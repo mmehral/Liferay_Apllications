@@ -1,0 +1,14 @@
+<custom-sql>
+<sql id="getEmailIdsFromRHDSUserTable">
+    <![CDATA[
+    select emailaddress from User_;
+        ]]>
+	</sql>
+	
+	<sql id="getScreenNameFromTable">
+    <![CDATA[
+    SELECT screenname FROM screennameempidmapping  where empid=?;
+        ]]>
+	</sql>
+	
+</custom-sql>

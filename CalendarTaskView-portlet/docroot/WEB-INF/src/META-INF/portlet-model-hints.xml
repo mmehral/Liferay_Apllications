@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.msappointment.model.calendarmsappointment">
+		<field name="id" type="long" />
+	</model>
+</model-hints>

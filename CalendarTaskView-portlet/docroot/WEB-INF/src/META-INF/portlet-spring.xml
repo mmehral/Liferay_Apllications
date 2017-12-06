@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.msappointment.service.impl.calendarmsappointmentLocalServiceImpl" id="com.chola.msappointment.service.calendarmsappointmentLocalService" />
+	<bean class="com.chola.msappointment.service.impl.calendarmsappointmentServiceImpl" id="com.chola.msappointment.service.calendarmsappointmentService" />
+	<bean class="com.chola.msappointment.service.persistence.impl.calendarmsappointmentPersistenceImpl" id="com.chola.msappointment.service.persistence.calendarmsappointmentPersistence" parent="basePersistence" />
+	<bean class="com.chola.msappointment.service.persistence.impl.calendarmsappointmentFinderImpl" id="com.chola.msappointment.service.persistence.calendarmsappointmentFinder" parent="basePersistence" />
+</beans>
