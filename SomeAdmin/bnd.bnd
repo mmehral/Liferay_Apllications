@@ -1,0 +1,4 @@
+Bundle-Name: SomeAdmin
+Bundle-SymbolicName: SomeAdmin
+Bundle-Version: 1.0.0
+Export-Package: SomeAdmin.constants

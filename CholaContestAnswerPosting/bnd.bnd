@@ -1,0 +1,4 @@
+Bundle-Name: CholaContestAnswerPosting
+Bundle-SymbolicName: CholaContestAnswerPosting
+Bundle-Version: 1.0.0
+Export-Package: CholaContestAnswerPosting.constants

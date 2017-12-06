@@ -1,0 +1,3 @@
+Bundle-SymbolicName: de.olafkock.custom.navigation
+Bundle-Version: 2.0.1
+Export-Package: de.olafkock.liferay.navigation

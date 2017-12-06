@@ -1,0 +1,4 @@
+Bundle-Name: Calendar-MicrosoftExchangeSync
+Bundle-SymbolicName: Calendar.MicrosoftExchangeSync
+Bundle-Version: 1.0.0
+Export-Package: Calendar.MicrosoftExchangeSync.constants

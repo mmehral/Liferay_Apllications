@@ -1,0 +1,4 @@
+Bundle-Name: MakeAllUsersProfilePages
+Bundle-SymbolicName: MakeAllUsersProfilePages
+Bundle-Version: 1.0.0
+Export-Package: MakeAllUsersProfilePages.constants

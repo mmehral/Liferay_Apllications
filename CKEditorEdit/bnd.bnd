@@ -1,0 +1,4 @@
+Bundle-Name: CKEditorEdit
+Bundle-SymbolicName: CKEditorEdit
+Bundle-Version: 1.0.0
+Export-Package: CKEditorEdit.constants

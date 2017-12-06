@@ -1,0 +1,11 @@
+Bundle-Name: Message-Board-Extension
+Bundle-SymbolicName: Message.Board.Extension
+Bundle-Version: 1.0.0
+Export-Package:\
+  com.liferay.message.boards.configuration,\
+  com.liferay.message.boards.display.context,\
+  com.liferay.message.boards.util.comparator
+Liferay-Releng-Module-Group-Description:
+Liferay-Releng-Module-Group-Title: Message Boards
+
+Include-Resource: @com.liferay.message.boards.api-3.1.0.jar

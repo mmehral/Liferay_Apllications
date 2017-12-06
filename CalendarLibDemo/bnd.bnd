@@ -1,0 +1,10 @@
+Bundle-Name: CalendarLibDemo
+Bundle-SymbolicName: CalendarLibDemo
+Bundle-Version: 1.0.0
+Export-Package: CalendarLibDemo.constants
+Import-Package: !microsoft.exchange.webservices.data.core.service.item.Task, \
+!org.json.simple.JSONArray, \
+!org.json.simple.JSONObject
+
+
+
