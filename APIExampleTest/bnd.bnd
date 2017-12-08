@@ -1,4 +1,0 @@
-Bundle-Name: APIExampleTest
-Bundle-SymbolicName: APIExampleTest
-Bundle-Version: 1.0.0
-Export-Package: APIExampleTest.api
