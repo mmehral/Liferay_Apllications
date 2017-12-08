@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.portlet.sample">
+	<author>CloverLiferay01</author>
+	<namespace>Sample</namespace>
+
+<entity name="SampleEntry" uuid="true" local-service="true"
+
+remote-service="true">
+
+
+
+<column name="entryId" type="long" primary="true"></column>
+
+<column name="companyId" type="long"></column>
+
+<column name="groupId" type="long"></column>
+
+<column name="userId" type="long"></column>
+
+<column name="userName" type="String"></column>
+
+<column name="title" type="String"></column>
+
+<column name="content" type="String"></column>
+
+<column name="createDate" type="Date"></column>
+
+<column name="modifiedDate" type="Date"></column>
+
+<column name="status" type="boolean"></column>
+
+</entity>
+</service-builder>

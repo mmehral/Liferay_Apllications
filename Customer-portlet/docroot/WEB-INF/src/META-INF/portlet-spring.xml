@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.customer.service.impl.customerLocalServiceImpl" id="com.customer.service.customerLocalService" />
+	<bean class="com.customer.service.impl.customerServiceImpl" id="com.customer.service.customerService" />
+	<bean class="com.customer.service.persistence.impl.customerPersistenceImpl" id="com.customer.service.persistence.customerPersistence" parent="basePersistence" />
+</beans>

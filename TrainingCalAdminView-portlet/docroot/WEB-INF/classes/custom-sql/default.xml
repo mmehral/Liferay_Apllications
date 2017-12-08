@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+
+
+	<sql id="DeleteTrainings">
+    <![CDATA[
+		delete FROM chola_trainingcalendardata ;
+ ]]>
+	</sql>
+	
+	<sql id="trainingList">
+    <![CDATA[
+		SELECT * FROM chola_trainingcalendardata where schedulestartdate>=CURDATE();
+ ]]>
+	</sql>
+	
+	<sql id="trainingListintendedRecord">
+    <![CDATA[
+		SELECT * FROM chola_trainingcalendardata
+		where id_=?;
+ ]]>
+	</sql>
+	
+	
+		<sql id="trainingresponses">
+    <![CDATA[
+select td.title,td.location,
+(select CONCAT(firstname,' ',lastname) as name from User_ u where u.screenname=tr.user_id) as 'employee name',
+(select emailAddress from User_ u where u.screenname=tr.user_id)  as 'Email Address',
+case when tr.responseflag=2
+then 'Attending'
+else 'Rejected'
+ end as reponse
+ from chola_trainingcalendardata td,trainingattendeeresponse tr where td.id_=tr.training_id ;
+	 ]]>
+	</sql>
+	
+	
+		<sql id="intendedUserList">
+    <![CDATA[
+		select userid,screenname from people_power
+where location=? and companyname=?;
+ ]]>
+	</sql>
+	
+		<sql id="notifycat">
+    <![CDATA[
+      update usernotificationevent
+		set
+		notify_syscd=?,
+		notify_val=?,
+		notify_desc=?,
+		status=?,
+		flag=?
+		where userNotificationEventId=?;
+        ]]>
+	</sql>
+	<sql id="intendedUserTrainingList">
+    <![CDATA[
+     select trainingid from chola_trainingintendedtable
+     where screenname=? and flag=?;
+        ]]>
+	</sql>
+	
+	<sql id="getExistingintendedUserTrainingList">
+    <![CDATA[
+     SELECT * FROM chola_trainingintendedtable
+where trainingid=? and
+userid=? and screenname=? and flag=?;
+     
+     
+        ]]>
+	</sql>
+	
+	<sql id="updateFlagForIntendedUserConfirmOrReject">
+    <![CDATA[
+    
+   insert into trainingattendeeresponse(training_id,user_id,content_id,responseflag)
+   select * from (select ?,?,?,?) AS tmp
+   WHERE NOT EXISTS (
+  select id from trainingattendeeresponse where training_id=? and user_id=? and content_id=? and responseflag=?
+) LIMIT 1;
+     
+     
+        ]]>
+	</sql>
+	
+		<sql id="gettrainingname">
+    <![CDATA[
+     select title from chola_trainingcalendardata where id_=?;
+        ]]>
+	</sql>
+	
+	   <sql id="getbusinessname">
+    <![CDATA[
+     select business from business where business_id=?;
+        ]]>
+    </sql>
+    
+    
+<sql id="getcontentbasedonnotificationtypeall">
+<![CDATA[
+    select content_id from chola_trainingpersonalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	<sql id="getcontentbasedonnotificationtypeunit">
+<![CDATA[
+    select content_id from chola_trainingpersonalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and unit=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+		<sql id="getcontentbasedonnotificationtypefunction">
+<![CDATA[
+    select content_id from chola_trainingpersonalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and function=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	<sql id="getcontentbasedonnotificationtypedepartment">
+<![CDATA[
+    select content_id from chola_trainingpersonalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and department=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtypedesignation">
+<![CDATA[
+    select content_id from chola_trainingpersonalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and designation=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtypeproduct">
+<![CDATA[
+    select content_id from chola_trainingpersonalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and product=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtypezone">
+<![CDATA[
+    select content_id from chola_trainingpersonalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and zone=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtypegrade">
+<![CDATA[
+    select content_id from chola_trainingpersonalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and grade=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtyperegion">
+<![CDATA[
+    select content_id from chola_trainingpersonalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and region=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtypebranch">
+<![CDATA[
+    select content_id from chola_trainingpersonalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and branch=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtypelocation">
+<![CDATA[
+    select content_id from chola_trainingpersonalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and location=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_trainingpersonalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+		<sql id="userlist">
+    <![CDATA[
+   SELECT CONCAT(firstname,' ',lastname,' (',screenname,')') as name FROM User_ where screenname  is not null and firstname is not null and lastname is not null;
+        ]]>
+	</sql>
+	
+	<sql id="getcontentbasedonnotificationtypeuserid">
+<![CDATA[
+    select content_id from chola_trainingpersonalisedparameterscontentstore where notification_type=? and business=? and user_id=? ;
+
+]]>
+	</sql>
+	
+	<sql id="empidfromuid">
+    <![CDATA[
+	 SELECT empid FROM rhdspeoplepowermapping
+     where  uid=?;
+	 ]]>
+	</sql>
+	
+</custom-sql>
+

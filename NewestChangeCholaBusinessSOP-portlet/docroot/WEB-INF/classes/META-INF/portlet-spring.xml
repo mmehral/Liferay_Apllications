@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.bsop.service.impl.bsopdetailsLocalServiceImpl" id="com.chola.bsop.service.bsopdetailsLocalService" />
+	<bean class="com.chola.bsop.service.impl.bsopdetailsServiceImpl" id="com.chola.bsop.service.bsopdetailsService" />
+	<bean class="com.chola.bsop.service.persistence.impl.bsopdetailsPersistenceImpl" id="com.chola.bsop.service.persistence.bsopdetailsPersistence" parent="basePersistence" />
+	<bean class="com.chola.bsop.service.impl.bsoppathLocalServiceImpl" id="com.chola.bsop.service.bsoppathLocalService" />
+	<bean class="com.chola.bsop.service.impl.bsoppathServiceImpl" id="com.chola.bsop.service.bsoppathService" />
+	<bean class="com.chola.bsop.service.persistence.impl.bsoppathPersistenceImpl" id="com.chola.bsop.service.persistence.bsoppathPersistence" parent="basePersistence" />
+</beans>

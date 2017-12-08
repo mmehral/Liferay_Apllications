@@ -1,0 +1,1 @@
+ define.amd = define._amd;

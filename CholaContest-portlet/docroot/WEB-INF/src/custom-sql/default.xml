@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+
+	<sql id="syscode">
+    <![CDATA[
+		SELECT val,description FROM ms0028
+		where syscode =?
+ ]]>
+	</sql>
+	<sql id="contestlist">
+    <![CDATA[
+		select id_,content,contest_title,contest_doc  FROM chola_cholacontest
+      where date_format(enddate,"%d-%m-%Y") >=date_format(sysdate(),"%d-%m-%Y") 
+     ]]>
+	</sql>
+
+<sql id="contestval">
+    <![CDATA[
+	 SELECT contest_val FROM chola_cholacontest
+     where  id_=?;
+	 ]]>
+	</sql>
+	
+	
+	<sql id="empidfromuid">
+    <![CDATA[
+	 SELECT empid FROM rhdspeoplepowermapping
+     where  uid=?;
+	 ]]>
+	</sql>
+	
+</custom-sql>

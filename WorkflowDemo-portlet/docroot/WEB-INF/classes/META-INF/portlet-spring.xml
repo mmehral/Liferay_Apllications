@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.meera.workflow.db.service.impl.FeedbackLocalServiceImpl" id="com.meera.workflow.db.service.FeedbackLocalService" />
+	<bean class="com.meera.workflow.db.service.impl.FeedbackServiceImpl" id="com.meera.workflow.db.service.FeedbackService" />
+	<bean class="com.meera.workflow.db.service.persistence.impl.FeedbackPersistenceImpl" id="com.meera.workflow.db.service.persistence.FeedbackPersistence" parent="basePersistence" />
+</beans>

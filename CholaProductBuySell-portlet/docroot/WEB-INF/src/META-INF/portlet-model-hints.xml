@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.productbuysell.model.BuySell">
+		<field name="id" type="long" />
+		<field name="name" type="String" />
+	</model>
+	<model name="com.chola.productbuysell.model.BuySellProducts">
+		<field name="id" type="long" />
+		<field name="sellerName" type="String" />
+		<field name="contactNumber" type="String" />
+		<field name="content_id" type="long" />
+		<field name="category_id" type="long" />
+		<field name="title" type="String" />
+		<field name="description" type="String" />
+		<field name="askingPrice" type="String" />
+		<field name="userScreenName" type="String" />
+		<field name="location" type="long" />
+		<field name="status" type="long" />
+		<field name="approvedstatus" type="long" />
+		<field name="created_date" type="Date" />
+	</model>
+	<model name="com.chola.productbuysell.model.BuySellProductsImages">
+		<field name="id" type="long" />
+		<field name="content_id" type="long" />
+		<field name="image_name" type="String" />
+		<field name="image_path" type="String" />
+		<field name="product_id" type="long" />
+	</model>
+</model-hints>

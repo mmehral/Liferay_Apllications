@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+	
+
+	<action-mappings>		
+			
+	 <action path="/test/view" forward="portlet.test.view" />
+	 
+	 <action path="/test/addView" type="com.portlet.sample.action.SampleAdd"> 
+       	 	<forward name="portlet.test.search" path="portlet.test.search" />
+     </action> 
+     
+     <action path="/test/search" type="com.portlet.sample.action.SearchAdd"> 
+       	 	<forward name="portlet.test.search" path="portlet.test.search" />
+       	 	<forward name="portlet.test.display" path="portlet.test.display" />       	 	
+     </action>
+     
+     <action path="/test/searchPage" forward="portlet.test.search"/>
+     
+     
+     
+     <action path="/test/display" forward="portlet.test.display"/>
+     
+     
+    
+     
+	<!-- <action path="/test/addView" type="com.portlet.sample.action.SampleAdd"> 
+       	 	<forward name="portlet.test.search" path="portlet.test.search" />
+     </action>     
+     <action path="/test/search" type="com.portlet.sample.action.SampleAdd"> 
+       	 	<forward name="portlet.test.search" path="portlet.test.search" />
+       	 	<forward name="portlet.test.display" path="portlet.test.display" />       	 	
+     </action> -->
+     
+     <!-- <action path="/test/view" forward="/html/portlet/test/view.jsp" /> -->
+	<!-- <action path="/test/addView" type="com.portlet.sample.action.SampleAdd"> 
+       	 	<forward name="portlet.test.search" path="/html/portlet/test/search.jsp" />
+     </action>     
+     <action path="/test/search" type="com.portlet.sample.action.SearchAdd"> 
+       	 	<forward name="portlet.test.search" path="/html/portlet/test/search.jsp" />
+       	 	<forward name="portlet.test.display" path="/html/portlet/test/display.jsp" />       	 	
+     </action> -->
+     
+     
+     
+	</action-mappings>
+	
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+
+	</plug-in>
+	
+</struts-config>	

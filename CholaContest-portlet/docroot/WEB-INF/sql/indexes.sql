@@ -1,0 +1,1 @@
+create index IX_AB623810 on chola_cholacontest (content_id);

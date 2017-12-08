@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.chola.trainingcalendar">
+	<author>CloverLiferay01</author>
+	<namespace>chola</namespace>
+
+	<entity name="trainingcalendar" local-service="true" remote-service="false">
+		<column name="trainingid" type="long" primary="true" id-type="increment" />
+	<column name="name" type="String"></column>
+	</entity>
+	
+	<entity name="trainingcalendardata" local-service="true" remote-service="true">
+		<column name="id" type="long" primary="true" id-type="increment" />
+	<column name="title" type="String"></column>
+	<column name="description" type="String"></column>
+	<column name="schedulestartdate" type="Date"></column>
+	<column name="scheduleenddate" type="Date"></column>
+	<column name="location" type="String"></column>
+	</entity>
+
+	
+	<entity name="trainingintendedtable" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="id" type="long" primary="true" id-type="increment" />
+		<column name="trainingid" type="long" ></column>
+	<column name="userid" type="String"></column>
+		<column name="screenname" type="String"></column>
+		<column name="createddate" type="Date"></column>
+		<column name="flag" type="int"></column>
+
+	</entity>
+	
+	<entity name="trainingcontentuniqueinformation" local-service="true"
+		remote-service="true">
+		<column name="id" type="long" primary="true" id-type="increment" />
+		<column name="training_id" type="long"/>
+		<column name="content_id" type="long"/>
+		<column name="status" type="long"/>
+		<column name="udflag" type="long"/>
+		<column name="content_type" type="String"/>
+		<column name="notification_text" type="String"/>
+		<column name="pageurl" type="String"/>
+		<finder return-type="Collection" name="CONTENTID">
+		<finder-column name="content_id"></finder-column>
+		</finder>
+		<finder return-type="Collection" name="TRAININGID">
+		<finder-column name="training_id"></finder-column>
+		</finder>
+	</entity>
+	
+		<entity name="trainingpersonalisedparameterscontentstore" local-service="true"
+		remote-service="true">
+		<column name="id" type="long" primary="true" id-type="increment" />
+		<column name="content_id" type="long"/>
+		<column name="business" type="String"/>
+		<column name="unit" type="String"/>
+		<column name="function" type="String"/>
+		<column name="department" type="String"/>
+		<column name="designation" type="String"/>
+		<column name="product" type="String"/>
+		<column name="zone" type="String"/>
+		<column name="branch" type="String"/>
+		<column name="grade" type="String"/>
+		<column name="region" type="String"/>
+		<column name="location" type="String"/>
+		<column name="user_id" type="String"/>
+		<column name="gender" type="String"/>
+		<column name="age_type" type="String"/>
+		<column name="age_value" type="String"/>
+		<column name="notification_type" type="long"/>
+		<finder return-type="Collection" name="CONTENTID">
+		<finder-column name="content_id"></finder-column>
+		</finder>
+	</entity>
+</service-builder>

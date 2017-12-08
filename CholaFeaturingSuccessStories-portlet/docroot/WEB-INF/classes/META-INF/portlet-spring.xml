@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.successstories.service.impl.ssdetailsLocalServiceImpl" id="com.chola.successstories.service.ssdetailsLocalService" />
+	<bean class="com.chola.successstories.service.impl.ssdetailsServiceImpl" id="com.chola.successstories.service.ssdetailsService" />
+	<bean class="com.chola.successstories.service.persistence.impl.ssdetailsPersistenceImpl" id="com.chola.successstories.service.persistence.ssdetailsPersistence" parent="basePersistence" />
+	<bean class="com.chola.successstories.service.persistence.impl.ssdetailsFinderImpl" id="com.chola.successstories.service.persistence.ssdetailsFinder" parent="basePersistence" />
+	<bean class="com.chola.successstories.service.impl.sspathLocalServiceImpl" id="com.chola.successstories.service.sspathLocalService" />
+	<bean class="com.chola.successstories.service.impl.sspathServiceImpl" id="com.chola.successstories.service.sspathService" />
+	<bean class="com.chola.successstories.service.persistence.impl.sspathPersistenceImpl" id="com.chola.successstories.service.persistence.sspathPersistence" parent="basePersistence" />
+</beans>

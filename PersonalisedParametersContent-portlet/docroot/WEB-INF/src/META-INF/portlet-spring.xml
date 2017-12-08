@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.ppcontent.service.impl.contentuniqueinformationLocalServiceImpl" id="com.chola.ppcontent.service.contentuniqueinformationLocalService" />
+	<bean class="com.chola.ppcontent.service.impl.contentuniqueinformationServiceImpl" id="com.chola.ppcontent.service.contentuniqueinformationService" />
+	<bean class="com.chola.ppcontent.service.persistence.impl.contentuniqueinformationPersistenceImpl" id="com.chola.ppcontent.service.persistence.contentuniqueinformationPersistence" parent="basePersistence" />
+	<bean class="com.chola.ppcontent.service.impl.contentupdateLocalServiceImpl" id="com.chola.ppcontent.service.contentupdateLocalService" />
+	<bean class="com.chola.ppcontent.service.impl.contentupdateServiceImpl" id="com.chola.ppcontent.service.contentupdateService" />
+	<bean class="com.chola.ppcontent.service.persistence.impl.contentupdatePersistenceImpl" id="com.chola.ppcontent.service.persistence.contentupdatePersistence" parent="basePersistence" />
+	<bean class="com.chola.ppcontent.service.persistence.impl.contentupdateFinderImpl" id="com.chola.ppcontent.service.persistence.contentupdateFinder" parent="basePersistence" />
+	<bean class="com.chola.ppcontent.service.impl.personalisedparameterscontentstoreLocalServiceImpl" id="com.chola.ppcontent.service.personalisedparameterscontentstoreLocalService" />
+	<bean class="com.chola.ppcontent.service.impl.personalisedparameterscontentstoreServiceImpl" id="com.chola.ppcontent.service.personalisedparameterscontentstoreService" />
+	<bean class="com.chola.ppcontent.service.persistence.impl.personalisedparameterscontentstorePersistenceImpl" id="com.chola.ppcontent.service.persistence.personalisedparameterscontentstorePersistence" parent="basePersistence" />
+</beans>

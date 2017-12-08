@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.contest.model.CholaContest">
+		<field name="Id" type="long" />
+		<field name="content_id" type="long" />
+		<field name="content" type="String" />
+		<field name="startdate" type="Date" />
+		<field name="enddate" type="Date" />
+		<field name="feedback" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="contest_code" type="int" />
+		<field name="contest_val" type="int" />
+		<field name="contest_desc" type="String" />
+		<field name="contest_doc" type="String" />
+		<field name="contest_path" type="String" />
+		<field name="contest_title" type="String" />
+		<field name="user_id" type="String" />
+	</model>
+</model-hints>

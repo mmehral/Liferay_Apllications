@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.successstories.model.ssdetails">
+		<field name="id" type="long" />
+		<field name="content_id" type="long" />
+		<field name="sstitle" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="ssdesc" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="createdDate" type="Date" />
+		<field name="createdBy" type="long" />
+		<field name="modifiedDate" type="Date" />
+		<field name="modifiedBy" type="long" />
+		<field name="flag" type="String" />
+	</model>
+	<model name="com.chola.successstories.model.sspath">
+		<field name="id" type="long" />
+		<field name="ssfiledoc" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="ssfilepath" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="createdDate" type="Date" />
+		<field name="createdBy" type="long" />
+		<field name="flag" type="String" />
+		<field name="ssdetails_id" type="long" />
+		<field name="content_id" type="long" />
+		<field name="ssfilename" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+	</model>
+</model-hints>

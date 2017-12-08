@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.trainingcalendar.service.impl.trainingcalendarLocalServiceImpl" id="com.chola.trainingcalendar.service.trainingcalendarLocalService" />
+	<bean class="com.chola.trainingcalendar.service.persistence.impl.trainingcalendarPersistenceImpl" id="com.chola.trainingcalendar.service.persistence.trainingcalendarPersistence" parent="basePersistence" />
+	<bean class="com.chola.trainingcalendar.service.persistence.impl.trainingcalendarFinderImpl" id="com.chola.trainingcalendar.service.persistence.trainingcalendarFinder" parent="basePersistence" />
+	<bean class="com.chola.trainingcalendar.service.impl.trainingcalendardataLocalServiceImpl" id="com.chola.trainingcalendar.service.trainingcalendardataLocalService" />
+	<bean class="com.chola.trainingcalendar.service.impl.trainingcalendardataServiceImpl" id="com.chola.trainingcalendar.service.trainingcalendardataService" />
+	<bean class="com.chola.trainingcalendar.service.persistence.impl.trainingcalendardataPersistenceImpl" id="com.chola.trainingcalendar.service.persistence.trainingcalendardataPersistence" parent="basePersistence" />
+	<bean class="com.chola.trainingcalendar.service.impl.trainingcontentuniqueinformationLocalServiceImpl" id="com.chola.trainingcalendar.service.trainingcontentuniqueinformationLocalService" />
+	<bean class="com.chola.trainingcalendar.service.impl.trainingcontentuniqueinformationServiceImpl" id="com.chola.trainingcalendar.service.trainingcontentuniqueinformationService" />
+	<bean class="com.chola.trainingcalendar.service.persistence.impl.trainingcontentuniqueinformationPersistenceImpl" id="com.chola.trainingcalendar.service.persistence.trainingcontentuniqueinformationPersistence" parent="basePersistence" />
+	<bean class="com.chola.trainingcalendar.service.impl.trainingintendedtableLocalServiceImpl" id="com.chola.trainingcalendar.service.trainingintendedtableLocalService" />
+	<bean class="com.chola.trainingcalendar.service.impl.trainingintendedtableServiceImpl" id="com.chola.trainingcalendar.service.trainingintendedtableService" />
+	<bean class="com.chola.trainingcalendar.service.persistence.impl.trainingintendedtablePersistenceImpl" id="com.chola.trainingcalendar.service.persistence.trainingintendedtablePersistence" parent="basePersistence" />
+	<bean class="com.chola.trainingcalendar.service.impl.trainingpersonalisedparameterscontentstoreLocalServiceImpl" id="com.chola.trainingcalendar.service.trainingpersonalisedparameterscontentstoreLocalService" />
+	<bean class="com.chola.trainingcalendar.service.impl.trainingpersonalisedparameterscontentstoreServiceImpl" id="com.chola.trainingcalendar.service.trainingpersonalisedparameterscontentstoreService" />
+	<bean class="com.chola.trainingcalendar.service.persistence.impl.trainingpersonalisedparameterscontentstorePersistenceImpl" id="com.chola.trainingcalendar.service.persistence.trainingpersonalisedparameterscontentstorePersistence" parent="basePersistence" />
+</beans>

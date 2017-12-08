@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+
+	<sql id="mdspeaks">
+    <![CDATA[
+		SELECT title,urlTitle FROM BlogsEntry
+        where groupId=(SELECT groupId FROM Group_
+        where classPK in (SELECT plid FROM Layout
+        where friendlyURL=?)
+       ) order by entryId desc ;
+     ]]>
+	</sql>
+	
+</custom-sql>

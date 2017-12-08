@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.contest.model.CholaContest" />
+	<class name="com.contest.model.impl.CholaContestImpl" table="chola_CholaContest">
+		<id name="Id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="startdate" type="org.hibernate.type.TimestampType" />
+		<property name="enddate" type="org.hibernate.type.TimestampType" />
+		<property name="feedback" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="contest_code" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="contest_val" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="contest_desc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contest_doc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contest_path" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contest_title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="user_id" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

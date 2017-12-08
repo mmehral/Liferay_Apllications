@@ -1,0 +1,1 @@
+create index IX_53B8A28 on Z_customer (name[$COLUMN_LENGTH:75$]);

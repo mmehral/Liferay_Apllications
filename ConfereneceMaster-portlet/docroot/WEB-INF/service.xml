@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.chola.service.conference">
+	<author>adms.java1</author>
+	<namespace>cholaconference</namespace>
+
+<entity name="state" local-service="true" remote-service="true">
+<column name="state_id" type="long" primary="true" id-type="increment"></column>
+<column name="state_name" type="String"></column>
+</entity>
+
+
+<entity name="location" local-service="true" remote-service="true">
+<column name="location_id" type="long" primary="true" id-type="increment"></column>
+<column name="location_name" type="String"></column>
+<column name="state_id" type="long"></column>
+</entity> 
+
+<entity name="floorwing" local-service="true" remote-service="true">
+<column name="floorwing_id" type="long" primary="true" id-type="increment"></column>
+<column name="state_id" type="long"></column>
+<column name="location_id" type="long"></column>
+<column name="floor_name" type="String"></column>
+</entity> 
+   
+<entity name="facilitymaster" local-service="true" remote-service="true">
+<column name="facility_id" type="long" primary="true" id-type="increment"></column>
+<column name="facility_name" type="String"></column>
+<column name="facility_description" type="String"></column>
+</entity>	
+
+<entity name="room" local-service="true" remote-service="true">
+<column name="room_id" type="long" primary="true" id-type="increment"></column>
+<column name="state_id" type="long"></column>
+<column name="location_id" type="long"></column>
+<column name="floor_id" type="long"></column>
+<column name="room_name" type="String"></column>
+<column name="room_capacity" type="long"></column>
+<column name="room_extension" type="long"></column>
+<column name="room_values" type="String"></column>
+
+
+</entity>			
+	
+</service-builder>

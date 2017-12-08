@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.chola.productbuysell">
+	<author>CloverLiferay03</author>
+	<namespace>chola</namespace>
+
+	<entity name="BuySell" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="id" type="long" primary="true" id-type="increment" />
+		<column name="name" type="String" />
+		
+	</entity>
+
+	<entity name="BuySellProducts" local-service="true"
+		remote-service="true">
+		<column name="id" type="long" primary="true" id-type="increment" />
+		<column name="sellerName" type="String"></column>
+		<column name="contactNumber" type="String"></column>
+		<column name="content_id" type="long"></column>
+		<column name="category_id" type="long" />
+		<column name="title" type="String" />
+		<column name="description" type="String" />
+		<column name="askingPrice" type="String" />
+		<column name="userScreenName" type="String" />
+		<column name="location" type="long" />
+		<column name="status" type="long" />
+		<column name="approvedstatus" type="long" />
+		<column name="created_date" type="Date" />
+		<order>
+		<order-column name="created_date"  order-by="desc"></order-column>
+		</order>
+		<finder return-type="Collection" name="CATEGORY" where="status!=2">
+			<finder-column name="category_id" ></finder-column>
+		</finder>
+
+		<finder return-type="Collection" name="LOCATION" where="status!=2">
+			<finder-column name="location"></finder-column>
+		</finder>
+
+		<finder return-type="Collection" name="CATEGORYANDLOCATION" where="status!=2">
+			<finder-column name="location"></finder-column>
+			<finder-column name="category_id"></finder-column>
+		</finder>
+
+		<finder name="TITLEBASEDSEARCH" return-type="Collection" where="status!=2">
+			<finder-column name="title" comparator="LIKE" />
+		</finder>
+		
+		<finder return-type="Collection" name="categoryAndSearch" where="status!=2">
+		<finder-column name="category_id"></finder-column>
+		<finder-column name="title" comparator="LIKE" />
+		</finder>
+		
+		<finder return-type="Collection" name="locationAndSearch" where="status!=2">
+		<finder-column name="location"></finder-column>
+		<finder-column name="title" comparator="LIKE" />
+		</finder>
+		
+		<finder return-type="Collection" name="categoryLocationAndSearch" where="status!=2">
+		<finder-column name="category_id"></finder-column>
+		<finder-column name="location"></finder-column>
+		<finder-column name="title" comparator="LIKE" />
+		</finder>
+		
+		
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
+	</entity>
+
+	<entity name="BuySellProductsImages" local-service="true"
+		remote-service="true">
+		<column name="id" type="long" primary="true" id-type="increment" />
+		<column name="content_id" type="long"></column>
+		<column name="image_name" type="String" />
+		<column name="image_path" type="String" />
+		<column name="product_id" type="long" />
+
+		<finder return-type="Collection" name="PRODUCTSIMAGES">
+			<finder-column name="product_id"></finder-column>
+		</finder>
+	</entity>
+</service-builder>

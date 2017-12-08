@@ -1,0 +1,50 @@
+<custom-sql>
+<sql id="statelist">
+<![CDATA[
+select state_name from cholaconference_state where state_id=?;
+]]>
+</sql>
+
+<sql id="StateCall">
+<![CDATA[
+select state_id,state_name from cholaconference_state;
+]]>
+</sql>
+
+<sql id="locationlist">
+<![CDATA[
+select location_id,location_name from cholaconference_location where state_id=?;
+]]>
+</sql>
+
+<sql id="locationCall">
+<![CDATA[
+select location_id,location_name from cholaconference_location;
+]]>
+</sql>
+
+
+<sql id="floorlist">
+<![CDATA[
+select floorwing_id,floor_name from cholaconference_floorwing;
+]]>
+</sql>
+
+<sql id="roomvalueslist">
+<![CDATA[
+select room_values from cholaconference_room where room_id=?;
+]]>
+</sql>
+
+<sql id="locationnamelist">
+<![CDATA[
+select location_name from cholaconference_location where location_id=?;
+]]>
+</sql>
+
+<sql id="floornamelist">
+<![CDATA[
+select floor_name from cholaconference_floorwing where floorwing_id=?;
+]]>
+</sql>
+</custom-sql>

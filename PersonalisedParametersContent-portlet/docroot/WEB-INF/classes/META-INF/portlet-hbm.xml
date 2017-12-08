@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.ppcontent.model.contentuniqueinformation" />
+	<import class="com.chola.ppcontent.model.contentupdate" />
+	<import class="com.chola.ppcontent.model.personalisedparameterscontentstore" />
+	<class name="com.chola.ppcontent.model.impl.contentuniqueinformationImpl" table="chola_contentuniqueinformation">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="udflag" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="content_type" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="notification_text" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="pageurl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.ppcontent.model.impl.contentupdateImpl" table="chola_contentupdate">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.chola.ppcontent.model.impl.personalisedparameterscontentstoreImpl" table="chola_personalisedparameterscontentstore">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="business" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="unit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="function" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="department" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="designation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="product" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="branch" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="grade" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="region" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="location" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="user_id" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="gender" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="age_type" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="age_value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="notification_type" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

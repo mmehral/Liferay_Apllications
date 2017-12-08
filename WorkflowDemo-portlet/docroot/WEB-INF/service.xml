@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.meera.workflow.db">
+	<author>CloverLiferay01</author>
+	<namespace>LS</namespace>
+
+<entity name="Feedback" uuid="true" local-service="true"
+remote-service="true">
+<column name="feedbackId" type="long" primary="true" />
+<column name="feedbackDate" type="Date" />
+<column name="feedbackText" type="String" />
+<column name="feedbackSubject" type="String" />
+<column name="feedBackStatus" type="int" />
+<column name="statusByUserId" type="long" />
+<column name="statusDate" type="Date" />
+<column name="companyId" type="long" />
+<column name="groupId" type="long" />
+<column name="userId" type="long" />
+<order>
+<order-column name="feedbackId" order-by="asc" />
+<order-column name="feedbackDate" order-by="desc" />
+</order>
+<finder name="GroupId" return-type="Collection">
+<finder-column name="groupId" />
+</finder>
+<finder name="CompanyId" return-type="Collection">
+<finder-column name="companyId" />
+</finder>
+<finder name="feedbackText" return-type="Collection">
+<finder-column name="feedbackText" />
+</finder>
+<finder name="G_S" return-type="Collection">
+<finder-column name="groupId" />
+<finder-column name="feedBackStatus" />
+</finder>
+<reference package-path="com.liferay.portal" entity="User" />
+<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+<reference package-path="com.liferay.portal" entity="WorkflowDefinitionLink"></reference>
+<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink"></reference>
+</entity>
+</service-builder>

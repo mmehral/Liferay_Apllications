@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.chola.mdspeak">
+	<author>adms.java1</author>
+	<namespace>mdspeak</namespace>
+
+	<entity name="MdSpeaks" local-service="true" remote-service="true">
+		<column name="Id" type="long" primary="true" />
+        <column name="username" type="String" />
+	</entity>
+</service-builder>

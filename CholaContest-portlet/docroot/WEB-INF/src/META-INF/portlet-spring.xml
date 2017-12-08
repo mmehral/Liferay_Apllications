@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.contest.service.impl.cholacontestLocalServiceImpl" id="com.chola.contest.service.cholacontestLocalService" />
+	<bean class="com.chola.contest.service.impl.cholacontestServiceImpl" id="com.chola.contest.service.cholacontestService" />
+	<bean class="com.chola.contest.service.persistence.impl.cholacontestPersistenceImpl" id="com.chola.contest.service.persistence.cholacontestPersistence" parent="basePersistence" />
+	<bean class="com.chola.contest.service.persistence.impl.cholacontestFinderImpl" id="com.chola.contest.service.persistence.cholacontestFinder" parent="basePersistence" />
+</beans>

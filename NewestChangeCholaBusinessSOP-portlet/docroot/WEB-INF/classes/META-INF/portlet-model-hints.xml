@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.bsop.model.bsopdetails">
+		<field name="id" type="long" />
+		<field name="content_id" type="long" />
+		<field name="btitle" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="bdesc" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="createddate" type="Date" />
+		<field name="createdby" type="String" />
+		<field name="modifieddate" type="Date" />
+		<field name="modifiedby" type="long" />
+		<field name="flag" type="String" />
+	</model>
+	<model name="com.chola.bsop.model.bsoppath">
+		<field name="id" type="long" />
+		<field name="bdoc" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="bpath" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="createddate" type="Date" />
+		<field name="createdby" type="String" />
+		<field name="flag" type="String" />
+		<field name="bdetails_id" type="long" />
+		<field name="bdetailscontent_id" type="long" />
+		<field name="filename" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+	</model>
+</model-hints>

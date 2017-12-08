@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="notificationCategoryCount">
+    <![CDATA[
+   SELECT c.content_type, COUNT(id) as active_count
+FROM `chola_contentuniqueinformation` c
+LEFT JOIN `cholacontentusernotification` p
+    ON c.content_id = p.content_id AND p.userid=? AND c.udflag!=0 AND p.flag!=2
+GROUP BY c.content_type;
+        ]]>
+	</sql>
+
+
+		<sql id="notificationList">
+    <![CDATA[
+		 select c.id,c.userid,c.content_id,p.content_type,p.notification_text,p.pageurl
+FROM cholacontentusernotification c,chola_contentuniqueinformation p
+where p.content_type=?
+ and c.userid=?
+ and p.content_id=c.content_id
+ and c.flag=1
+ and c.contentstatus!=0;
+		]]>
+ </sql>
+	<sql id="updatenotificationstatus">
+<![CDATA[
+    update cholacontentusernotification
+		set flag=? 
+		where id=? and userid=? and content_id=?;
+
+]]>
+	</sql>
+<sql id="getcontentbasedonnotificationtypeall">
+<![CDATA[
+    select content_id from chola_personalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_personalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_personalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	<sql id="getcontentbasedonnotificationtypeunit">
+<![CDATA[
+    select content_id from chola_personalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and unit=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_personalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_personalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+		<sql id="getcontentbasedonnotificationtypefunction">
+<![CDATA[
+    select content_id from chola_personalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and function=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_personalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_personalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	<sql id="getcontentbasedonnotificationtypedepartment">
+<![CDATA[
+    select content_id from chola_personalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and department=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_personalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_personalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtypedesignation">
+<![CDATA[
+    select content_id from chola_personalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and designation=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_personalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_personalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtypeproduct">
+<![CDATA[
+    select content_id from chola_personalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and product=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_personalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_personalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtypezone">
+<![CDATA[
+    select content_id from chola_personalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and zone=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_personalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_personalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtypegrade">
+<![CDATA[
+    select content_id from chola_personalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and grade=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_personalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_personalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtyperegion">
+<![CDATA[
+    select content_id from chola_personalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and region=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_personalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_personalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtypebranch">
+<![CDATA[
+    select content_id from chola_personalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and branch=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_personalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_personalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	
+	<sql id="getcontentbasedonnotificationtypelocation">
+<![CDATA[
+    select content_id from chola_personalisedparameterscontentstore where notification_type=? and (gender = 'ALL' or gender=?) and business=? and location=? and
+((age_type='all') or
+(age_type='Less than' and age_value>=?) or
+(age_type='Greater than' and age_value<=?) or
+(age_type='Between'
+and
+? between
+(select LEFT(age_value,LOCATE('&',age_value) - 1)  from chola_personalisedparameterscontentstore where  age_type='Between')
+and
+(select right(age_value,LOCATE('&',age_value)-1)  from chola_personalisedparameterscontentstore where  age_type='Between')));
+
+]]>
+	</sql>
+	
+	
+	<sql id="getcontentbasedonnotificationtypeuserid">
+<![CDATA[
+    select content_id from chola_personalisedparameterscontentstore where notification_type=? and business=? and user_id=? ;
+
+]]>
+	</sql>
+	
+	
+	<sql id="insertintocholausernotification">
+<![CDATA[
+    insert into cholacontentusernotification(userid,content_id,flag,contentstatus)
+   select * from (select ?,?,?,(SELECT udflag FROM chola_contentuniqueinformation WHERE content_id = ?)) AS tmp
+   WHERE NOT EXISTS (
+    SELECT content_id FROM cholacontentusernotification WHERE content_id = ? and contentstatus= (SELECT udflag FROM chola_contentuniqueinformation WHERE content_id = ?)
+) LIMIT 1;
+
+]]>
+	</sql>
+	
+	<sql id="empidfromuid">
+    <![CDATA[
+	 SELECT empid FROM rhdspeoplepowermapping
+     where  uid=?;
+	 ]]>
+	</sql>
+	
+	<!-- Get Data from ActiveEmployeeInfo instead of people power API hit  -->
+	
+	<sql id="getEmployeeInfoFromActiveEmployeeInfoTable">
+    <![CDATA[
+	select Business,Unit,FunctionName,Department,Designation,Product,Zone,Grade,Region,Branch,Location,gender,DOJ,Anniversary,Name,Birthday,EmpId from activeemployeeinfo where EmpId=?;
+	 ]]>
+	</sql>
+	
+	<sql id="getPeoplePowerNotificationDetails">
+    <![CDATA[
+	select * from chola_peoplepowernotification where empid=?;
+	 ]]>
+	</sql>
+	
+		<sql id="getQtracNotificationDetails">
+    <![CDATA[
+	select * from chola_qtracnotification where empid=?;
+	 ]]>
+	</sql>
+
+</custom-sql>

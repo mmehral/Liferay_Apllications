@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="productCategoryList">
+    <![CDATA[
+      select * from chola_productscategory_master
+      where status=1;
+        ]]>
+	</sql>
+
+<sql id="locationList">
+    <![CDATA[
+     select * from branch_city order by city_name;
+        ]]>
+	</sql> 
+
+</custom-sql>

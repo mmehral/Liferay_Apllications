@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.businessmis.model.businessmisdetails">
+		<field name="id" type="long" />
+		<field name="content_id" type="long" />
+		<field name="businesstitle" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="businessDesc" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="businessLink" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="filepath" type="String" />
+		<field name="filename" type="String" />
+		<field name="createdDate" type="Date" />
+		<field name="createdBy" type="String" />
+		<field name="modifiedDate" type="Date" />
+		<field name="modifiedBy" type="long" />
+		<field name="flag" type="String" />
+	</model>
+</model-hints>

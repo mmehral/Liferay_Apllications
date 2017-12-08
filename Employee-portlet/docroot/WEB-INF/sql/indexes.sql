@@ -1,0 +1,1 @@
+create index IX_46CEC133 on Z_employee (email[$COLUMN_LENGTH:75$]);

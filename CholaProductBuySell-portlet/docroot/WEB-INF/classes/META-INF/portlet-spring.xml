@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.productbuysell.service.impl.BuySellLocalServiceImpl" id="com.chola.productbuysell.service.BuySellLocalService" />
+	<bean class="com.chola.productbuysell.service.impl.BuySellServiceImpl" id="com.chola.productbuysell.service.BuySellService" />
+	<bean class="com.chola.productbuysell.service.persistence.impl.BuySellPersistenceImpl" id="com.chola.productbuysell.service.persistence.BuySellPersistence" parent="basePersistence" />
+	<bean class="com.chola.productbuysell.service.persistence.impl.BuySellFinderImpl" id="com.chola.productbuysell.service.persistence.BuySellFinder" parent="basePersistence" />
+	<bean class="com.chola.productbuysell.service.impl.BuySellProductsLocalServiceImpl" id="com.chola.productbuysell.service.BuySellProductsLocalService" />
+	<bean class="com.chola.productbuysell.service.impl.BuySellProductsServiceImpl" id="com.chola.productbuysell.service.BuySellProductsService" />
+	<bean class="com.chola.productbuysell.service.persistence.impl.BuySellProductsPersistenceImpl" id="com.chola.productbuysell.service.persistence.BuySellProductsPersistence" parent="basePersistence" />
+	<bean class="com.chola.productbuysell.service.impl.BuySellProductsImagesLocalServiceImpl" id="com.chola.productbuysell.service.BuySellProductsImagesLocalService" />
+	<bean class="com.chola.productbuysell.service.impl.BuySellProductsImagesServiceImpl" id="com.chola.productbuysell.service.BuySellProductsImagesService" />
+	<bean class="com.chola.productbuysell.service.persistence.impl.BuySellProductsImagesPersistenceImpl" id="com.chola.productbuysell.service.persistence.BuySellProductsImagesPersistence" parent="basePersistence" />
+</beans>

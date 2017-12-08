@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.service.conference.service.impl.facilitymasterLocalServiceImpl" id="com.chola.service.conference.service.facilitymasterLocalService" />
+	<bean class="com.chola.service.conference.service.impl.facilitymasterServiceImpl" id="com.chola.service.conference.service.facilitymasterService" />
+	<bean class="com.chola.service.conference.service.persistence.impl.facilitymasterPersistenceImpl" id="com.chola.service.conference.service.persistence.facilitymasterPersistence" parent="basePersistence" />
+	<bean class="com.chola.service.conference.service.impl.floorwingLocalServiceImpl" id="com.chola.service.conference.service.floorwingLocalService" />
+	<bean class="com.chola.service.conference.service.impl.floorwingServiceImpl" id="com.chola.service.conference.service.floorwingService" />
+	<bean class="com.chola.service.conference.service.persistence.impl.floorwingPersistenceImpl" id="com.chola.service.conference.service.persistence.floorwingPersistence" parent="basePersistence" />
+	<bean class="com.chola.service.conference.service.impl.locationLocalServiceImpl" id="com.chola.service.conference.service.locationLocalService" />
+	<bean class="com.chola.service.conference.service.impl.locationServiceImpl" id="com.chola.service.conference.service.locationService" />
+	<bean class="com.chola.service.conference.service.persistence.impl.locationPersistenceImpl" id="com.chola.service.conference.service.persistence.locationPersistence" parent="basePersistence" />
+	<bean class="com.chola.service.conference.service.persistence.impl.locationFinderImpl" id="com.chola.service.conference.service.persistence.locationFinder" parent="basePersistence" />
+	<bean class="com.chola.service.conference.service.impl.roomLocalServiceImpl" id="com.chola.service.conference.service.roomLocalService" />
+	<bean class="com.chola.service.conference.service.impl.roomServiceImpl" id="com.chola.service.conference.service.roomService" />
+	<bean class="com.chola.service.conference.service.persistence.impl.roomPersistenceImpl" id="com.chola.service.conference.service.persistence.roomPersistence" parent="basePersistence" />
+	<bean class="com.chola.service.conference.service.impl.stateLocalServiceImpl" id="com.chola.service.conference.service.stateLocalService" />
+	<bean class="com.chola.service.conference.service.impl.stateServiceImpl" id="com.chola.service.conference.service.stateService" />
+	<bean class="com.chola.service.conference.service.persistence.impl.statePersistenceImpl" id="com.chola.service.conference.service.persistence.statePersistence" parent="basePersistence" />
+</beans>

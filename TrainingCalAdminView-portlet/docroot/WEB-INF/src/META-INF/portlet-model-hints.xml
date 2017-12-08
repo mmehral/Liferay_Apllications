@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.trainingcalendar.model.trainingcalendar">
+		<field name="trainingid" type="long" />
+		<field name="name" type="String" />
+	</model>
+	<model name="com.chola.trainingcalendar.model.trainingcalendardata">
+		<field name="id" type="long" />
+		<field name="title" type="String" />
+		<field name="description" type="String" />
+		<field name="schedulestartdate" type="Date" />
+		<field name="scheduleenddate" type="Date" />
+		<field name="location" type="String" />
+	</model>
+	<model name="com.chola.trainingcalendar.model.trainingcontentuniqueinformation">
+		<field name="id" type="long" />
+		<field name="training_id" type="long" />
+		<field name="content_id" type="long" />
+		<field name="status" type="long" />
+		<field name="udflag" type="long" />
+		<field name="content_type" type="String" />
+		<field name="notification_text" type="String" />
+		<field name="pageurl" type="String" />
+	</model>
+	<model name="com.chola.trainingcalendar.model.trainingintendedtable">
+		<field name="id" type="long" />
+		<field name="trainingid" type="long" />
+		<field name="userid" type="String" />
+		<field name="screenname" type="String" />
+		<field name="createddate" type="Date" />
+		<field name="flag" type="int" />
+	</model>
+	<model name="com.chola.trainingcalendar.model.trainingpersonalisedparameterscontentstore">
+		<field name="id" type="long" />
+		<field name="content_id" type="long" />
+		<field name="business" type="String" />
+		<field name="unit" type="String" />
+		<field name="function" type="String" />
+		<field name="department" type="String" />
+		<field name="designation" type="String" />
+		<field name="product" type="String" />
+		<field name="zone" type="String" />
+		<field name="branch" type="String" />
+		<field name="grade" type="String" />
+		<field name="region" type="String" />
+		<field name="location" type="String" />
+		<field name="user_id" type="String" />
+		<field name="gender" type="String" />
+		<field name="age_type" type="String" />
+		<field name="age_value" type="String" />
+		<field name="notification_type" type="long" />
+	</model>
+</model-hints>

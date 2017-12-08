@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>	
+	<definition name="portlet.test" path="/html/portlet/test/template.jsp" />
+	<definition name="portlet.test.view" extends="portlet.test">
+		<put name="portlet_content" value="/portlet/test/view.jsp" />
+	</definition>
+	<definition name="portlet.test.search" extends="portlet.test">
+		<put name="portlet_content" value="/portlet/test/search.jsp" />
+	</definition>
+	<definition name="portlet.test.display" extends="portlet.test">
+		<put name="portlet_content" value="/portlet/test/display.jsp" />
+	</definition>
+</tiles-definitions>

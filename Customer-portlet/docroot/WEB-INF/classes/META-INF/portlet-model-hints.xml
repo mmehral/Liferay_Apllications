@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.customer.model.customer">
+		<field name="customerId" type="long" />
+		<field name="name" type="String" />
+		<field name="product" type="String" />
+		<field name="PhoneNo" type="int" />
+		<field name="price" type="float" />
+		<field name="email" type="String" />
+	</model>
+</model-hints>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.contest.model.cholacontest">
+		<field name="id" type="long" />
+		<field name="content_id" type="long" />
+		<field name="content" type="String" />
+		<field name="startdate" type="Date" />
+		<field name="enddate" type="Date" />
+		<field name="feedback" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="createDate" type="Date" />
+		<field name="contest_code" type="int" />
+		<field name="contest_val" type="int" />
+		<field name="contest_desc" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="contest_doc" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="contest_path" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="contest_title" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="user_id" type="String" />
+	</model>
+</model-hints>

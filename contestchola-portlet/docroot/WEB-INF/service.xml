@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.contest">
+	<author>CloverLiferay01</author>
+	<namespace>chola</namespace>
+
+<entity name="CholaContest" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="Id" type="long" primary="true" id-type="increment" />
+		<column name="content_id" type="long"></column>
+		<column name="content" type="String" />
+		<column name="startdate" type="Date"></column>
+		<column name="enddate" type="Date"></column>
+		<column name="feedback" type="String"></column>
+		<column name="createDate" type="Date" />
+		<column name="contest_code" type="int"></column>
+		<column name="contest_val" type="int"></column>
+		<column name="contest_desc" type="String"></column>
+		<column name="contest_doc" type="String"></column>
+		<column name="contest_path" type="String"></column>
+		<column name="contest_title" type="String"></column>
+		<column name="user_id" type="String"></column>
+		<finder return-type="Collection" name="CONTENT_ID">
+		<finder-column name="content_id"></finder-column>
+		</finder>
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
+	</entity>
+	
+	
+</service-builder>

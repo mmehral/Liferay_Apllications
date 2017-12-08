@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.mdspeak.service.impl.MdSpeaksLocalServiceImpl" id="com.chola.mdspeak.service.MdSpeaksLocalService" />
+	<bean class="com.chola.mdspeak.service.impl.MdSpeaksServiceImpl" id="com.chola.mdspeak.service.MdSpeaksService" />
+	<bean class="com.chola.mdspeak.service.persistence.impl.MdSpeaksPersistenceImpl" id="com.chola.mdspeak.service.persistence.MdSpeaksPersistence" parent="basePersistence" />
+	<bean class="com.chola.mdspeak.service.persistence.impl.MdSpeaksFinderImpl" id="com.chola.mdspeak.service.persistence.MdSpeaksFinder" parent="basePersistence" />
+</beans>

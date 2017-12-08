@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.businessmis.service.impl.businessmisdetailsLocalServiceImpl" id="com.chola.businessmis.service.businessmisdetailsLocalService" />
+	<bean class="com.chola.businessmis.service.impl.businessmisdetailsServiceImpl" id="com.chola.businessmis.service.businessmisdetailsService" />
+	<bean class="com.chola.businessmis.service.persistence.impl.businessmisdetailsPersistenceImpl" id="com.chola.businessmis.service.persistence.businessmisdetailsPersistence" parent="basePersistence" />
+	<bean class="com.chola.businessmis.service.persistence.impl.businessmisdetailsFinderImpl" id="com.chola.businessmis.service.persistence.businessmisdetailsFinder" parent="basePersistence" />
+</beans>

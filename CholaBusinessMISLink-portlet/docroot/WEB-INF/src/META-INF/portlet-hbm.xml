@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.businessmis.model.businessmisdetails" />
+	<class name="com.chola.businessmis.model.impl.businessmisdetailsImpl" table="chola_businessmisdetails">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="businesstitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="businessDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="businessLink" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="filepath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="filename" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

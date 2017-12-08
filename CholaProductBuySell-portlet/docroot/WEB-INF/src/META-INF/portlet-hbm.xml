@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.productbuysell.model.BuySell" />
+	<import class="com.chola.productbuysell.model.BuySellProducts" />
+	<import class="com.chola.productbuysell.model.BuySellProductsImages" />
+	<class name="com.chola.productbuysell.model.impl.BuySellImpl" table="chola_BuySell">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.productbuysell.model.impl.BuySellProductsImpl" table="chola_BuySellProducts">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="sellerName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="category_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="askingPrice" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userScreenName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="location" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="approvedstatus" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="created_date" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.chola.productbuysell.model.impl.BuySellProductsImagesImpl" table="chola_BuySellProductsImages">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="image_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="image_path" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="product_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>
