@@ -1,0 +1,297 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.chola.appcorner.service;
+
+import aQute.bnd.annotation.ProviderType;
+
+import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
+import com.liferay.portal.kernel.service.InvokableLocalService;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
+
+/**
+ * Provides the local service utility for post. This utility wraps
+ * {@link com.chola.appcorner.service.impl.postLocalServiceImpl} and is the
+ * primary access point for service operations in application layer code running
+ * on the local server. Methods of this service will not have security checks
+ * based on the propagated JAAS credentials because this service can only be
+ * accessed from within the same VM.
+ *
+ * @author CloverLiferay02
+ * @see postLocalService
+ * @see com.chola.appcorner.service.base.postLocalServiceBaseImpl
+ * @see com.chola.appcorner.service.impl.postLocalServiceImpl
+ * @generated
+ */
+@ProviderType
+public class postLocalServiceUtil {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify this class directly. Add custom service methods to {@link com.chola.appcorner.service.impl.postLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 */
+	public static boolean insertNotificationData(int syscode, int val,
+		java.lang.String sysname, int status, int sttsflag, long usernotifyId) {
+		return getService()
+				   .insertNotificationData(syscode, val, sysname, status,
+			sttsflag, usernotifyId);
+	}
+
+	/**
+	* Adds the post to the database. Also notifies the appropriate model listeners.
+	*
+	* @param post the post
+	* @return the post that was added
+	*/
+	public static com.chola.appcorner.model.post addpost(
+		com.chola.appcorner.model.post post) {
+		return getService().addpost(post);
+	}
+
+	/**
+	* Creates a new post with the primary key. Does not add the post to the database.
+	*
+	* @param id the primary key for the new post
+	* @return the new post
+	*/
+	public static com.chola.appcorner.model.post createpost(long id) {
+		return getService().createpost(id);
+	}
+
+	/**
+	* Deletes the post from the database. Also notifies the appropriate model listeners.
+	*
+	* @param post the post
+	* @return the post that was removed
+	*/
+	public static com.chola.appcorner.model.post deletepost(
+		com.chola.appcorner.model.post post) {
+		return getService().deletepost(post);
+	}
+
+	/**
+	* Deletes the post with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param id the primary key of the post
+	* @return the post that was removed
+	* @throws PortalException if a post with the primary key could not be found
+	*/
+	public static com.chola.appcorner.model.post deletepost(long id)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().deletepost(id);
+	}
+
+	public static com.chola.appcorner.model.post fetchpost(long id) {
+		return getService().fetchpost(id);
+	}
+
+	/**
+	* Returns the post with the primary key.
+	*
+	* @param id the primary key of the post
+	* @return the post
+	* @throws PortalException if a post with the primary key could not be found
+	*/
+	public static com.chola.appcorner.model.post getpost(long id)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getpost(id);
+	}
+
+	/**
+	* Updates the post in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	*
+	* @param post the post
+	* @return the post that was updated
+	*/
+	public static com.chola.appcorner.model.post updatepost(
+		com.chola.appcorner.model.post post) {
+		return getService().updatepost(post);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
+		return getService().getActionableDynamicQuery();
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
+		return getService().dynamicQuery();
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
+		return getService().getIndexableActionableDynamicQuery();
+	}
+
+	/**
+	* @throws PortalException
+	*/
+	public static com.liferay.portal.kernel.model.PersistedModel deletePersistedModel(
+		com.liferay.portal.kernel.model.PersistedModel persistedModel)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().deletePersistedModel(persistedModel);
+	}
+
+	public static com.liferay.portal.kernel.model.PersistedModel getPersistedModel(
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	/**
+	* Returns the number of posts.
+	*
+	* @return the number of posts
+	*/
+	public static int getpostsCount() {
+		return getService().getpostsCount();
+	}
+
+	public static java.lang.Object invokeMethod(java.lang.String name,
+		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
+		throws java.lang.Throwable {
+		return getService().invokeMethod(name, parameterTypes, arguments);
+	}
+
+	/**
+	* Returns the OSGi service identifier.
+	*
+	* @return the OSGi service identifier
+	*/
+	public static java.lang.String getOSGiServiceIdentifier() {
+		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static java.util.List<java.lang.Object[]> SyscodeCustomMsg(
+		int syscode) {
+		return getService().SyscodeCustomMsg(syscode);
+	}
+
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query
+	* @return the matching rows
+	*/
+	public static <T> java.util.List<T> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
+		return getService().dynamicQuery(dynamicQuery);
+	}
+
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.chola.appcorner.model.impl.postModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
+	* @return the range of matching rows
+	*/
+	public static <T> java.util.List<T> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) {
+		return getService().dynamicQuery(dynamicQuery, start, end);
+	}
+
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.chola.appcorner.model.impl.postModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query
+	* @param start the lower bound of the range of model instances
+	* @param end the upper bound of the range of model instances (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching rows
+	*/
+	public static <T> java.util.List<T> dynamicQuery(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
+		return getService()
+				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
+	}
+
+	public static java.util.List<com.chola.appcorner.model.post> getAppToData(
+		long appTo) {
+		return getService().getAppToData(appTo);
+	}
+
+	/**
+	* Returns a range of all the posts.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.chola.appcorner.model.impl.postModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param start the lower bound of the range of posts
+	* @param end the upper bound of the range of posts (not inclusive)
+	* @return the range of posts
+	*/
+	public static java.util.List<com.chola.appcorner.model.post> getposts(
+		int start, int end) {
+		return getService().getposts(start, end);
+	}
+
+	/**
+	* Returns the number of rows matching the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query
+	* @return the number of rows matching the dynamic query
+	*/
+	public static long dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery) {
+		return getService().dynamicQueryCount(dynamicQuery);
+	}
+
+	/**
+	* Returns the number of rows matching the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query
+	* @param projection the projection to apply to the query
+	* @return the number of rows matching the dynamic query
+	*/
+	public static long dynamicQueryCount(
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery,
+		com.liferay.portal.kernel.dao.orm.Projection projection) {
+		return getService().dynamicQueryCount(dynamicQuery, projection);
+	}
+
+	public static void clearService() {
+		_service = null;
+	}
+
+	public static postLocalService getService() {
+		if (_service == null) {
+			InvokableLocalService invokableLocalService = (InvokableLocalService)PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
+					postLocalService.class.getName());
+
+			if (invokableLocalService instanceof postLocalService) {
+				_service = (postLocalService)invokableLocalService;
+			}
+			else {
+				_service = new postLocalServiceClp(invokableLocalService);
+			}
+
+			ReferenceRegistry.registerReference(postLocalServiceUtil.class,
+				"_service");
+		}
+
+		return _service;
+	}
+
+	private static postLocalService _service;
+}

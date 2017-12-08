@@ -1,0 +1,1168 @@
+@charset "UTF-8";
+/* Calendar Start */
+body {
+  font-family: Calibri !important; }
+
+#mycalendar {
+  width: 100%;
+  /*margin: 2em auto 0 auto;*/
+  max-width: 80em;
+  /*border: 1px solid #666;*/ }
+
+/* Overall wrapper */
+.monthly {
+  background: #F3F3F5;
+  color: #545454;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative; }
+
+/* Top bar containing title, navigation, and buttons */
+.monthly-header {
+  position: relative;
+  text-align: center;
+  padding: 0.5em;
+  background: #0e81b8;
+  height: 3em;
+  box-sizing: border-box; }
+
+/* Center area of top bar containing title and buttons */
+.monthly-header-title {
+  text-transform: uppercase; }
+
+/* Buttons for reverting to "today", and closing event list */
+.monthly-header-title a:link,
+.monthly-header-title a:visited {
+  display: inline-block;
+  /*border: 1px solid #ccc;*/
+  color: #545454;
+  text-decoration: none;
+  height: 1.75em;
+  line-height: 1.65em;
+  padding: 0 0.65em 0 0.65em;
+  box-sizing: border-box;
+  transition: background 0.1s; }
+
+/* Add some roundy-ness */
+/*.monthly-header-title a:first-of-type {
+	border-top-left-radius: 1em;
+	border-bottom-left-radius: 1em;
+}*/
+/*.monthly-header-title a:last-of-type {
+	border-top-right-radius: 1em;
+	border-bottom-right-radius: 1em;
+}*/
+.monthly-header-title a:hover {
+  background: #8b8b8b;
+  border: 1px solid #8b8b8b;
+  color: #fff; }
+
+.monthly-header-title a:active {
+  background: #222;
+  border: 1px solid #222;
+  transition: none; }
+
+/* current month/yr block */
+.monthly-header-title-date,
+.monthly-header-title-date:hover {
+  /*background: #eee!important;*/
+  /*border: 1px solid #ccc!important;*/
+  color: #fff !important;
+  cursor: default;
+  float: right; }
+
+/* Button to reset to current month */
+.monthly-reset {
+  border-left: 0 !important; }
+
+.monthly-reset::before {
+  content: '\21BB';
+  margin-right: 0.25em; }
+
+/* Button to return to month view */
+.monthly-cal {
+  border-right: 0 !important; }
+
+.monthly-cal::before {
+  content: '\2637';
+  margin-right: 0.25em; }
+
+/* wrapper for left/right buttons to make the clickable area bigger */
+/* Day of the week headings */
+.monthly-day-title-wrap {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #EBEBEB;
+  font-size: 11px;
+  font-weight: bold; }
+
+.monthly-day-title-wrap div {
+  width: 14.28% !important;
+  display: table-cell;
+  box-sizing: border-box;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase; }
+
+/* Calendar days wrapper */
+.monthly-day-wrap {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  overflow: hidden;
+  text-align: center; }
+
+.monthly-week {
+  display: table-row;
+  width: 100%; }
+
+/* Calendar Days */
+.monthly-day, .monthly-day-blank {
+  width: 14.28% !important;
+  display: table-cell;
+  vertical-align: top;
+  box-sizing: border-box;
+  position: relative;
+  color: inherit;
+  background: #fff;
+  /*box-shadow: 0 0 0 1px #EBEBEB;*/
+  -webkit-transition: .25s;
+  transition: .25s;
+  padding: 0;
+  text-decoration: none; }
+
+/* Trick to make the days' width equal their height */
+.monthly-day:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+  float: left; }
+
+/* Hover effect for non event calendar days */
+.monthly-day-wrap > a:hover {
+  background: #A1C2E3; }
+
+/* Days that are part of previous or next month */
+.monthly-day-blank {
+  background: #F3F3F5; }
+
+/* Event calendar day number styles */
+.monthly-day-event > .monthly-day-number {
+  position: absolute;
+  top: 0.5em;
+  left: 0.9em;
+  line-height: 24px;
+  font-size: 13px;
+  font-weight: bold; }
+
+/* Non-Event calendar day number styles */
+.monthly-day-pick > .monthly-indicator-wrap {
+  margin: 0; }
+
+.monthly-day-pick > .monthly-day-number:before,
+.monthly-day-pick > .monthly-day-number:after {
+  content: '';
+  display: block;
+  padding-top: calc(50% - 0.8em);
+  width: 0;
+  height: 0; }
+
+/* Days in the past in "picker" mode */
+.monthly-past-day:after {
+  content: '';
+  width: 150%;
+  height: 2px;
+  -webkit-transform-origin: left top;
+  -ms-transform-origin: left top;
+  transform-origin: left top;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  background: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  left: 0;
+  top: 0; }
+
+.monthly-past-day:hover {
+  background: #fff !important; }
+
+/* Current day style */
+.monthly-today .monthly-day-number {
+  color: #FFF;
+  background: #0e81b8;
+  top: 0.08em;
+  left: 0.05em;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 36px;
+  font-size: 13px; }
+
+.monthly-day-pick.monthly-today .monthly-day-number {
+  padding: 0.15em;
+  margin: calc(50% - 0.7em) auto auto auto;
+  font-size: 1em; }
+
+/* Wrapper around events */
+.monthly-indicator-wrap {
+  position: relative;
+  text-align: center;
+  line-height: 0;
+  max-width: 1.5em;
+  margin: 0 auto;
+  padding-top: 1.2em; }
+
+/* Event indicator dots */
+.monthly-day .monthly-event-indicator {
+  display: inline-block;
+  margin: 0.05em;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 0.25em;
+  vertical-align: middle;
+  background: #7BA7CE; }
+
+.monthly-day .monthly-event-indicator span {
+  color: transparent; }
+
+.monthly-day .monthly-event-indicator:hover {
+  cursor: pointer; }
+
+/* Listing of events under calendar */
+.monthly-event-list {
+  background: rgba(233, 235, 236, 0.9);
+  overflow: auto;
+  position: absolute;
+  top: 2.5em;
+  width: 100%;
+  height: calc(100% - 2.5em);
+  display: none;
+  -webkit-transition: .25s;
+  transition: .25s;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0); }
+
+/* Days in Events List */
+.monthly-list-item {
+  position: relative;
+  padding: 0.5em 0.7em 0.25em 4em;
+  display: none;
+  border-top: 1px solid #D6D6D6;
+  text-align: left; }
+
+.monthly-list-item:after {
+  padding: 0.4em 1em;
+  display: block;
+  margin-bottom: 0.5em; }
+
+.monthly-event-list .monthly-today .monthly-event-list-date {
+  color: #EA6565; }
+
+/* Events in Events List */
+.monthly-event-list .listed-event {
+  display: block;
+  color: #fff;
+  padding: 0.4em 1em;
+  border-radius: 0.2em;
+  margin-bottom: 0.5em; }
+
+.monthly-list-item a:link, .monthly-list-item a:visited {
+  text-decoration: none; }
+
+.item-has-event {
+  display: block; }
+
+.item-has-event:after {
+  display: none !important; }
+
+.monthly-event-list-date {
+  width: 4em;
+  position: absolute;
+  left: 0;
+  top: 1.2em;
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.2em; }
+
+.monthly-list-time-start,
+.monthly-list-time-end {
+  font-size: .8em;
+  display: inline-block; }
+
+.monthly-list-time-end:not(:empty):before {
+  content: '\2013';
+  padding: 0 2px; }
+
+/* Events List custom webkit scrollbar */
+.monthly-event-list::-webkit-scrollbar {
+  width: 0.75em; }
+
+/* Track */
+.monthly-event-list::-webkit-scrollbar-track {
+  background: none; }
+
+/* Handle */
+.monthly-event-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border: 1px solid #E9EBEC;
+  border-radius: 0.5em; }
+
+.monthly-event-list::-webkit-scrollbar-thumb:hover {
+  background: #555; }
+
+/* Language-specific. Default is English. */
+.monthly-reset:after {
+  content: 'Today'; }
+
+.monthly-cal:after {
+  content: 'Month'; }
+
+.monthly-list-item:after {
+  content: 'No Events'; }
+
+.monthly-locale-fr .monthly-reset:after {
+  content: "aujourd'hui"; }
+
+.monthly-locale-fr .monthly-cal:after {
+  content: "mois"; }
+
+.monthly-locale-fr .monthly-list-item:after {
+  content: 'aucun �v�nement'; }
+
+/*
+Calendar shows event titles if the device width allows for at least 3em per day (rounded
+up to 25em total). This assumes the calendar font is close to the baseline font size and
+the calendar takes up close to the full media width as the window is made smaller or the
+font is zoomed. If one or both of these is not true, this will need to be overridden by
+a layout-specific width, or you will need to use a library like css-element-queries to 
+establish the rules based on the calendar element width rather than the device width.
+*/
+@media (min-width: 25em) {
+  .monthly-day-event {
+    padding-top: 1.1em; }
+  .monthly-day-event > .monthly-indicator-wrap {
+    width: auto;
+    max-width: none; }
+  .monthly-indicator-wrap {
+    padding: 0; }
+  .monthly-day:before {
+    padding-top: calc(100% - 1.2em); }
+  .monthly-day .monthly-event-indicator {
+    display: block;
+    margin: 0 0 1px 0;
+    width: auto;
+    height: 1.5em;
+    line-height: 1.2em;
+    padding: 0.125em 0 0.1em 0.125em;
+    border-radius: 0;
+    overflow: hidden;
+    background-color: #333;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;
+    box-sizing: border-box; }
+  .monthly-day .monthly-event-indicator.monthly-event-continued {
+    box-shadow: -1px 0 0 0; }
+  .monthly-day .monthly-event-indicator span {
+    display: block;
+    width: auto;
+    margin: 0;
+    color: #fff;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; } }
+
+/* Calendar End */
+.CholaExpress {
+  float: right;
+  margin: 0px 0px 0px 0px;
+  background: #ffffff url(../img/Chola_Express.jpg) no-repeat;
+  width: 108px;
+  height: 103px;
+  text-align: center;
+  padding-top: 25px;
+  margin-top: -40px;
+  position: relative;
+  z-index: 10; }
+
+@media only screen and (min-width: 320px) {
+  .logo_panel_set {
+    padding: 0px 10px; }
+  .navi_spc {
+    padding: 15px 10px; }
+  .paddi {
+    padding: 10px; }
+  .CholaExpress {
+    float: right;
+    margin: 0px 0px 0px 0px;
+    background: #ffffff url(../img/Chola_Express.jpg) no-repeat;
+    width: 108px;
+    height: 103px;
+    text-align: center;
+    padding-top: 25px;
+    margin-top: -90px;
+    position: relative;
+    z-index: 10; }
+  .yellow_panel_bg {
+    background: url(../img/yellow_gradient.gif) repeat-x;
+    margin-bottom: 1px;
+    height: 36px;
+    padding-top: 7px;
+    font-size: 14px;
+    font-weight: bold; }
+  .yellow_panel_bg2 {
+    background: url(../img/yellow_gradient.gif) repeat-x;
+    margin-bottom: 1px;
+    height: 36px;
+    padding-top: 7px;
+    font-size: 14px;
+    font-weight: bold; } }
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width: 480px) {
+  .logo_panel_set {
+    padding: 0px 10px; }
+  .CholaExpress {
+    float: right;
+    margin: 0px 0px 0px 0px;
+    background: #ffffff url(../img/Chola_Express.jpg) no-repeat;
+    width: 108px;
+    height: 103px;
+    text-align: center;
+    padding-top: 25px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 10; } }
+
+@media only screen and (min-width: 360px) {
+  .logo_panel_set {
+    padding: 0px 10px; }
+  .CholaExpress {
+    float: right;
+    margin: 0px 0px 0px 0px;
+    background: #ffffff url(../img/Chola_Express.jpg) no-repeat;
+    width: 108px;
+    height: 103px;
+    text-align: center;
+    padding-top: 25px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 10; } }
+
+@media only screen and (min-width: 768px) {
+  .logo_panel_set {
+    padding: 0px 0px; }
+  .navi_spc {
+    padding: 15px 0px; }
+  .paddi {
+    padding: 0px; }
+  .yellow_panel_bg {
+    background: url(../img/yellow_gradient.gif) repeat-x;
+    margin-bottom: 1px;
+    border-right: 2px solid #fff;
+    height: 36px;
+    padding-top: 7px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px; }
+  .yellow_panel_bg2 {
+    background: url(../img/yellow_gradient.gif) repeat-x;
+    margin-bottom: 1px;
+    height: 36px;
+    padding-top: 7px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px; } }
+
+@media only screen and (min-width: 800px) {
+  .logo_panel_set {
+    padding: 0px 0px; }
+  .navi_spc {
+    padding: 15px 0px; }
+  .paddi {
+    padding: 0px; }
+  .yellow_panel_bg {
+    background: url(../img/yellow_gradient.gif) repeat-x;
+    margin-bottom: 1px;
+    border-right: 2px solid #fff;
+    height: 36px;
+    padding-top: 7px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px; }
+  .yellow_panel_bg2 {
+    background: url(../img/yellow_gradient.gif) repeat-x;
+    margin-bottom: 1px;
+    height: 36px;
+    padding-top: 7px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px; } }
+
+@media only screen and (min-width: 1024px) {
+  .logo_panel_set {
+    padding: 0px 0px; } }
+
+.active {
+  background: #fdcc03;
+  color: #000 !important;
+  font-weight: bold;
+  border-top-right-radius: 10px; }
+
+#custom-search-input {
+  margin: 0;
+  margin-top: 10px;
+  padding: 0; }
+
+#custom-search-input .search-query {
+  padding-right: 3px;
+  padding-right: 4px \9;
+  padding-left: 3px;
+  padding-left: 4px \9;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+
+#custom-search-input button {
+  border: 0;
+  background: none;
+  /** belows styles are working good */
+  padding: 2px 5px;
+  margin-top: 2px;
+  position: relative;
+  left: -28px;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #D9230F; }
+
+.search-query:focus + button {
+  z-index: 3; }
+
+.header_imgbg {
+  top: 0px;
+  background: url(../img/Header.jpg) repeat-x;
+  height: 40px; }
+
+.blue_navheader {
+  background: #008ed4;
+  color: #fff;
+  border: none;
+  border-radius: 0 !important; }
+
+.right_gradient {
+  background: #ebedec url(../img/gradient.gif) repeat-x;
+  padding-bottom: 14px;
+  margin-bottom: 10px; }
+
+.text_panel {
+  padding: 0px 0px 0px 10px;
+  font-size: 16px; }
+
+.text_style {
+  font-style: italic;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0px 10px; }
+
+.leftpaddi {
+  padding-left: 0px;
+  margin-top: 0px; }
+
+::-webkit-input-placeholder {
+  font-size: 18px; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  font-size: 18px; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  font-size: 18px; }
+
+:-ms-input-placeholder {
+  font-size: 18px; }
+
+/*-----start-responsive-design------*/
+@media (max-width: 1024px) {
+  .leftpaddi {
+    padding-left: 0px; } }
+
+@media (max-width: 800px) {
+  .leftpaddi {
+    padding-left: 15px; } }
+
+@media (max-width: 768px) {
+  .leftpaddi {
+    padding-left: 15px; } }
+
+@media (max-width: 640px) {
+  .leftpaddi {
+    padding: 0px 25px; } }
+
+@media (max-width: 480px) {
+  .leftpaddi {
+    padding: 0px 25px; } }
+
+@media (max-width: 320px) {
+  .leftpaddi {
+    padding: 0px 25px; } }
+
+.yellow_panel_main {
+  padding: 0px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center; }
+
+.yellow_panelrit_bg {
+  background: url(../img/yellow_gradient.gif) repeat-x; }
+
+.bd_gradient {
+  background: linear-gradient(#efefef, #d3d3d3);
+  padding-top: 10px;
+  padding-bottom: 14px;
+  margin-bottom: 5px; }
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff; }
+
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
+  color: #fff;
+  background-color: transparent;
+  background: #fdcc03;
+  color: #000;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-right-radius: 10px; }
+
+.event_gradient {
+  background: linear-gradient(#efefef, #d3d3d3); }
+
+/* ABOUT US CSS START */
+.abt_left_panel {
+  background: #1d5a76;
+  padding-left: 0px;
+  padding-right: 0px; }
+
+.abt_box_inn {
+  background: #1d5a76;
+  width: auto;
+  height: auto;
+  border-radius: 5px;
+  padding: 2px 10px 4px 10px;
+  margin-top: 50px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px; }
+
+.abt_img {
+  width: 100%;
+  float: left; }
+
+.abt_img_wid {
+  width: 100%;
+  height: 100%; }
+
+.abt_menu_panel {
+  width: 100%;
+  background: #0e81b8 none repeat scroll 0% 0%;
+  z-index: 5;
+  bottom: 0px;
+  border-top: 4px solid #1d5a76;
+  float: left;
+  padding: 30px 0px;
+  height: 390px; }
+
+.abt_box_dwn {
+  margin-top: 10px; }
+
+.abt_nav_panel {
+  padding: 0px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 5px; }
+
+.abt_text_head {
+  margin-bottom: 10px;
+  width: 100%;
+  float: left;
+  font-size: 22px;
+  font-weight: bold; }
+
+.abt_text_headcol {
+  color: #ed1c24; }
+
+.abt_text_head_sub {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+  width: 100%;
+  float: left; }
+
+@media only screen and (min-width: 320px) {
+  .abt_box {
+    width: 100%;
+    float: left;
+    position: absolute;
+    margin-top: 197px; } }
+
+@media only screen and (min-width: 480px) {
+  .abt_box {
+    width: 100%;
+    float: left;
+    position: absolute;
+    margin-top: 303px !important; } }
+
+@media only screen and (min-width: 360px) {
+  .abt_box {
+    width: 100%;
+    float: left;
+    position: absolute;
+    margin-top: 224px; } }
+
+@media only screen and (min-width: 640px) {
+  .abt_box {
+    width: 100%;
+    float: left;
+    position: absolute;
+    margin-top: 407px !important; } }
+
+@media only screen and (min-width: 768px) {
+  .abt_box {
+    width: 100%;
+    float: left;
+    position: absolute;
+    margin-top: 478px !important; } }
+
+@media only screen and (min-width: 800px) {
+  .abt_box {
+    width: 100%;
+    float: left;
+    position: absolute;
+    margin-top: 478px !important; } }
+
+@media only screen and (min-width: 1024px) {
+  .abt_box {
+    width: 100%;
+    float: left;
+    position: absolute;
+    margin-top: 147px !important; } }
+
+@media only screen and (min-width: 1136px) {
+  .abt_box {
+    width: 100%;
+    float: left;
+    position: absolute;
+    margin-top: 180px !important; } }
+
+.abt_sev_img_panl {
+  margin-bottom: 5px;
+  text-align: center; }
+
+.text_link {
+  color: #fff;
+  text-decoration: none; }
+
+.text_link:hover {
+  color: #fff;
+  text-decoration: none; }
+
+.abt_pr_gradient {
+  background: linear-gradient(#fff, #ccc);
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-top: 1px solid #f5f5f5; }
+
+.abt_pr_dashed {
+  border-bottom: 1px dashed #959595;
+  float: left;
+  width: 100%;
+  margin-bottom: 10px; }
+
+.abt_pr_panel {
+  padding: 0px;
+  float: left;
+  width: 100%; }
+
+.abt_pr_lh {
+  line-height: 18px; }
+
+/* HOME PAGE START */
+.left_panel {
+  width: 100%;
+  float: left;
+  height: auto; }
+
+.right_panel {
+  width: 710px;
+  float: left;
+  height: 383px; }
+
+.right_panel_mid1_01 {
+  float: left;
+  font-size: 14px;
+  height: auto;
+  line-height: 23px;
+  text-align: justify;
+  width: 100%; }
+
+/* HOME PAGE END */
+/* Vertical Navigation Start */
+#navigation {
+  width: 100%; }
+
+#navigation ul {
+  margin-left: 35px;
+  padding: 0px; }
+
+#navigation li {
+  list-style: none; }
+
+ul.top-level {
+  width: 100%;
+  /*position:absolute;*/
+  z-index: 10; }
+
+ul.top-level li {
+  /*border-bottom: #fff solid;
+ border-top: #fff solid;
+ border-width: 1px;*/ }
+
+#navigation a {
+  cursor: pointer;
+  display: block;
+  height: 24px;
+  line-height: 18px;
+  padding: 2px 0;
+  text-indent: 10px;
+  margin-bottom: 13px;
+  font-size: 16px; }
+
+#navigation a:hover {
+  /* text-decoration:underline;*/
+  color: #fff;
+  font-weight: bold; }
+
+#navigation li:hover {
+  background: #fff7d0;
+  position: relative;
+  border-bottom: 2px solid #1568aa; }
+
+#navigation li.active {
+  background: #fff7d0;
+  border-bottom: 2px solid #1568aa; }
+
+ul.sub-level {
+  display: none; }
+
+li:hover .sub-level {
+  background: #999;
+  border-width: 1px;
+  display: block;
+  position: absolute;
+  left: 75px;
+  top: 5px; }
+
+ul.sub-level li {
+  border: none;
+  float: left;
+  width: 240px; }
+
+/*Seconda Level*/
+#navigation .sub-level {
+  background: none repeat scroll 0 0 #ffdd00;
+  margin-left: 166px;
+  margin-top: -5px;
+  width: 240px; }
+
+/*Third Level*/
+#navigation .sub-level .sub-level {
+  background: #09C; }
+
+/*RESET STYLES*/
+li:hover .sub-level .sub-level {
+  display: none; }
+
+.sub-level li:hover .sub-level {
+  display: block; }
+
+.nav_panel {
+  float: left;
+  width: 100%; }
+
+.nav_panel_image {
+  float: left;
+  width: 30px;
+  margin-top: -5px;
+  margin-left: -18px; }
+
+.nav_panel_text {
+  float: left;
+  width: auto;
+  padding-left: 15px; }
+
+/* Vertical Navigation End */
+/*---------------------------*/
+ul#tabs {
+  list-style-type: none;
+  /*margin: 30px 0 0 0;*/
+  padding: 0 0 0.3em 0;
+  width: auto; }
+
+ul#tabs li {
+  display: inline; }
+
+ul#tabs li a {
+  color: #fff;
+  font-weight: bold;
+  /* border: 1px solid #c9c3ba;*/
+  border-bottom: none;
+  text-decoration: none; }
+
+ul#tabs li a:hover {
+  background-color: #0b6c9e;
+  width: 100%; }
+
+ul#tabs li a.selected {
+  color: #fff;
+  background-color: #0b6c9e;
+  font-weight: bold;
+  width: 100%; }
+
+div.tabContent {
+  /* padding: 0.5em;*/
+  background-color: #fff; }
+
+div.tabContent.hide {
+  display: none; }
+
+/*---------------------------*/
+.col-md-1 {
+  background-color: none; }
+
+@media (min-width: 768px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 100%;
+    *width: 100%; } }
+
+@media (min-width: 992px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%; } }
+
+/*
+ You probably do not need to edit this at all.
+
+ Add some SmartMenus required styles not covered in Bootstrap 3's default CSS.
+ These are theme independent and should work with any Bootstrap 3 theme mod.
+*/
+/* sub menus arrows on desktop */
+.navbar-nav:not(.sm-collapsible) ul .caret {
+  position: absolute;
+  right: 0;
+  margin-top: 6px;
+  margin-right: 15px;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 4px dashed; }
+
+.navbar-nav:not(.sm-collapsible) ul a.has-submenu {
+  padding-right: 30px; }
+
+/* make sub menu arrows look like +/- buttons in collapsible mode */
+.navbar-nav.sm-collapsible .caret, .navbar-nav.sm-collapsible ul .caret {
+  position: absolute;
+  right: 0;
+  margin: -3px 15px 0 0;
+  padding: 0;
+  width: 32px;
+  height: 26px;
+  line-height: 24px;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid; }
+
+.navbar-nav.sm-collapsible .caret:before {
+  content: '+';
+  font-family: monospace;
+  font-weight: bold;
+  color: #fff; }
+
+.navbar-nav.sm-collapsible .open > a > .caret:before {
+  content: '-';
+  color: #fff; }
+
+.navbar-nav.sm-collapsible a.has-submenu {
+  padding-right: 50px; }
+
+/* revert to Bootstrap's default carets in collapsible mode when the "data-sm-skip-collapsible-behavior" attribute is set to the ul.navbar-nav */
+.navbar-nav.sm-collapsible[data-sm-skip-collapsible-behavior] .caret, .navbar-nav.sm-collapsible[data-sm-skip-collapsible-behavior] ul .caret {
+  position: static;
+  margin: 0 0 0 2px;
+  padding: 0;
+  width: 0;
+  height: 0;
+  border-top: 4px dashed;
+  border-right: 4px solid transparent;
+  border-bottom: 0;
+  border-left: 4px solid transparent; }
+
+.navbar-nav.sm-collapsible[data-sm-skip-collapsible-behavior] .caret:before {
+  content: '' !important; }
+
+.navbar-nav.sm-collapsible[data-sm-skip-collapsible-behavior] a.has-submenu {
+  padding-right: 15px; }
+
+/* ABOUT US CSS END */
+/* HALL OF FAME START */
+.hf_btn_styl {
+  border: none;
+  background: none; }
+
+.hf_text {
+  background: #1e5977 none repeat scroll 0% 0%;
+  color: white;
+  padding: 2px;
+  font-size: 12px; }
+
+/* HALL OF FAME END */
+/* CONTESTS START */
+.con_btn_styl {
+  border: none;
+  background: none;
+  float: right;
+  padding: 0px; }
+
+.con_main_panel {
+  overflow: auto;
+  height: 550px;
+  float: left;
+  margin: 0 auto;
+  width: 100%; }
+
+.con_box_panel {
+  padding: 5px;
+  float: left;
+  border-radius: 4px;
+  border: 2px solid #d8d8d8;
+  box-shadow: 0px 1px 5px #d7d7d7;
+  line-height: 18px;
+  margin: 4px;
+  width: 97%; }
+
+.con_paddi {
+  padding: 0px; }
+
+.con_img {
+  border: 1px solid #c7d2d0;
+  width: 213px;
+  height: 145px; }
+
+.con_text {
+  color: #ed2028;
+  width: 100%;
+  float: left;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px; }
+
+.con_more {
+  background: #0f81b9 none repeat scroll 0% 0%;
+  color: white;
+  padding: 2px 8px;
+  font-size: 14px;
+  margin-top: 10px; }
+
+.con_img_cen {
+  text-align: center;
+  width: 100%;
+  float: left; }
+
+/* CONTESTS END */
+/* PHOTOS START */
+.pht_text {
+  color: #ed1c24;
+  font-weight: bold;
+  font-size: 22px; }
+
+.pht_img {
+  border: 1px solid #c7d2d0;
+  width: 142px;
+  height: 116px; }
+
+.vid_text {
+  color: #0b6c9e;
+  width: 100%;
+  float: left;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px; }
+
+.vid_panel {
+  float: left;
+  margin: 0 auto;
+  width: 100%; }
+
+/* PHOTOS END */
+/* MESSAGE WALL START */
+.hel_img {
+  border: 1px solid #c7d2d0;
+  width: 84px;
+  height: 93px; }
+
+.hel_box_panel {
+  padding: 5px;
+  float: left;
+  border-radius: 4px;
+  border: 2px solid #d8d8d8;
+  background: #dde1e2;
+  line-height: 18px;
+  margin: 4px;
+  width: 97%; }
+
+.hel_bg_gradi {
+  background: linear-gradient(#f8f8f9, #dee1e3);
+  padding: 5px;
+  float: left;
+  border-radius: 4px;
+  line-height: 18px;
+  margin: 4px;
+  width: 97%;
+  padding: 18px; }
+
+.hel_text_link {
+  color: #0b6c9e;
+  text-decoration: none; }
+
+.hel_text_link:hover {
+  color: #0b6c9e;
+  text-decoration: underline; }
+
+.hel_text_inn {
+  width: 100%;
+  float: left;
+  margin-bottom: 10px; }
+
+.comp_text_head {
+  margin-bottom: 10px;
+  width: 100%;
+  float: left;
+  font-size: 16px;
+  font-weight: bold; }
+
+/* MESSAGE WALL END */

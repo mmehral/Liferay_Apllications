@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.popular.service.impl.externallinksLocalServiceImpl" id="com.popular.service.externallinksLocalService" />
+	<bean class="com.popular.service.impl.externallinksServiceImpl" id="com.popular.service.externallinksService" />
+	<bean class="com.popular.service.persistence.impl.externallinksPersistenceImpl" id="com.popular.service.persistence.externallinksPersistence" parent="basePersistence" />
+	<bean class="com.popular.service.impl.popularlinksLocalServiceImpl" id="com.popular.service.popularlinksLocalService" />
+	<bean class="com.popular.service.impl.popularlinksServiceImpl" id="com.popular.service.popularlinksService" />
+	<bean class="com.popular.service.persistence.impl.popularlinksPersistenceImpl" id="com.popular.service.persistence.popularlinksPersistence" parent="basePersistence" />
+	<bean class="com.popular.service.persistence.impl.popularlinksFinderImpl" id="com.popular.service.persistence.popularlinksFinder" parent="basePersistence" />
+</beans>

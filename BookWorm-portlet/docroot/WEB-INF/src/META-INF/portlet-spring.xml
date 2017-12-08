@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.book.service.impl.bookdetailsLocalServiceImpl" id="com.chola.book.service.bookdetailsLocalService" />
+	<bean class="com.chola.book.service.impl.bookdetailsServiceImpl" id="com.chola.book.service.bookdetailsService" />
+	<bean class="com.chola.book.service.persistence.impl.bookdetailsPersistenceImpl" id="com.chola.book.service.persistence.bookdetailsPersistence" parent="basePersistence" />
+	<bean class="com.chola.book.service.persistence.impl.bookdetailsFinderImpl" id="com.chola.book.service.persistence.bookdetailsFinder" parent="basePersistence" />
+</beans>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.chola.listbranch">
+	<author>adms.java1</author>
+	<namespace>Branch</namespace>
+
+<entity name="product" local-service="true" remote-service="true">
+<column name="product_id" type="long" primary="true" id-type="increment"></column>
+<column name="product_name" type="String"></column>
+</entity>
+
+<entity name="state" local-service="true" remote-service="true">
+<column name="state_id" type="long" primary="true" id-type="increment"></column>
+<column name="state_name" type="String"></column>
+</entity>
+
+<entity name="city" local-service="true" remote-service="true">
+<column name="city_id" type="long" primary="true" id-type="increment"></column>
+<column name="city_name" type="String"></column>
+<column name="state_id" type="long"></column>
+
+</entity>
+
+<entity name="branchdetails" local-service="true" remote-service="true">
+<column name="branch_id" type="long" primary="true" id-type="increment"></column>
+<column name="branch_code" type="String"></column>
+<column name="branch_address" type="String"></column>
+<column name="city_id" type="long"></column>
+
+</entity>
+
+<entity name="mapping" local-service="true" remote-service="true">
+<column name="mapping_id" type="long" primary="true" id-type="increment"></column>
+<column name="product_id" type="long"></column>
+<column name="state_id" type="long"></column>
+<column name="city_id" type="long"></column>
+<column name="branch_id" type="long"></column>
+
+</entity>
+
+</service-builder>

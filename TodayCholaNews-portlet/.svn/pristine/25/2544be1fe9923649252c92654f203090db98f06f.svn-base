@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_chola_TodayCholaNewsService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="com.chola.TodaycholaNews.service.http.TodayCholaNewsServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="TodayCholaNewsServiceSoap" />
+		<parameter name="wsdlServiceElement" value="TodayCholaNewsServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_chola_TodayCholaNewsService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.TodaycholaNews.chola.com" />
+	</service>
+</deployment>

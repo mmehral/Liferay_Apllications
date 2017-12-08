@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.calendar.model.data" />
+	<import class="com.chola.calendar.model.EmpInfoEntity" />
+	<import class="com.chola.calendar.model.eventcalendar" />
+	<class name="com.chola.calendar.model.impl.dataImpl" table="events_data">
+		<id name="eventid" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="eventdetails" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eventfrom" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eventto" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="location" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="dept" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="subdept" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="grade" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="age" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="gender" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.calendar.model.impl.EmpInfoEntityImpl" table="events_EmpInfoEntity">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="empId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="emailid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="birthday" type="org.hibernate.type.TimestampType" />
+		<property name="grade" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="functionName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="department" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="subdepartment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="location" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="gender" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="unit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.calendar.model.impl.eventcalendarImpl" table="events_eventcalendar">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="startdate" type="org.hibernate.type.TimestampType" />
+		<property name="enddate" type="org.hibernate.type.TimestampType" />
+		<property name="color" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

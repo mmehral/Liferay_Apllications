@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+
+	
+<!-- 	<sql id="state">
+    <![CDATA[
+		SELECT state_id, state_name FROM chola_state ;
+     ]]>
+	</sql> -->
+	
+	<sql id="state">
+    <![CDATA[
+		SELECT state_id, state_name FROM branch_state ;
+     ]]>
+	</sql>
+	<sql id="location">
+    <![CDATA[
+		SELECT city_id,city_name
+        FROM branch_city
+        where state_id=?;
+     ]]>
+	</sql>
+	<sql id="roomlist">
+    <![CDATA[
+	SELECT room_id,room_name,floor_id, room_capacity, room_extension, room_values
+    FROM branch_room
+    where state_id=?
+    and location_id=?;
+	 ]]>
+	</sql>
+
+	<sql id="approveroom">
+    <![CDATA[
+    SELECT id,startdate,starttime,endtime
+	FROM test
+	where starttime > ?
+    and endtime < ?
+	union
+	select id,startdate,starttime,endtime
+	from test
+	where ? between starttime and endtime
+	and ? between  starttime and endtime
+	 ]]>
+	</sql>
+
+	<sql id="roomid">
+    <![CDATA[
+       select room_id 
+       from branch_room
+       where state_id=? and location_id=?
+     ]]>
+	</sql>
+
+
+	<sql id="bookingdetails">
+    <![CDATA[
+     select * from branch_conferenceroombookingdetails
+		where roomid=?
+		and startime > ?
+		and endtime < ?
+		and startdate=date_format(?,"%Y-%m-%d")
+		and status=1
+		union
+		select * from branch_conferenceroombookingdetails
+		where roomid=?		  
+		and startdate=date_format(?,"%Y-%m-%d")
+		and ? between startime and endtime
+		or ? between startime and endtime
+		and roomid=?
+        and startdate=date_format(?,"%Y-%m-%d")
+		and status=1
+		order by  startime,endtime,bookid
+     ]]>
+	</sql>
+	<sql id="roommasterlist">
+    <![CDATA[
+   select state_id,location_id,room_name,floor_id,room_values,room_capacity,room_extension
+    from branch_room
+    where state_id=?
+    and location_id=?
+    and room_id=?
+         ]]>	
+	</sql>
+	<sql id="mybookingdetails">
+    <![CDATA[
+    select startdate,startime,endtime,roomid,meeting_emailid,meeting_title,meeting_agenda,state_id,location_id,floor_id,room_name,room_capacity,room_extension,room_values,bookid
+	from branch_conferenceroombookingdetails,branch_room
+	where roomid=room_id
+	and userid =?
+	and status=?
+	and DATE(startdate)>= DATE(NOW())
+	order by startime ,endtime   
+	
+]]>
+	</sql>
+
+	<sql id="updatestatus">
+    <![CDATA[
+       update branch_conferenceroombookingdetails
+       set status =?
+       where userid =?
+       and bookid=?   
+    ]]>
+	</sql>
+	<sql id="allbookinglist">
+    <![CDATA[
+    select startdate,startime,endtime,state_id,location_id,floor_id,room_name,room_capacity,room_extension,room_values,bookid 
+    from branch_conferenceroombookingdetails,branch_room
+	where roomid=room_id
+	and startdate between ? and ?
+	and roomid in (select room_id from branch_room
+	where state_id =? and location_id =?)
+	order by startdate,startime
+    ]]>
+	</sql>
+	<sql id="defaultallbookinglist">
+    <![CDATA[
+    select startdate,startime,endtime,state_id,location_id,floor_id,room_name,room_capacity,room_extension,room_values,bookid 
+    from branch_conferenceroombookingdetails,branch_room
+	where roomid=room_id
+	and startdate between ? and ?
+	and DATE(startdate)>= DATE(NOW())
+	order by startdate,startime
+    ]]>
+	</sql>
+	
+<!-- <sql id="statelist">
+<![CDATA[
+select state_name from chola_state where state_id=?;
+]]>
+</sql> -->
+
+<sql id="statelist">
+<![CDATA[
+select state_name from branch_state where state_id=?;
+]]>
+</sql>
+
+<!-- <sql id="StateCalls">
+<![CDATA[
+select state_id,state_name from chola_state;
+]]>
+</sql> -->
+
+<sql id="StateCalls">
+<![CDATA[
+select state_id,state_name from branch_state;
+]]>
+</sql>
+
+<sql id="locationlist">
+<![CDATA[
+select city_id,city_name from branch_city where state_id=?;
+]]>
+</sql>
+
+<!-- <sql id="locationCall">
+<![CDATA[
+select location_id,location_name from branch_location;
+]]>
+</sql> -->
+
+<sql id="locationCall">
+<![CDATA[
+select city_id,city_name from branch_city;
+]]>
+</sql>
+
+
+<sql id="floorlist">
+<![CDATA[
+select floorwing_id,floor_name from branch_floorwing;
+]]>
+</sql>
+
+<sql id="roomvalueslist">
+<![CDATA[
+select room_values from branch_room where room_id=?;
+]]>
+</sql>
+
+<sql id="locationnamelist">
+<![CDATA[
+select city_name from branch_city where city_id=?;
+]]>
+</sql>
+
+<sql id="floornamelist">
+<![CDATA[
+select floor_name from branch_floorwing where floorwing_id=?;
+]]>
+</sql>
+	
+	
+</custom-sql>

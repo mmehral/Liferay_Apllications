@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.popularlinks.service.impl.externallinksLocalServiceImpl" id="com.chola.popularlinks.service.externallinksLocalService" />
+	<bean class="com.chola.popularlinks.service.impl.externallinksServiceImpl" id="com.chola.popularlinks.service.externallinksService" />
+	<bean class="com.chola.popularlinks.service.persistence.impl.externallinksPersistenceImpl" id="com.chola.popularlinks.service.persistence.externallinksPersistence" parent="basePersistence" />
+	<bean class="com.chola.popularlinks.service.impl.popularlinksLocalServiceImpl" id="com.chola.popularlinks.service.popularlinksLocalService" />
+	<bean class="com.chola.popularlinks.service.impl.popularlinksServiceImpl" id="com.chola.popularlinks.service.popularlinksService" />
+	<bean class="com.chola.popularlinks.service.persistence.impl.popularlinksPersistenceImpl" id="com.chola.popularlinks.service.persistence.popularlinksPersistence" parent="basePersistence" />
+	<bean class="com.chola.popularlinks.service.persistence.impl.popularlinksFinderImpl" id="com.chola.popularlinks.service.persistence.popularlinksFinder" parent="basePersistence" />
+</beans>

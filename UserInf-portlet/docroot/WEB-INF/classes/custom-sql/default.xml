@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="empdata">
+    <![CDATA[
+      SELECT * FROM activeemployeeinfo where empid =  ?
+        ]]>
+	</sql>
+</custom-sql>

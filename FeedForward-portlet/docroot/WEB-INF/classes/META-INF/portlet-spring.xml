@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.feedforward.service.impl.feedforwardgalleryLocalServiceImpl" id="com.chola.feedforward.service.feedforwardgalleryLocalService" />
+	<bean class="com.chola.feedforward.service.impl.feedforwardgalleryServiceImpl" id="com.chola.feedforward.service.feedforwardgalleryService" />
+	<bean class="com.chola.feedforward.service.persistence.impl.feedforwardgalleryPersistenceImpl" id="com.chola.feedforward.service.persistence.feedforwardgalleryPersistence" parent="basePersistence" />
+	<bean class="com.chola.feedforward.service.persistence.impl.feedforwardgalleryFinderImpl" id="com.chola.feedforward.service.persistence.feedforwardgalleryFinder" parent="basePersistence" />
+	<bean class="com.chola.feedforward.service.impl.feedforwardgallerypathLocalServiceImpl" id="com.chola.feedforward.service.feedforwardgallerypathLocalService" />
+	<bean class="com.chola.feedforward.service.impl.feedforwardgallerypathServiceImpl" id="com.chola.feedforward.service.feedforwardgallerypathService" />
+	<bean class="com.chola.feedforward.service.persistence.impl.feedforwardgallerypathPersistenceImpl" id="com.chola.feedforward.service.persistence.feedforwardgallerypathPersistence" parent="basePersistence" />
+</beans>

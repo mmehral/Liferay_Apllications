@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="topsearch">
+    <![CDATA[
+      SELECT distinct(url),tag,count
+      FROM chola_popularlinks
+      where flag=1
+      order by count desc
+      limit 5;
+        ]]>
+	</sql>
+
+
+
+</custom-sql>

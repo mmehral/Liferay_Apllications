@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.service.model.newhire">
+		<field name="newhire_id" type="long" />
+		<field name="newhire_name" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="newhire_designation" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="newhire_profileimage" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="newhire_profileimage_path" type="String">
+			<hint name="max-length">300</hint>
+		</field>
+		<field name="newhire_detailedimage" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="newhire_detailedimage_path" type="String">
+			<hint name="max-length">300</hint>
+		</field>
+		<field name="newhire_createdate" type="Date" />
+		<field name="newhire_modifieddate" type="Date" />
+	</model>
+</model-hints>

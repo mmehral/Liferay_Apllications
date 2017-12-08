@@ -1,0 +1,1 @@
+create index IX_4CE2F3C7 on cholam_imagegallerypath (albumId[$COLUMN_LENGTH:75$]);

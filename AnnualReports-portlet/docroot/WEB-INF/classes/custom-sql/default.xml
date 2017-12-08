@@ -1,0 +1,7 @@
+<custom-sql>
+	<sql id="getdatalist">
+    <![CDATA[
+    SELECT id,details FROM chola_annualreports
+   	]]>
+	</sql>
+	</custom-sql>

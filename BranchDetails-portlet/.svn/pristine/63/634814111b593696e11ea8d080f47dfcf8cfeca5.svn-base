@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.branchdetails.service.impl.branchdetailsLocalServiceImpl" id="com.branchdetails.service.branchdetailsLocalService" />
+	<bean class="com.branchdetails.service.impl.branchdetailsServiceImpl" id="com.branchdetails.service.branchdetailsService" />
+	<bean class="com.branchdetails.service.persistence.impl.branchdetailsPersistenceImpl" id="com.branchdetails.service.persistence.branchdetailsPersistence" parent="basePersistence" />
+	<bean class="com.branchdetails.service.impl.cityLocalServiceImpl" id="com.branchdetails.service.cityLocalService" />
+	<bean class="com.branchdetails.service.impl.cityServiceImpl" id="com.branchdetails.service.cityService" />
+	<bean class="com.branchdetails.service.persistence.impl.cityPersistenceImpl" id="com.branchdetails.service.persistence.cityPersistence" parent="basePersistence" />
+	<bean class="com.branchdetails.service.impl.mappingLocalServiceImpl" id="com.branchdetails.service.mappingLocalService" />
+	<bean class="com.branchdetails.service.impl.mappingServiceImpl" id="com.branchdetails.service.mappingService" />
+	<bean class="com.branchdetails.service.persistence.impl.mappingPersistenceImpl" id="com.branchdetails.service.persistence.mappingPersistence" parent="basePersistence" />
+	<bean class="com.branchdetails.service.impl.productLocalServiceImpl" id="com.branchdetails.service.productLocalService" />
+	<bean class="com.branchdetails.service.impl.productServiceImpl" id="com.branchdetails.service.productService" />
+	<bean class="com.branchdetails.service.persistence.impl.productPersistenceImpl" id="com.branchdetails.service.persistence.productPersistence" parent="basePersistence" />
+	<bean class="com.branchdetails.service.persistence.impl.productFinderImpl" id="com.branchdetails.service.persistence.productFinder" parent="basePersistence" />
+	<bean class="com.branchdetails.service.impl.stateLocalServiceImpl" id="com.branchdetails.service.stateLocalService" />
+	<bean class="com.branchdetails.service.impl.stateServiceImpl" id="com.branchdetails.service.stateService" />
+	<bean class="com.branchdetails.service.persistence.impl.statePersistenceImpl" id="com.branchdetails.service.persistence.statePersistence" parent="basePersistence" />
+</beans>

@@ -1,0 +1,99 @@
+package com.chola.birthday;
+
+import java.io.IOException;
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
+import com.chola.birthday.model.predefinedmessages;
+import com.chola.birthday.service.birthdaywishLocalServiceUtil;
+import com.chola.birthday.service.predefinedmessagesLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
+
+public class BirthdayWish extends MVCPortlet{
+	private static Log logger = LogFactoryUtil.getLog(BirthdayWish.class);
+	
+	public void addComment(ActionRequest actionRequest, ActionResponse actionResponse) {
+
+		try {
+			invokeTaglibDiscussion(actionRequest, actionResponse);
+			logger.info("Comment added Successfully..............");
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	public void sendWish(ActionRequest actionRequest,ActionResponse actionResponse) throws NumberFormatException, PortalException, IOException
+	{
+		try
+		{
+		logger.info("Inside Wish method");
+		String userIds = actionRequest.getParameter("userName");
+		
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		Long wishedBy = themeDisplay.getUserId();
+		
+		logger.info("wishedBy User ID : "+wishedBy);
+		
+		String message = "";
+		if(null==(actionRequest.getParameter("preMessages")) || actionRequest.getParameter("preMessages").equalsIgnoreCase(""))
+		{
+			logger.info("No Predefined Message Selected");
+			
+			if(null!=(actionRequest.getParameter("personalMessage")) || (!actionRequest.getParameter("personalMessage").equalsIgnoreCase("")))
+			{
+				message = actionRequest.getParameter("personalMessage");
+				logger.info("Personal Message is  : "+message);
+			}
+		}
+		else
+		{
+			message =  actionRequest.getParameter("preMessages");
+			predefinedmessages preMess =  predefinedmessagesLocalServiceUtil.getpredefinedmessages(Long.parseLong(message));
+			message = preMess.getMessage();
+			logger.info("Predefined Message is : "+message);
+		}
+		
+			User user = UserLocalServiceUtil.getUserByScreenName(themeDisplay.getCompanyId(), userIds);
+			logger.info("Posted on : "+user.getUserId());
+			boolean flag = birthdaywishLocalServiceUtil.insertData(message,String.valueOf(themeDisplay.getUserId()),String.valueOf(user.getUserId()));
+			logger.info("User Id : "+user.getUserId());
+			if(flag)
+			{
+				logger.info("Success");
+			}
+			else
+			{
+				logger.info("Failed");
+			}
+			
+		
+		PortletConfig portletConfig = (PortletConfig) actionRequest.getAttribute("javax.portlet.config");
+
+		String portletName = portletConfig.getPortletName();
+		
+		PortletURL successPageURL = PortletURLFactoryUtil.create(actionRequest,
+				portletName + "_WAR_" + portletName + "portlet",
+				themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+
+		successPageURL.setParameter("jspPage", "/view.jsp");
+		actionResponse.sendRedirect(successPageURL.toString());
+		
+		
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+
+	
+}

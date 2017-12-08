@@ -1,0 +1,1 @@
+create index IX_593F94AD on cholas_swagatampath (inductionid[$COLUMN_LENGTH:75$]);

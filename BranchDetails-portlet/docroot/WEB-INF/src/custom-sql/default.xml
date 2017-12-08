@@ -1,0 +1,34 @@
+<custom-sql>
+	<sql id="productlist">
+    <![CDATA[
+    SELECT * FROM branch_product;
+        ]]>
+	</sql>
+	
+		<sql id="statelist">
+    <![CDATA[
+    SELECT distinct(s.state_id),s.state_name FROM branch_state s,branch_mapping m,branch_product b where s.state_id=m.state_id and b.product_id=m.product_id
+and b.product_id=? order by state_name;
+        ]]>
+	</sql>
+	
+		<sql id="citylist">
+    <![CDATA[
+    SELECT distinct(c.city_id),c.city_name FROM branch_city c,branch_state s,branch_mapping m,branch_product b where s.state_id=m.state_id  and
+c.city_id=m.city_id and b.product_id=m.product_id
+and b.product_id=? and s.state_id=? order by c.city_name;
+
+        ]]>
+	</sql>
+	
+	<sql id="branchlist">
+    <![CDATA[
+SELECT distinct(bd.branch_id),bd.branch_address
+FROM branch_branchdetails bd,branch_city c,branch_state s,branch_mapping m,branch_product b
+where s.state_id=m.state_id  and c.city_id=m.city_id
+and b.product_id=m.product_id and bd.branch_id=m.branch_id
+and b.product_id=? and s.state_id=? and c.city_id=?;
+
+        ]]>
+	</sql>
+</custom-sql>

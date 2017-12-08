@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.socho.model.idea">
+		<field name="id" type="long" />
+		<field name="userId" type="long" />
+		<field name="topic" type="String" />
+		<field name="sharedIdea" type="String" />
+		<field name="sharedFile" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
+		<field name="sharedDate" type="Date" />
+	</model>
+	<model name="com.chola.socho.model.topics">
+		<field name="id" type="long" />
+		<field name="topicName" type="String" />
+		<field name="flag" type="long" />
+		<field name="createdBy" type="long" />
+		<field name="createdOn" type="Date" />
+		<field name="modifiedBy" type="long" />
+		<field name="modifiedOn" type="Date" />
+	</model>
+</model-hints>

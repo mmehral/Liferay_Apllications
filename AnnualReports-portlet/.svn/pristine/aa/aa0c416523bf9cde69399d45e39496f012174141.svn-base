@@ -1,0 +1,33 @@
+<%@page import="com.chola.annual.service.annualreportsLocalServiceUtil"%>
+<%@page import="com.chola.annual.model.annualreports"%>
+<%@page import="javax.portlet.PortletURL"%>
+<%@page import="com.liferay.portal.kernel.util.UnicodeFormatter"%>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui"%>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui"%>
+<portlet:defineObjects />
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<%
+PortletURL backURL = renderResponse.createRenderURL();
+backURL.setParameter("jspPage", "/view.jsp");
+%>
+<portlet:actionURL var="updateAnnualReports" windowState="normal"
+	name="updateAnnualReports">
+</portlet:actionURL>
+
+<body>
+<liferay-ui:header title="Back" backLabel="Back" backURL="<%=backURL.toString()%>" />
+<%
+annualreports  pr = annualreportsLocalServiceUtil.fetchannualreports(1);
+%>
+<aui:form action="<%=updateAnnualReports%>">
+	<aui:input type="textarea" style="height: 500px;" max="20000" name="details" value="<%=pr.getDetails()%>" label="Press Releases">
+		<aui:validator name="required"/>  
+	</aui:input>
+	<aui:button type="submit" />
+</aui:form>
+</body>
+</html>

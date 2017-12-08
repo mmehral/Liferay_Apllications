@@ -1,0 +1,1 @@
+create index IX_3F7C68B1 on pratice_emp (field2);

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.halloffame.model.users">
+		<field name="Id" type="long" />
+		<field name="empId" type="String" />
+		<field name="empName" type="String" />
+		<field name="empImagePath" type="String" />
+		<field name="writeUp" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="awardedDate" type="Date" />
+	</model>
+</model-hints>

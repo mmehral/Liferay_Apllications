@@ -1,0 +1,233 @@
+package com.compliance.action;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.service.compliance.model.compliance;
+import com.service.compliance.service.complianceLocalServiceUtil;
+
+public class Complianceaction extends MVCPortlet
+{
+	private static Log logger = LogFactoryUtil.getLog(Complianceaction.class);
+	
+	public void addComment(ActionRequest actionRequest, ActionResponse actionResponse) {
+		logger.info("Comment=======");
+
+		try {
+			invokeTaglibDiscussion(actionRequest, actionResponse);
+			logger.info("Comment added Successfully..............");
+		} catch (Exception e) {
+			logger.error("Error",e);
+		}
+	}
+	
+public void submitCompliancehDetails(ActionRequest request,ActionResponse response) throws IOException
+{
+	String title=request.getParameter("title");
+	logger.info("Title.."+title);
+	
+	String shortdescription=request.getParameter("shortdescription");
+	logger.info("shortdescription.."+shortdescription);
+	
+	String description=request.getParameter("description");
+	logger.info("description.."+description);
+	
+	/*if(description.equalsIgnoreCase("") || description.length()<1)
+	{
+		System.out.println("ck editor data null>>>>>>");
+		SessionErrors.add(request, "error-key");
+		SessionMessages.add(request, PortalUtil.getPortletId(request) + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+		response.setRenderParameter("jspPage","/jsp/addComplianceDetails.jsp");
+	}*/
+
+	long complianceId=ParamUtil.getLong(request, "complianceId");
+	logger.info("compliance Id..................."+complianceId);
+
+	 UploadPortletRequest uploadRequest =
+	 PortalUtil.getUploadPortletRequest(request);
+	 
+			SimpleDateFormat df2 = new SimpleDateFormat("ddMMyyyyHHmmss");
+			Date date = new Date();
+			String albumId = df2.format(date);
+			File sourceFile = uploadRequest.getFile("fileName");
+			String sourceFileName = uploadRequest.getFileName("fileName");
+			logger.info("file name" + sourceFileName);
+			
+			String extension = "";
+
+			int i = sourceFileName.lastIndexOf('.');
+			logger.info("value of i.."+i);
+			if (i > 0) {
+			    extension = sourceFileName.substring(i+1);
+			}
+			String fileName = null;
+		if (!sourceFileName.isEmpty())
+		{
+					logger.info("File selected by user");
+					fileName = fileUpload(request, response, uploadRequest, sourceFileName, sourceFile);
+		}
+		else
+		{
+					logger.info("File not selected by user");
+		}
+		logger.info("File name...."+fileName);
+		
+	
+	if(complianceId>=01)
+	{
+		if(description.equalsIgnoreCase("") || description.length()<1)
+		{
+			System.out.println("ck editor data null>>>>>>");
+			SessionErrors.add(request, "error-key");
+			SessionMessages.add(request, PortalUtil.getPortletId(request) + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+			response.setRenderParameter("jspPage","/jsp/compliancedetailsupdatereference.jsp");
+		}
+		else
+		{
+		modifiedcompliancedetails(request, response,complianceId,title,shortdescription,description,sourceFileName,fileName,extension);
+		response.setRenderParameter("jspPage","/jsp/editComplianceDetails.jsp");
+		}
+		}
+	else if(description.equalsIgnoreCase("") || description.length()<1)
+	{
+		System.out.println("ck editor data null>>>>>>");
+		SessionErrors.add(request, "error-key");
+		SessionMessages.add(request, PortalUtil.getPortletId(request) + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+		response.setRenderParameter("jspPage","/jsp/addComplianceDetails.jsp");
+	}
+	else
+	{
+	compliance com=complianceLocalServiceUtil.createcompliance(CounterLocalServiceUtil.increment());
+	com.setCompliance_tite(title);
+	com.setCompliance_description(description);
+	com .setCompliance_shortdescription(shortdescription);
+	com.setCompliance_document_name(sourceFileName);
+    com.setCompliance_document_path(fileName);
+    com.setCompliance_document_extension(extension);
+    com.setCreateDate(new Date());
+    
+	complianceLocalServiceUtil.addcompliance(com);
+	}
+	logger.info("compliance data saved.....");
+	
+}
+
+public String fileUpload(ActionRequest request, ActionResponse response, UploadPortletRequest uploadRequest,
+		String fileName, File sourceFile) throws IOException
+{
+	String str = "ComplianceUpload";
+	String role="admin";
+	java.util.Properties properties = PortalUtil.getPortalProperties();
+	logger.info("my properties is...." + properties);
+	File contestfolder = new File(properties.getProperty("liferay.home") + "/tomcat-8.0.32/webapps/" + str);
+	File destinationFile = new File(
+			properties.getProperty("liferay.home") + "/tomcat-8.0.32/webapps/" + str + "/" + role);
+
+	if (!contestfolder.exists()) {
+		destinationFile.mkdirs();
+	}
+
+	if (!destinationFile.exists()) {
+		destinationFile.mkdirs();
+	}
+	logger.info("my directory is : " + destinationFile);
+
+	
+	if (fileName != null) {
+		/**************** SAVE THE DOC ********************************/
+		if (destinationFile.exists()) {
+			String fileNa = fileName.substring(0, fileName.lastIndexOf("."));
+			logger.info("fileName : " + fileNa);
+			String fileExtension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+			logger.info("fileExtension : " + fileExtension);
+			fileName = fileNa;
+			SimpleDateFormat df2 = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+			Date date = new Date();
+			String testDateString = df2.format(date);
+			fileName = fileName + "_" + testDateString + fileExtension;
+
+			destinationFile = new File(properties.getProperty("liferay.home") + "/tomcat-8.0.32/webapps/" + str
+					+ "/" + role + "/" + fileName);
+
+			logger.info("destinationFile : " + destinationFile);
+
+		}
+		logger.info("File : " + fileName);
+		FileUtil.copyFile(sourceFile, destinationFile);
+
+		String FilePath = destinationFile.toString();
+		logger.info("Successfully Saved the Document");
+		/*************** ENDED THE SAVING ******************/
+		logger.info(FilePath);
+	}
+	return fileName;
+}
+
+private void modifiedcompliancedetails(ActionRequest request, ActionResponse response, long complianceId,String title, String shortdescription,String description,String sourceFileName,String fileName,String extension)
+{
+	
+     logger.info("edit the forms======");
+     logger.info("complianceId.."+complianceId);
+	
+	compliance com = null;
+	try
+	{
+		com = complianceLocalServiceUtil.fetchcompliance(complianceId);
+		logger.info(com);
+	
+	if (Validator.isNotNull(com)) 
+	{
+		
+		com.setCompliance_tite(title);
+		com.setCompliance_description(description);
+		com.setCompliance_shortdescription(shortdescription);
+		com.setCompliance_document_name(sourceFileName);
+		com.setCompliance_document_path(fileName);
+		com.setCompliance_document_extension(extension);
+		
+			complianceLocalServiceUtil.updatecompliance(com);
+			logger.info("Updated Successfully");
+	}
+	} 
+	catch (Exception e)
+	{
+		logger.error("Error",e);
+	}
+}	
+
+public void deletecompliancedetailsreference(ActionRequest actionRequest,
+		ActionResponse actionResponse) throws Exception
+{
+	logger.info("Delete Vendor======");
+	long complianceId = ParamUtil.getInteger(actionRequest, "complianceId");
+	logger.info("complianceId===" + complianceId);
+	if (complianceId >= 01) {
+	
+ 	try {
+ 		complianceLocalServiceUtil.deletecompliance(complianceId);
+			logger.info("deleted successfully");
+			actionResponse.setRenderParameter("jspPage","/jsp/editComplianceDetails.jsp");
+		
+		} catch (Exception e) {
+			logger.error("Error",e);
+		} 
+			
+	}
+	
+}
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.imagegallery.model.imagegallery">
+		<field name="id" type="long" />
+		<field name="content_id" type="long" />
+		<field name="albumName" type="String" ><hint name="max-length">200</hint></field>
+		<field name="albumDesc" type="String" ><hint name="max-length">500</hint></field>
+		<field name="albumId" type="String" />
+		<field name="createdDate" type="Date" />
+		<field name="createdBy" type="String" />
+		<field name="flag" type="String" />
+	</model>
+	<model name="com.chola.imagegallery.model.imagegallerypath">
+		<field name="id" type="long" />
+		<field name="albumId" type="String" />
+		<field name="content_id" type="long" />
+		<field name="albumImagePath" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="createdDate" type="Date" />
+		<field name="createdBy" type="String" />
+		<field name="updatedDate" type="Date" />
+		<field name="updatedBy" type="String" />
+		<field name="flag" type="String" />
+	</model>
+</model-hints>

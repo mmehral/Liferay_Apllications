@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="empdata">
+    <![CDATA[
+      SELECT * FROM activeemployeeinfo where birthday like ?
+        ]]>
+	</sql>
+	
+	<sql id="insertlist">
+    <![CDATA[
+   insert into all_messages(postedOn,postedBy,message,code,postedDate) values(?,?,?,?,?);
+        ]]>
+	</sql>
+	
+	<sql id="wallpost">
+    <![CDATA[
+   select * from all_messages where postedOn = ?
+        ]]>
+	</sql>
+</custom-sql>

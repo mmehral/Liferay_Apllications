@@ -1,0 +1,24 @@
+package com.chola.news.action;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+
+
+public class AroundtheworldAction extends MVCPortlet{
+	private static Log _log = LogFactoryUtil.getLog(AroundtheworldAction.class);
+	
+	public void addComment(ActionRequest actionRequest, ActionResponse actionResponse) {
+		_log.info("Comment=======");
+
+		try {
+			invokeTaglibDiscussion(actionRequest, actionResponse);
+			_log.info("Comment Successfull");
+		} catch (Exception e) {
+			_log.error(e.getMessage());
+		}
+	}
+}

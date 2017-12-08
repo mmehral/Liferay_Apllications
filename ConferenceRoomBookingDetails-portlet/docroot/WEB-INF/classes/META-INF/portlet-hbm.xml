@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.conferenceroombooking.model.city" />
+	<import class="com.chola.conferenceroombooking.model.conferenceroombookingdetails" />
+	<import class="com.chola.conferenceroombooking.model.facilitymaster" />
+	<import class="com.chola.conferenceroombooking.model.floorwing" />
+	<import class="com.chola.conferenceroombooking.model.location" />
+	<import class="com.chola.conferenceroombooking.model.room" />
+	<import class="com.chola.conferenceroombooking.model.state" />
+	<class name="com.chola.conferenceroombooking.model.impl.cityImpl" table="branch_city">
+		<id name="city_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="city_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="state_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.chola.conferenceroombooking.model.impl.conferenceroombookingdetailsImpl" table="branch_conferenceroombookingdetails">
+		<id name="bookid" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="startdate" type="org.hibernate.type.TimestampType" />
+		<property name="startime" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="endtime" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="roomid" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="meeting_emailid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="meeting_title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="meeting_agenda" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="userid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="username" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.chola.conferenceroombooking.model.impl.facilitymasterImpl" table="branch_facilitymaster">
+		<id name="facility_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="facility_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="facility_description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.conferenceroombooking.model.impl.floorwingImpl" table="branch_floorwing">
+		<id name="floorwing_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="state_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="location_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="floor_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.conferenceroombooking.model.impl.locationImpl" table="branch_location">
+		<id name="location_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="location_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="state_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.chola.conferenceroombooking.model.impl.roomImpl" table="branch_room">
+		<id name="room_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="state_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="location_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="floor_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="room_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="room_capacity" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="room_extension" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="room_values" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.conferenceroombooking.model.impl.stateImpl" table="branch_state">
+		<id name="state_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="state_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

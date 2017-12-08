@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.promotion.service.impl.usersLocalServiceImpl" id="com.chola.promotion.service.usersLocalService" />
+	<bean class="com.chola.promotion.service.impl.usersServiceImpl" id="com.chola.promotion.service.usersService" />
+	<bean class="com.chola.promotion.service.persistence.impl.usersPersistenceImpl" id="com.chola.promotion.service.persistence.usersPersistence" parent="basePersistence" />
+	<bean class="com.chola.promotion.service.persistence.impl.usersFinderImpl" id="com.chola.promotion.service.persistence.usersFinder" parent="basePersistence" />
+</beans>

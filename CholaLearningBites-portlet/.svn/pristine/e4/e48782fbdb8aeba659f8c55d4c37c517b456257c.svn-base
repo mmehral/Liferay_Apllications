@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.chola.learningbites">
+	<author>cloverliferay01</author>
+	<namespace>chola</namespace>
+
+	<entity name="lbdetails" local-service="true"
+		remote-service="true">
+		<column name="id" type="long" primary="true" id-type="increment" />
+		<column name="content_id" type="long"/>
+		<column name="lbtitle" type="String" />
+		<column name="lbdescription" type="String" />
+		<column name="lbfilename" type="String" />
+		<column name="lbfilepath" type="String" />
+		<column name="createddate" type="Date" />
+		<column name="createdby" type="long" />
+		<column name="modifieddate" type="Date" />
+		<column name="modifiedby" type="long" />
+		<column name="flag" type="String" />
+		<finder return-type="Collection" name="CONTENT_ID">
+		<finder-column name="content_id"></finder-column>
+		</finder>
+	</entity>
+</service-builder>

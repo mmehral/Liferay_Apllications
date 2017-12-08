@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.popularlinks.model.externallinks" />
+	<import class="com.chola.popularlinks.model.popularlinks" />
+	<class name="com.chola.popularlinks.model.impl.externallinksImpl" table="url_externallinks">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="tag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.popularlinks.model.impl.popularlinksImpl" table="url_popularlinks">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="userid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="tag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="count" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>

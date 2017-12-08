@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.appcorner.model.post" />
+	<import class="com.chola.appcorner.model.replied" />
+	<class name="com.chola.appcorner.model.impl.postImpl" table="appcorner_post">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="appTo" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="appBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="appMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="appDate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.appcorner.model.impl.repliedImpl" table="appcorner_replied">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="repliedOnPost" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="repliedTo" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="repliedBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="repliedMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="repliedDate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

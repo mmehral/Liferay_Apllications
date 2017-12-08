@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!DOCTYPE project>
+
+<project name="Pratice_03_07_2017-portlet" basedir="." default="deploy">
+	<import file="../build-common-portlet.xml" />
+</project>

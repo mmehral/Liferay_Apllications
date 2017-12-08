@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.imagegallery.model.imagegallery" />
+	<import class="com.chola.imagegallery.model.imagegallerypath" />
+	<class name="com.chola.imagegallery.model.impl.imagegalleryImpl" table="cholam_imagegallery">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="albumName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="albumDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="albumId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.imagegallery.model.impl.imagegallerypathImpl" table="cholam_imagegallerypath">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="albumId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="albumImagePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+		<property name="updatedBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

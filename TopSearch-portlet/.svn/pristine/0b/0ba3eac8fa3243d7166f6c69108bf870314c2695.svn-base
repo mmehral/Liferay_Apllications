@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.chola.topsearch">
+	<author>adms.java1</author>
+	<namespace>master</namespace>
+
+	<entity name="TopSearch" local-service="true" remote-service="false">
+		<column name="srchId" type="long" primary="true" />
+		<column name="Name" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+	</entity>
+</service-builder>

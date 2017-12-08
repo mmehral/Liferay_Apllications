@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.socho.service.impl.ideaLocalServiceImpl" id="com.chola.socho.service.ideaLocalService" />
+	<bean class="com.chola.socho.service.impl.ideaServiceImpl" id="com.chola.socho.service.ideaService" />
+	<bean class="com.chola.socho.service.persistence.impl.ideaPersistenceImpl" id="com.chola.socho.service.persistence.ideaPersistence" parent="basePersistence" />
+	<bean class="com.chola.socho.service.impl.topicsLocalServiceImpl" id="com.chola.socho.service.topicsLocalService" />
+	<bean class="com.chola.socho.service.impl.topicsServiceImpl" id="com.chola.socho.service.topicsService" />
+	<bean class="com.chola.socho.service.persistence.impl.topicsPersistenceImpl" id="com.chola.socho.service.persistence.topicsPersistence" parent="basePersistence" />
+</beans>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.videogallery.service.impl.videogalleryLocalServiceImpl" id="com.chola.videogallery.service.videogalleryLocalService" />
+	<bean class="com.chola.videogallery.service.impl.videogalleryServiceImpl" id="com.chola.videogallery.service.videogalleryService" />
+	<bean class="com.chola.videogallery.service.persistence.impl.videogalleryPersistenceImpl" id="com.chola.videogallery.service.persistence.videogalleryPersistence" parent="basePersistence" />
+	<bean class="com.chola.videogallery.service.impl.videogallerypathLocalServiceImpl" id="com.chola.videogallery.service.videogallerypathLocalService" />
+	<bean class="com.chola.videogallery.service.impl.videogallerypathServiceImpl" id="com.chola.videogallery.service.videogallerypathService" />
+	<bean class="com.chola.videogallery.service.persistence.impl.videogallerypathPersistenceImpl" id="com.chola.videogallery.service.persistence.videogallerypathPersistence" parent="basePersistence" />
+</beans>

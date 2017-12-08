@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.shutterspeed.model.shutterspeedgallery" />
+	<import class="com.chola.shutterspeed.model.shutterspeedgallerypath" />
+	<class name="com.chola.shutterspeed.model.impl.shutterspeedgalleryImpl" table="chola_shutterspeedgallery">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="albumName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="albumDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="albumId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+		<property name="updatedBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.chola.shutterspeed.model.impl.shutterspeedgallerypathImpl" table="chola_shutterspeedgallerypath">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="albumId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="albumImagePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imageTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+		<property name="updatedBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.swagatam.service.impl.swagatamLocalServiceImpl" id="com.chola.swagatam.service.swagatamLocalService" />
+	<bean class="com.chola.swagatam.service.impl.swagatamServiceImpl" id="com.chola.swagatam.service.swagatamService" />
+	<bean class="com.chola.swagatam.service.persistence.impl.swagatamPersistenceImpl" id="com.chola.swagatam.service.persistence.swagatamPersistence" parent="basePersistence" />
+	<bean class="com.chola.swagatam.service.impl.swagatamdataLocalServiceImpl" id="com.chola.swagatam.service.swagatamdataLocalService" />
+	<bean class="com.chola.swagatam.service.impl.swagatamdataServiceImpl" id="com.chola.swagatam.service.swagatamdataService" />
+	<bean class="com.chola.swagatam.service.persistence.impl.swagatamdataPersistenceImpl" id="com.chola.swagatam.service.persistence.swagatamdataPersistence" parent="basePersistence" />
+	<bean class="com.chola.swagatam.service.persistence.impl.swagatamdataFinderImpl" id="com.chola.swagatam.service.persistence.swagatamdataFinder" parent="basePersistence" />
+	<bean class="com.chola.swagatam.service.impl.swagatampathLocalServiceImpl" id="com.chola.swagatam.service.swagatampathLocalService" />
+	<bean class="com.chola.swagatam.service.impl.swagatampathServiceImpl" id="com.chola.swagatam.service.swagatampathService" />
+	<bean class="com.chola.swagatam.service.persistence.impl.swagatampathPersistenceImpl" id="com.chola.swagatam.service.persistence.swagatampathPersistence" parent="basePersistence" />
+</beans>

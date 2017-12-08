@@ -1,0 +1,1 @@
+create index IX_6B37305E on usertheme_themecolor (user_id[$COLUMN_LENGTH:75$]);

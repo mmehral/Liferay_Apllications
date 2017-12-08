@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.service.compliance.model.compliance">
+		<field name="compliance_id" type="long" />
+		<field name="compliance_tite" type="String">
+			<hint name="max-length">250</hint>
+		</field>
+		<field name="compliance_shortdescription" type="String">
+			<hint name="max-length">250</hint>
+		</field>
+		<field name="compliance_description" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="compliance_document_name" type="String">
+			<hint name="max-length">250</hint>
+		</field>
+		<field name="compliance_document_extension" type="String" />
+		<field name="compliance_document_path" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+</model-hints>

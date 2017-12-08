@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.personalisedparameters.model.bsopdetails" />
+	<import class="com.chola.personalisedparameters.model.bsoppath" />
+	<class name="com.chola.personalisedparameters.model.impl.bsopdetailsImpl" table="chola_bsopdetails">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="btitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bdesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createddate" type="org.hibernate.type.TimestampType" />
+		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="modifieddate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.personalisedparameters.model.impl.bsoppathImpl" table="chola_bsoppath">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="bdoc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bpath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createddate" type="org.hibernate.type.TimestampType" />
+		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bdetails_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="bdetailscontent_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="filename" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

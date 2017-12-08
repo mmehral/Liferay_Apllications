@@ -1,0 +1,240 @@
+package com.chola.imagegallery;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+
+import com.chola.imagegallery.model.imagegallery;
+import com.chola.imagegallery.model.imagegallerypath;
+import com.chola.imagegallery.service.imagegalleryLocalService;
+import com.chola.imagegallery.service.imagegalleryLocalServiceUtil;
+import com.chola.imagegallery.service.imagegallerypathLocalServiceUtil;
+import com.chola.ppcontent.service.contentupdateLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+
+
+public class ImageGallery extends MVCPortlet {
+	private static Log _log = LogFactoryUtil.getLog(ImageGallery.class);
+
+	public void updateDetails(ActionRequest request, ActionResponse response)
+			throws NumberFormatException, PortalException {
+		_log.info("Inside Update Method");
+
+		String id = request.getParameter("id");
+		_log.info("ID : " + id);
+
+		String albumName = request.getParameter("albumName");
+		_log.info("albumName : " + albumName);
+
+		String albumDesc = request.getParameter("albumDesc");
+		_log.info("albumDesc : " + albumDesc);
+
+		imagegallery img = imagegalleryLocalServiceUtil.fetchimagegallery(Long.parseLong(id));
+		img.setAlbumName(albumName);
+		img.setAlbumDesc(albumDesc);
+		img = imagegalleryLocalServiceUtil.updateimagegallery(img);
+
+		_log.info("Updated ID : " + img.getId());
+		
+		long flag=2;
+		String notificationText="Image Album has been Updated";
+		long content_id=img.getContent_id();
+		boolean updatedeleteSucces=contentupdateLocalServiceUtil.changeContentFlagForUpdateDelete(flag,notificationText, content_id);
+		
+		_log.info("update status "+updatedeleteSucces);
+
+	}
+
+	public void removeAlbum(ActionRequest request, ActionResponse response) {
+		_log.info("Inside Remove Method");
+
+		String albumSelect = request.getParameter("albumSelect");
+		_log.info("albumSelect : " + albumSelect);
+
+		imagegallery imageGal = imagegalleryLocalServiceUtil.fetchimagegallery(Long.parseLong(albumSelect));
+		imageGal.setFlag("2");
+		imageGal = imagegalleryLocalServiceUtil.updateimagegallery(imageGal);
+
+		_log.info("Removed Successfully : " + imageGal.getId());
+		
+		long flag=0;
+		String notificationText="Image Album has been Deleted";
+		long content_id=imageGal.getContent_id();
+		
+		boolean updatedeleteSucces=contentupdateLocalServiceUtil.changeContentFlagForUpdateDelete(flag,notificationText, content_id);
+		
+		_log.info("delete status : "+updatedeleteSucces);
+		
+	}
+
+	public String fileUpload(ActionRequest request, ActionResponse response, UploadPortletRequest uploadRequest,
+			String fileName, File sourceFile) throws IOException {
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+		
+		// Creating the folder Structure in Tomcat as
+		// WebApps/ImageGalleryUpload/userId folder will create
+
+		String str = "ImageGalleryUpload";
+
+		String role="admin";
+		java.util.Properties properties = PortalUtil.getPortalProperties();
+		_log.info("my properties is...." + properties);
+		File contestfolder = new File(properties.getProperty("liferay.home") + "/tomcat-8.0.32/webapps/" + str);
+		File destinationFile = new File(
+				properties.getProperty("liferay.home") + "/tomcat-8.0.32/webapps/" + str + "/" + role);
+
+		if (!contestfolder.exists()) {
+			destinationFile.mkdirs();
+			_log.info("type directory exists");
+		}
+		_log.info("my directory is : " + contestfolder);
+
+		if (!destinationFile.exists()) {
+			destinationFile.mkdirs();
+			_log.info("type directory exists");
+		}
+		_log.info("my directory is : " + destinationFile);
+
+		// File sourceFile = uploadRequest.getFile("uploadedFile");
+		// fileName = uploadRequest.getFileName("uploadedFile");
+
+		if (fileName != null) {
+			/**************** SAVE THE DOC ********************************/
+			if (destinationFile.exists()) {
+				fileName.lastIndexOf(".");
+				String fileNa = fileName.substring(0, fileName.lastIndexOf("."));
+				_log.info("fileName : " + fileNa);
+				String fileExtension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+				_log.info("fileExtension : " + fileExtension);
+				fileName = fileNa;
+				SimpleDateFormat df2 = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+				Date date = new Date();
+				String testDateString = df2.format(date);
+				fileName = fileName + "_" + testDateString + fileExtension;
+
+				destinationFile = new File(properties.getProperty("liferay.home") + "/tomcat-8.0.32/webapps/" + str
+						+ "/" + role + "/" + fileName);
+
+				_log.info("destinationFile : " + destinationFile);
+
+			}
+			_log.info("File : " + fileName);
+			FileUtil.copyFile(sourceFile, destinationFile);
+
+			String FilePath = destinationFile.toString();
+			_log.info("Successfully Saved the Document");
+			/*************** ENDED THE SAVING ******************/
+			_log.info(FilePath);
+		}
+		return fileName;
+	}
+
+	public void uploadData(ActionRequest request, ActionResponse response) throws PortalException, IOException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+
+		String albumName = request.getParameter("albumName");
+		_log.info("albumName : " + albumName);
+
+		String albumDesc = request.getParameter("albumDesc");
+		_log.info("albumDesc : " + albumDesc);
+		
+		SimpleDateFormat df2 = new SimpleDateFormat("ddMMyyyyHHmmss");
+		Date date = new Date();
+		String albumId = df2.format(date);
+
+		
+		SimpleDateFormat df3 = new SimpleDateFormat("ddMMyyyyHHmmssSSS");
+		long uniqueContentId = Long.parseLong(df3.format(date));
+		
+		String currentPageUrl=themeDisplay.getURLCurrent();
+		if(currentPageUrl.contains("?"))
+		{
+			currentPageUrl = currentPageUrl.substring(0, currentPageUrl.indexOf("?"));
+		}
+		
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
+		String[] sourceFileName = uploadRequest.getFileNames("uploadedFile");
+		File[] sourceFile = uploadRequest.getFiles("uploadedFile");
+		
+		imagegallerypath path = null;
+		
+		for(int i=0;i<sourceFileName.length;i++)
+		{
+			_log.info("File Name : "+sourceFileName[i].toString());
+		
+		String fileName=null;
+		if(!sourceFileName[i].equalsIgnoreCase(""))
+		{
+			_log.info("File selected by user");
+			fileName = fileUpload(request,response,uploadRequest,sourceFileName[i],sourceFile[i]);
+		}
+		else
+		{
+			_log.info("File not selected by user");
+		}
+
+		    path = imagegallerypathLocalServiceUtil.createimagegallerypath(CounterLocalServiceUtil.increment());
+			path.setAlbumImagePath("/ImageGalleryUpload/admin/"+fileName.toString());
+			path.setCreatedBy(String.valueOf(themeDisplay.getUserId()));
+			path.setCreatedDate(date);
+			path.setFlag("1");
+			path.setAlbumId(albumId);
+			path.setContent_id(uniqueContentId);
+			path = imagegallerypathLocalServiceUtil.addimagegallerypath(path);
+
+		}
+
+		imagegallery imgGallery = imagegalleryLocalServiceUtil.createimagegallery(CounterLocalServiceUtil.increment());
+		imgGallery.setAlbumName(albumName);
+		imgGallery.setAlbumDesc(albumDesc);
+		imgGallery.setAlbumId(path.getAlbumId());
+		imgGallery.setCreatedBy(String.valueOf(themeDisplay.getUserId()));
+		imgGallery.setCreatedDate(date);
+		imgGallery.setFlag("1");
+		imgGallery.setContent_id(uniqueContentId);
+
+		imgGallery = imagegalleryLocalServiceUtil.addimagegallery(imgGallery);
+
+	    List<String> lt=com.chola.ppcontent.service.contentupdateLocalServiceUtil.getCompany();
+		Iterator it = lt.iterator();
+		 Object[] notificationDetails={imgGallery.getContent_id(),1,1,"Image Gallery","New Album has been added",currentPageUrl};
+		
+		boolean insert1=com.chola.ppcontent.service.contentupdateLocalServiceUtil.insertIntoContentUniqueInfo(notificationDetails);
+		
+		while (it.hasNext()) {
+			Object[] object = (Object[]) it.next();
+			String businessId=object[0].toString();
+			
+			if(insert1){
+				boolean insert2=com.chola.ppcontent.service.contentupdateLocalServiceUtil.insertIntoPPContentStore(businessId, null, "ALL", "all", "All User", imgGallery.getContent_id(), null, null, null, 0);
+			}
+		}
+	}
+
+	public void addComment(ActionRequest actionRequest, ActionResponse actionResponse) {
+		_log.info("Comment=======");
+
+		try {
+			invokeTaglibDiscussion(actionRequest, actionResponse);
+			_log.info("Comment is successfully added........");
+		} catch (Exception e) {
+			_log.error(e.getMessage());
+		}
+	}
+}

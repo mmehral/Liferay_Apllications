@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.business.service.impl.businesssopDetailsLocalServiceImpl" id="com.chola.business.service.businesssopDetailsLocalService" />
+	<bean class="com.chola.business.service.impl.businesssopDetailsServiceImpl" id="com.chola.business.service.businesssopDetailsService" />
+	<bean class="com.chola.business.service.persistence.impl.businesssopDetailsPersistenceImpl" id="com.chola.business.service.persistence.businesssopDetailsPersistence" parent="basePersistence" />
+	<bean class="com.chola.business.service.persistence.impl.businesssopDetailsFinderImpl" id="com.chola.business.service.persistence.businesssopDetailsFinder" parent="basePersistence" />
+	<bean class="com.chola.business.service.impl.businesssoppathLocalServiceImpl" id="com.chola.business.service.businesssoppathLocalService" />
+	<bean class="com.chola.business.service.impl.businesssoppathServiceImpl" id="com.chola.business.service.businesssoppathService" />
+	<bean class="com.chola.business.service.persistence.impl.businesssoppathPersistenceImpl" id="com.chola.business.service.persistence.businesssoppathPersistence" parent="basePersistence" />
+	<bean class="com.chola.business.service.impl.businesssopusersLocalServiceImpl" id="com.chola.business.service.businesssopusersLocalService" />
+	<bean class="com.chola.business.service.impl.businesssopusersServiceImpl" id="com.chola.business.service.businesssopusersService" />
+	<bean class="com.chola.business.service.persistence.impl.businesssopusersPersistenceImpl" id="com.chola.business.service.persistence.businesssopusersPersistence" parent="basePersistence" />
+</beans>

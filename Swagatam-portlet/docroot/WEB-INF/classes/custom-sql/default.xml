@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="empdata">
+    <![CDATA[
+      SELECT * FROM cholas_swagatamdata where empId=?
+        ]]>
+	</sql>
+</custom-sql>

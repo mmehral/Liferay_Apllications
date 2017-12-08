@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="empdata">
+    <![CDATA[
+      SELECT * FROM activeemployeeinfo where DOJ like ?
+        ]]>
+	</sql>
+	
+	<sql id="insertlist">
+    <![CDATA[
+   insert into all_messages(empId,postedBy,message,code,postedDate) values(?,?,?,?,?);
+        ]]>
+	</sql>
+</custom-sql>

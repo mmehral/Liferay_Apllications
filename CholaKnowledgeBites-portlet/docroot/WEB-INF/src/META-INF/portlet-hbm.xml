@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.knowledgebites.model.kbdetails" />
+	<import class="com.chola.knowledgebites.model.kbpath" />
+	<class name="com.chola.knowledgebites.model.impl.kbdetailsImpl" table="chola_kbdetails">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="kbtitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="kbdesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.knowledgebites.model.impl.kbpathImpl" table="chola_kbpath">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="kbfiledoc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="kbfilepath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="kbdetails_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="kbfilename" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

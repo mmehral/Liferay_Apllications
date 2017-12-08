@@ -1,0 +1,310 @@
+package com.chola.action.newhire;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletException;
+
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
+
+import com.service.model.newhire;
+import com.service.service.newhireLocalServiceUtil;
+
+
+public class NewHire extends MVCPortlet
+{
+	private static Log _log = LogFactoryUtil.getLog(NewHire.class);
+public void submitNewHireDetails(ActionRequest request,ActionResponse response) throws IOException
+{
+	ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+
+	String Name = request.getParameter("Name");
+	_log.info("Name : " + Name);
+
+	String Designation = request.getParameter("Designation");
+	_log.info("Designation : " + Designation);
+	
+	String profileimage = request.getParameter("profileimage");
+	_log.info("profileimage : " + profileimage);
+	
+	String detailedimage = request.getParameter("detailedimage");
+	_log.info("detailedimage : " + detailedimage);
+	
+	
+	
+	long newhireId=ParamUtil.getLong(request, "newhireId");
+	_log.info("newhireId..................."+newhireId);
+	
+	
+	
+	 UploadPortletRequest uploadRequest =
+	 PortalUtil.getUploadPortletRequest(request);
+	 
+			SimpleDateFormat df2 = new SimpleDateFormat("ddMMyyyyHHmmss");
+			Date date = new Date();
+			String albumId = df2.format(date);
+			File sourceprofileimage = uploadRequest.getFile("profileimage");
+			String sourceprofileimageName = uploadRequest.getFileName("profileimage");
+			
+			File sourcedetailedimage= uploadRequest.getFile("detailedimage");
+			String sourcedetailedimageName = uploadRequest.getFileName("detailedimage");
+			
+			_log.info("sourceprofileimageName" + sourceprofileimageName);
+			
+			_log.info("sourcedetailedimageName" + sourcedetailedimageName);
+			
+				
+			
+			String fileName = null;
+		if (!sourceprofileimageName.isEmpty())
+		{
+					_log.info("File selected by user");
+					fileName = fileUpload(request, response, uploadRequest, sourceprofileimageName, sourceprofileimage);
+		}
+		else
+		{
+					_log.info("File not selected by user");
+		}
+		_log.info("File name...."+fileName);
+		
+		String detailedimagefileName = null;
+		if (!sourcedetailedimageName.isEmpty())
+		{
+					_log.info("File selected by user");
+					detailedimagefileName = fileUpload2(request, response, uploadRequest, sourcedetailedimageName, sourcedetailedimage);
+		}
+		else
+		{
+					_log.info("File not selected by user");
+		}
+		_log.info("newhireId  before if loop.."+newhireId);
+		
+		if(newhireId>=01)
+		{
+			_log.info("newhireId  in if loop.."+newhireId);
+			modifiedorganizationdetails(request, response,newhireId,Name,Designation,sourceprofileimageName,fileName,sourcedetailedimageName,detailedimagefileName);
+			response.setRenderParameter("jspPage","/jsp/editnewhiredetails.jsp");
+		}
+		else
+		{
+			_log.info("sourcedetailedimageName.. "+sourcedetailedimageName);
+			_log.info("detailedimagefileName.. "+detailedimagefileName);
+		newhire newh=newhireLocalServiceUtil.createnewhire(CounterLocalServiceUtil.increment());
+		newh.setNewhire_name(Name);
+		newh.setNewhire_designation(Designation);
+		newh.setNewhire_profileimage(sourceprofileimageName);
+		newh.setNewhire_profileimage_path(fileName);
+		newh.setNewhire_detailedimage(sourcedetailedimageName);
+		newh.setNewhire_detailedimage_path(detailedimagefileName);
+		newh.setNewhire_createdate(new Date());
+		newh=newhireLocalServiceUtil.addnewhire(newh);
+		
+		_log.info("Organization announcement saved successfully............");
+		}
+		
+}
+
+private void modifiedorganizationdetails(ActionRequest request, ActionResponse response, long newhireId,String Name,String Designation,String sourceprofileimageName,String fileName,String sourcedetailedimageName,String detailedimagefileName)
+{
+	
+     _log.info("edit the forms======");
+     _log.info("complianceId.."+newhireId);
+	
+	newhire newh = null;
+	try
+	{
+		newh=newhireLocalServiceUtil.fetchnewhire(newhireId);
+		
+		_log.info(newh);
+	} 
+	catch (SystemException e)
+	{
+		// TODO Auto-generated catch block
+		_log.error(e.getMessage());
+	}
+	if (Validator.isNotNull(newh)) 
+	{
+		newh.setNewhire_name(Name);
+        newh.setNewhire_designation(Designation);
+       newh.setNewhire_profileimage(sourceprofileimageName);
+       newh.setNewhire_profileimage_path(fileName);
+       newh.setNewhire_detailedimage(sourcedetailedimageName);
+       newh.setNewhire_detailedimage_path(detailedimagefileName);
+       newh.setNewhire_modifieddate(new Date());
+       try 
+		{
+		newhireLocalServiceUtil.updatenewhire(newh);
+			
+		_log.info("Updated Successfully");
+		}
+		catch (SystemException e) 
+		{
+			_log.error(e.getMessage());
+		}
+	}
+}	
+
+
+public void deletenewhiredetailsreference(ActionRequest actionRequest,
+		ActionResponse actionResponse) throws IOException, PortletException
+{
+	_log.info("Delete Vendor======");
+	long newhireId = ParamUtil.getInteger(actionRequest, "newhireId");
+	_log.info("newhireId===" + newhireId);
+	if (newhireId >= 01) {
+	
+ 	try {
+ 		
+ 		newhireLocalServiceUtil.deletenewhire(newhireId);
+			_log.info("deleted successfully");
+			actionResponse.setRenderParameter("jspPage","/jsp/editnewhiredetails.jsp");
+		
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			_log.error(e.getMessage());
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			_log.error(e.getMessage());
+		}
+			
+	}
+	
+}
+
+public String fileUpload(ActionRequest request, ActionResponse response, UploadPortletRequest uploadRequest,
+		String sourceprofileimageName, File sourceprofileimage) throws IOException
+{
+	ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+	
+
+	String str = "NewHireUpload";
+
+	
+	String role="admin";
+	java.util.Properties properties = PortalUtil.getPortalProperties();
+	_log.info("my properties is...." + properties);
+	File contestfolder = new File(properties.getProperty("liferay.home") + "/tomcat-8.0.32/webapps/" + str);
+	File destinationFile = new File(
+			properties.getProperty("liferay.home") + "/tomcat-8.0.32/webapps/" + str + "/" + role);
+
+	if (!contestfolder.exists()) {
+		destinationFile.mkdirs();
+		_log.info("type directory exists");
+	}
+	_log.info("my directory is : " + contestfolder);
+
+	if (!destinationFile.exists()) {
+		destinationFile.mkdirs();
+		_log.info("type directory exists");
+	}
+	_log.info("my directory is : " + destinationFile);
+
+	
+	if (sourceprofileimageName != null) {
+		/**************** SAVE THE DOC ********************************/
+		if (destinationFile.exists()) {
+			sourceprofileimageName.lastIndexOf(".");
+			String fileNa = sourceprofileimageName.substring(0, sourceprofileimageName.lastIndexOf("."));
+			_log.info("fileName : " + fileNa);
+			String fileExtension = sourceprofileimageName.substring(sourceprofileimageName.lastIndexOf("."), sourceprofileimageName.length());
+			_log.info("fileExtension : " + fileExtension);
+			sourceprofileimageName = fileNa;
+			SimpleDateFormat df2 = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+			Date date = new Date();
+			String testDateString = df2.format(date);
+			sourceprofileimageName = sourceprofileimageName + "_" + testDateString + fileExtension;
+
+			destinationFile = new File(properties.getProperty("liferay.home") + "/tomcat-8.0.32/webapps/" + str
+					+ "/" + role + "/" + sourceprofileimageName);
+
+			_log.info("destinationFile : " + destinationFile);
+
+		}
+		_log.info("File : " + sourceprofileimageName);
+		FileUtil.copyFile(sourceprofileimage, destinationFile);
+
+		String FilePath = destinationFile.toString();
+		_log.info("Successfully Saved the Document");
+		/*************** ENDED THE SAVING ******************/
+		_log.info(FilePath);
+	}
+	return sourceprofileimageName;
+}
+
+public String fileUpload2(ActionRequest request, ActionResponse response, UploadPortletRequest uploadRequest,
+		String sourcedetailedimageName, File sourcedetailedimage) throws IOException
+{
+	ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+	
+
+	String str = "NewHireUpload";
+
+	
+	String role="admin";
+	java.util.Properties properties = PortalUtil.getPortalProperties();
+	_log.info("my properties is...." + properties);
+	File contestfolder = new File(properties.getProperty("liferay.home") + "/tomcat-8.0.32/webapps/" + str);
+	File destinationFile = new File(
+			properties.getProperty("liferay.home") + "/tomcat-8.0.32/webapps/" + str + "/" + role);
+
+	if (!contestfolder.exists()) {
+		destinationFile.mkdirs();
+		_log.info("type directory exists");
+	}
+	_log.info("my directory is : " + contestfolder);
+
+	if (!destinationFile.exists()) {
+		destinationFile.mkdirs();
+		_log.info("type directory exists");
+	}
+	_log.info("my directory is : " + destinationFile);
+
+	
+	if (sourcedetailedimageName != null) {
+		/**************** SAVE THE DOC ********************************/
+		if (destinationFile.exists()) {
+			sourcedetailedimageName.lastIndexOf(".");
+			String fileNa = sourcedetailedimageName.substring(0, sourcedetailedimageName.lastIndexOf("."));
+			_log.info("fileName : " + fileNa);
+			String fileExtension = sourcedetailedimageName.substring(sourcedetailedimageName.lastIndexOf("."), sourcedetailedimageName.length());
+			_log.info("fileExtension : " + fileExtension);
+			sourcedetailedimageName = fileNa;
+			SimpleDateFormat df2 = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss");
+			Date date = new Date();
+			String testDateString = df2.format(date);
+			sourcedetailedimageName = sourcedetailedimageName + "_" + testDateString + fileExtension;
+
+			destinationFile = new File(properties.getProperty("liferay.home") + "/tomcat-8.0.32/webapps/" + str
+					+ "/" + role + "/" + sourcedetailedimageName);
+
+			_log.info("destinationFile : " + destinationFile);
+
+		}
+		_log.info("File : " + sourcedetailedimageName);
+		FileUtil.copyFile(sourcedetailedimage, destinationFile);
+
+		String FilePath = destinationFile.toString();
+		_log.info("Successfully Saved the Document");
+		/*************** ENDED THE SAVING ******************/
+		_log.info(FilePath);
+	}
+	return sourcedetailedimageName;
+}
+
+}

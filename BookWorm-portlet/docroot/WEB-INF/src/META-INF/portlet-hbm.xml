@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.book.model.bookdetails" />
+	<class name="com.chola.book.model.impl.bookdetailsImpl" table="chola_bookdetails">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="booktitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bookname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bookpath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createddate" type="org.hibernate.type.TimestampType" />
+		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifieddate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

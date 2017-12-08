@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.EmployeeRef.model.EmployeeRefrence">
+		<field name="refId" type="long" />
+		<field name="title" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="from" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="to" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="body" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
+		<field name="flag" type="long" />
+		<field name="createDate" type="Date" />
+	</model>
+</model-hints>

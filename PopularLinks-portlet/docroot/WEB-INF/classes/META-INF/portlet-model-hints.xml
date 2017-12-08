@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.popularlinks.model.externallinks">
+		<field name="id" type="long" />
+		<field name="tag" type="String" />
+		<field name="url" type="String" />
+	</model>
+	<model name="com.chola.popularlinks.model.popularlinks">
+		<field name="id" type="long" />
+		<field name="userid" type="long" />
+		<field name="url" type="String" />
+		<field name="tag" type="String" />
+		<field name="count" type="long" />
+		<field name="flag" type="int" />
+		<field name="createDate" type="Date" />
+	</model>
+</model-hints>

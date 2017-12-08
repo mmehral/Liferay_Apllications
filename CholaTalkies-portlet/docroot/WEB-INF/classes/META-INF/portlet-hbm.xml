@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.model.cholatalkies" />
+	<import class="com.model.cholatalkiespath" />
+	<class name="com.model.impl.cholatalkiesImpl" table="CholaT_cholatalkies">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="videoName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="videoDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="videoId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.model.impl.cholatalkiespathImpl" table="CholaT_cholatalkiespath">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="cholatalkiesdetaild_id" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="VideoPath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="videoTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="videoDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+		<property name="updatedBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

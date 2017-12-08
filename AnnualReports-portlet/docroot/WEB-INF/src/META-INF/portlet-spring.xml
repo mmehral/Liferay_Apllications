@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.annual.service.impl.annualreportsLocalServiceImpl" id="com.chola.annual.service.annualreportsLocalService" />
+	<bean class="com.chola.annual.service.impl.annualreportsServiceImpl" id="com.chola.annual.service.annualreportsService" />
+	<bean class="com.chola.annual.service.persistence.impl.annualreportsPersistenceImpl" id="com.chola.annual.service.persistence.annualreportsPersistence" parent="basePersistence" />
+	<bean class="com.chola.annual.service.persistence.impl.annualreportsFinderImpl" id="com.chola.annual.service.persistence.annualreportsFinder" parent="basePersistence" />
+</beans>

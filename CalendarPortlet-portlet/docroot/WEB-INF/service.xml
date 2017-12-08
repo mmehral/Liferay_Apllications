@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+
+<service-builder package-path="com.chola.calendar">
+	<author>adms.java1</author>
+	<namespace>events</namespace>
+	<entity name="eventcalendar" local-service="true" remote-service="true">
+		<column name="id" type="long" primary="true" id-type="increment"></column>
+		<column name="name" type="String"></column>
+		<column name="startdate" type="Date"></column>
+		<column name="enddate" type="Date"></column>
+		<column name="color" type="String"></column>
+		<column name="url" type="String"></column>
+		<column name="userid" type="String"></column>
+		<order>   	 
+		<order-column name="name" order-by="asc" />
+    	<order-column name="startdate" order-by="asc"/>
+		</order>
+		<finder name="EVENT_NAME" return-type="Collection" >
+			<finder-column name="name" />
+		</finder>
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
+	</entity>
+	
+	<entity name="EmpInfoEntity" local-service="true" remote-service="true">
+		<column name="id" type="long" primary="true" id-type="increment"></column>
+		<column name="empId" type="String"></column>
+		<column name="name" type="String"></column>
+		<column name="emailid" type="String"></column>
+		<column name="birthday" type="Date"></column>
+		<column name="grade" type="String"></column>
+		<column name="functionName" type="String"></column>
+		<column name="department" type="String"></column>
+		<column name="subdepartment" type="String"></column>
+		<column name="location" type="String"></column>
+		<column name="gender" type="String"></column>
+		<column name="unit" type="String"></column>
+		<column name="userid" type="String"></column>
+		<order>   	 
+		<order-column name="name" order-by="asc" />
+		</order>
+		<finder name="EMP_NAME" return-type="Collection" >
+			<finder-column name="name" />
+		</finder>
+	</entity>
+	
+	<entity name="data" local-service="true" remote-service="true">
+		<column name="eventid" type="long" primary="true" id-type="increment"></column>
+		<column name="eventdetails" type="String"></column>
+		<column name="eventfrom" type="String"></column>
+		<column name="eventto" type="String"></column>
+		<column name="location" type="String"></column>
+		<column name="dept" type="String"></column>
+		<column name="subdept" type="String"></column>
+		<column name="grade" type="String"></column>
+		<column name="age" type="String"></column>
+		<column name="companyname" type="String"></column>
+		<column name="userid" type="String"></column>
+		<column name="gender" type="String"></column>
+	</entity>
+	
+	
+	
+	
+	
+</service-builder>

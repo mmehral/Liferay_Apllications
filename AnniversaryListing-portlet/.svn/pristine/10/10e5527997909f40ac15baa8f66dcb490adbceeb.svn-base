@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	
+	
+	<sql id="insertlist">
+    <![CDATA[
+   insert into all_messages(postedOn,postedBy,message,code,postedDate) values(?,?,?,?,?);
+        ]]>
+	</sql>
+</custom-sql>

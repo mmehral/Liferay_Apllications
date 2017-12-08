@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.organizationAnnouncement.model.organization">
+		<field name="organization_id" type="long" />
+		<field name="organization_tite" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="organization_description" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="organization_image_name" type="String" />
+		<field name="organization_image_path" type="String" />
+	</model>
+</model-hints>

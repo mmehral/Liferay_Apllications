@@ -1,0 +1,68 @@
+package practice;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+public class UserInfoMainAction {
+	private static Log _log = LogFactoryUtil.getLog(UserInfoMainAction.class);
+	/*public static void main(String[] args) throws ParseException {
+		String str = "2017-05-11 03:33:02.048000222";
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+		Date d1 = format.parse(str);
+		Date d2 = new Date();
+		String difft = null;
+		_log.info("FFFFFFFFF" + d1);
+		_log.info("FFFFFFFFF@@@@@" + d2);
+		long diff = d2.getTime() - d1.getTime();
+		_log.info("FFFFFF" + diff);
+
+		long diffSeconds = diff / 1000 % 60;
+		long diffMinutes = diff / (60 * 1000) % 60;
+		long diffHours = diff / (60 * 60 * 1000) % 24;
+		long diffDays = diff / (24 * 60 * 60 * 1000);
+		int diffInDays = (int) (d2.getTime() - d1.getTime());
+
+		// _log.info("Difference--> " + diffInDays);
+		difft = diffHours + ":" + diffMinutes;
+		_log.info(difft);
+		_log.info("DDDDDd" + diffDays);
+	}*/
+
+	public static String getLastHourDate(Date lastdate) {
+		String str = null;
+		Date d1 = lastdate;
+		Date d2 = new Date();
+		String difft = null;
+		_log.info("Last Login Date : " + d1);
+		_log.info("Current Sys Date : " + d2);
+		long diff = d2.getTime() - d1.getTime();
+		_log.info("Diff Date : " + diff);
+
+		long diffMinutes = diff / (60 * 1000) % 60;
+		long diffHours = diff / (60 * 60 * 1000) % 24;
+		long diffDays = diff / (24 * 60 * 60 * 1000);
+
+		if (diffDays > 0) {
+			String str1 = String.valueOf(diffDays);
+			str = str1 + "day ago";
+		} else {
+			if (diffHours > 0) {
+
+				str = diffHours + "  hours ago";
+			} else {
+				String min = String.valueOf(diffMinutes);
+        		str = min + "  min ago";
+			}
+		}
+		difft = diffHours + ":" + diffMinutes;
+		_log.info("Diffrence in date : "+difft);
+		_log.info("Day : " + diffDays);
+		_log.info("Hour : " + diffHours);
+		return str;
+	}
+}

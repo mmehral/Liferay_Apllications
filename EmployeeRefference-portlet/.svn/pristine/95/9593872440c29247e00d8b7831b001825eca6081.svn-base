@@ -1,0 +1,119 @@
+package com.chola.EmployeeRef.Action;
+
+import java.io.IOException;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletException;
+
+import com.chola.EmployeeRef.model.EmployeeRefrence;
+import com.chola.EmployeeRef.service.EmployeeRefrenceLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+
+public class EmployeeRefMainAction extends MVCPortlet{
+	private static Log _log = LogFactoryUtil.getLog(EmployeeRefMainAction.class);
+	
+	public void submitRefferal(ActionRequest request,ActionResponse response)
+	{
+		String Title=request.getParameter("Title");
+		_log.info("Title :"+Title);
+		String From=request.getParameter("From");
+		_log.info("Title :"+From);
+		String To=request.getParameter("To");
+		_log.info("To :"+To);
+		String Body=request.getParameter("Body");
+		_log.info("Body :"+Body);
+		long referenceId = ParamUtil.getInteger(request, "referenceId");
+		_log.info("referenceId=========="+referenceId);
+		if(referenceId>=01){
+			modifiedcompany(request, response, referenceId,
+					Title,From,To,Body);
+			response.setRenderParameter("jspPage",
+					"/html/edit.jsp");
+		}else{
+		
+		//refferal ref=refferalLocalServiceUtil.createrefferal(CounterLocalServiceUtil.increment());
+		EmployeeRefrence ref=EmployeeRefrenceLocalServiceUtil.createEmployeeRefrence(CounterLocalServiceUtil.increment());
+		ref.setBody(Body);
+		ref.setFrom(From);
+		ref.setFlag(1);
+		ref.setTitle(Title);
+		ref.setTo(To);
+		ref=EmployeeRefrenceLocalServiceUtil.addEmployeeRefrence(ref);
+		}
+		
+	}
+
+	private void modifiedcompany(ActionRequest request, ActionResponse response, long referenceId, String title,
+			String from, String to, String body) {
+		// TODO Auto-generated method stub
+	     _log.info("edit the forms======");
+		
+		_log.info("myyyyy CompanyId====" + referenceId);
+		EmployeeRefrence ref = null;
+		try {
+			ref = EmployeeRefrenceLocalServiceUtil.fetchEmployeeRefrence(referenceId);
+			_log.info("!!!!!!" + ref);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			_log.error(e.getMessage());
+		}
+		if (Validator.isNotNull(ref)) {
+			ref.setBody(body);
+			ref.setFrom(from);
+			ref.setFlag(1);
+			ref.setTitle(title);
+			ref.setTo(to);
+			try {
+			
+				EmployeeRefrenceLocalServiceUtil.updateEmployeeRefrence(ref);
+				_log.info("Your Updated Successfully");
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				_log.error(e.getMessage());
+			}
+		}
+	}
+	public void deletereference(ActionRequest actionRequest,
+			ActionResponse actionResponse) throws IOException, PortletException {
+		_log.info("Delete Vendor======");
+		long referenceId = ParamUtil.getInteger(actionRequest, "referenceId");
+		_log.info("referenceId===" + referenceId);
+		if (referenceId >= 01) {
+		
+	 	try {
+	 		EmployeeRefrenceLocalServiceUtil.deleteEmployeeRefrence(referenceId);
+				_log.info("your deleted successfully");
+				actionResponse.setRenderParameter("jspPage","/html/edit.jsp");
+			
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				_log.error(e.getMessage());
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				_log.error(e.getMessage());
+			}
+				
+		}
+		
+	}
+	//This method is added by sanket more  on 24 April 2017  for Comment in employee ref
+	public void addComment(ActionRequest actionRequest, ActionResponse actionResponse) {
+		_log.info("Comment=======");
+
+		try {
+			invokeTaglibDiscussion(actionRequest, actionResponse);
+			_log.info("Comment added Successfully..............");
+		} catch (Exception e) {
+			_log.error(e.getMessage());
+		}
+	}
+	
+}

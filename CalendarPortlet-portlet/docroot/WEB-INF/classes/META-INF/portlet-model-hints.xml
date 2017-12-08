@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.calendar.model.data">
+		<field name="eventid" type="long" />
+		<field name="eventdetails" type="String" />
+		<field name="eventfrom" type="String" />
+		<field name="eventto" type="String" />
+		<field name="location" type="String" />
+		<field name="dept" type="String" />
+		<field name="subdept" type="String" />
+		<field name="grade" type="String" />
+		<field name="age" type="String" />
+		<field name="companyname" type="String" />
+		<field name="userid" type="String" />
+		<field name="gender" type="String" />
+	</model>
+	<model name="com.chola.calendar.model.EmpInfoEntity">
+		<field name="id" type="long" />
+		<field name="empId" type="String" />
+		<field name="name" type="String" />
+		<field name="emailid" type="String" />
+		<field name="birthday" type="Date" />
+		<field name="grade" type="String" />
+		<field name="functionName" type="String" />
+		<field name="department" type="String" />
+		<field name="subdepartment" type="String" />
+		<field name="location" type="String" />
+		<field name="gender" type="String" />
+		<field name="unit" type="String" />
+		<field name="userid" type="String" />
+	</model>
+	<model name="com.chola.calendar.model.eventcalendar">
+		<field name="id" type="long" />
+		<field name="name" type="String" />
+		<field name="startdate" type="Date" />
+		<field name="enddate" type="Date" />
+		<field name="color" type="String" />
+		<field name="url" type="String" />
+		<field name="userid" type="String" />
+	</model>
+</model-hints>

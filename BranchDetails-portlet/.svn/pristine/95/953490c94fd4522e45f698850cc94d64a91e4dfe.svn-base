@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<%@taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
+	
+<b>List of Cholamandalam Branches !!!<br><br></b>  
+
+<portlet:defineObjects />
+<%-- <portlet:resourceURL var="resourceURLs"></portlet:resourceURL>
+ --%>
+<script>
+
+		$(document).ready(function() {
+			$.ajax({
+				url : "<portlet:resourceURL id='ProductCall'/>",
+				type : 'POST',
+				dataType : 'json',
+				success : function(data) {
+					console.log(JSON.stringify(data));
+					for(var i in data)
+					{
+					$("#product").append("<option value=" + data[i].product_id + ">" + data[i].product_name + "</option>");
+					}
+					$('#state').empty();
+					$('#city').empty();
+				},
+				error : function() {
+					console.log("There was an error. Try again please!");
+				}
+			});
+			
+			var product_id='';
+			$("#product").change(function() {
+				$('#state').empty();
+				$('#city').empty();
+				console.log("Product Id : "+$(this).val());
+				product_id = $(this).val();
+			$.ajax({
+				url : "<portlet:resourceURL id='StateCall'/>",
+				type : 'POST',
+				dataType : 'json',
+				data : { product_id : product_id},
+				success : function(data) {
+					console.log(JSON.stringify(data));
+					for(var i in data)
+					{
+					$("#state").append("<option value=" + data[i].state_id + ">" + data[i].state_name + "</option>");
+					}
+				},
+				error : function() {
+					console.log("There was an error. Try again please!");
+				}
+			});
+			});
+			
+			var state_id='';
+			$("#state").change(function() {
+				$('#city').empty()
+				console.log("State Id : "+$(this).val());
+				state_id = $(this).val();
+			$.ajax({
+				url : "<portlet:resourceURL id='CityCall'/>",
+				type : 'POST',
+				dataType : 'json',
+				data : { state_id : state_id, product_id : product_id},
+				success : function(data) {
+					console.log(JSON.stringify(data));
+					for(var i in data)
+					{
+					$("#city").append("<option value=" + data[i].city_id + ">" + data[i].city_name + "</option>");
+					}
+				},
+				error : function() {
+					console.log("There was an error. Try again please!");
+				}
+			});
+			});
+		});
+		
+		function getBranch()
+		{
+			$('#branch').empty();
+			$.ajax({
+				url : "<portlet:resourceURL id='BranchCall'/>",
+				type : 'POST',
+				dataType : 'json',
+				data : { city_id : $('#city').val() , state_id : $('#state').val(), product_id : $('#product').val()},
+				success : function(data) {
+					console.log(JSON.stringify(data));
+					 
+					for(var i in data)
+					{
+						 var branch_id = data[i].branch_id;
+					     var branch_address = data[i].branch_address;
+						    
+						$("#branch").append("<div id='branch_id'></div><br/><div id='branch_address'>"+branch_address+"</div><br/>");
+					}
+				},
+				error : function() {
+					console.log("There was an error. Try again please!");
+				}
+			});
+		}
+</script>
+
+Product : <select id="product"><option value="">Select Product</option></select>&nbsp;&nbsp;&nbsp;&nbsp;
+State : <select id="state"><option value="">Select State</option></select>&nbsp;&nbsp;&nbsp;&nbsp;
+City : <select id="city"><option value="">Select City</option></select>&nbsp;&nbsp;&nbsp;
+<input type="button" onclick="getBranch()" value="Submit">
+<br>
+
+<div id="branch"></div>

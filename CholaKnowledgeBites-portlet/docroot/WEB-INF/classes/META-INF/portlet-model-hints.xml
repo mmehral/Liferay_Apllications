@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.knowledgebites.model.kbdetails">
+		<field name="id" type="long" />
+		<field name="content_id" type="long" />
+		<field name="kbtitle" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="kbdesc" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="createdDate" type="Date" />
+		<field name="createdBy" type="long" />
+		<field name="modifiedDate" type="Date" />
+		<field name="modifiedBy" type="long" />
+		<field name="flag" type="String" />
+	</model>
+	<model name="com.chola.knowledgebites.model.kbpath">
+		<field name="id" type="long" />
+		<field name="kbfiledoc" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="kbfilepath" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="createdDate" type="Date" />
+		<field name="createdBy" type="long" />
+		<field name="flag" type="String" />
+		<field name="kbdetails_id" type="long" />
+		<field name="content_id" type="long" />
+		<field name="kbfilename" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+	</model>
+</model-hints>

@@ -1,0 +1,33 @@
+package com.chola.swagatam.service.persistence.impl;
+import java.util.List;
+
+import com.chola.swagatam.model.swagatamdata;
+import com.chola.swagatam.service.persistence.swagatamdataFinder;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.util.dao.orm.CustomSQLUtil;
+
+public class swagatamdataFinderImpl extends swagatamdataFinderBaseImpl
+implements swagatamdataFinder{
+
+	
+	public List<swagatamdata> getEmpData(String empId) {
+		Session session = null;
+		try {
+			session = openSession();
+			String sql = CustomSQLUtil.get("empdata");
+			SQLQuery queryObject = session.createSQLQuery(sql);
+			queryObject.setCacheable(false);
+			QueryPos qPos = QueryPos.getInstance(queryObject);
+			qPos.add(empId);
+			return queryObject.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeSession(session);
+		}
+		return null;
+	}
+	
+}

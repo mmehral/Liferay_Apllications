@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.swagatam.model.swagatam" />
+	<import class="com.chola.swagatam.model.swagatamdata" />
+	<import class="com.chola.swagatam.model.swagatampath" />
+	<class name="com.chola.swagatam.model.impl.swagatamImpl" table="cholas_swagatam">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="inductionid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property column="desc_" name="desc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.swagatam.model.impl.swagatamdataImpl" table="cholas_swagatamdata">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="empId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="watched" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="acknowledged" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.swagatam.model.impl.swagatampathImpl" table="cholas_swagatampath">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="inductionid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="videoPath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="videoTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="videoDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+		<property name="updatedBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

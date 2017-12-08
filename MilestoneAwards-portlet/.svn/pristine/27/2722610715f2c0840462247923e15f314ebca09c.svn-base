@@ -1,0 +1,332 @@
+<%@page import="java.util.regex.Matcher"%>
+<%@page import="java.util.regex.Pattern"%>
+<%@page import="peoplepowerapi.PeoplePowerAPI"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="org.json.JSONObject"%>
+<%@page import="org.json.JSONArray"%>
+<%@page import="com.chola.milestone.service.milestoneLocalServiceUtil"%>
+<%@page import="org.apache.commons.codec.binary.Base64"%>
+<%@page import="javax.crypto.spec.SecretKeySpec"%>
+<%@page import="javax.crypto.spec.IvParameterSpec"%>
+<%@page import="javax.crypto.Cipher"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.Period"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%@page import="com.liferay.portal.kernel.theme.ThemeDisplay"%>
+<%@page import="com.liferay.counter.kernel.service.CounterLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.service.ContactLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.Contact"%>
+<%@page import="java.util.List"%><%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui"%>
+
+<portlet:defineObjects />
+<portlet:actionURL var="sendWish"  name="sendWish"></portlet:actionURL>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+
+$("#submit").click(function(){
+    if($('#wish').find('input[type=checkbox]:checked').length == 0)
+    {
+        alert('Please select atleast one checkbox');
+        return false;
+    }
+    else if(($('input[name=preMessages]:checked').length <= 0) && ($('#personalMessage').val()==null || $('#personalMessage').val()==""))
+    {
+        alert('Please select atleast one predefind message or write your personal message in below textarea');
+        return false;
+    }
+    else
+    	{
+    	return true;
+    	}
+});
+});
+</script>
+
+<div class="col-md-12 bd_gradient" style="overflow: auto;">
+<form id="wish" action="<%=sendWish%>" method="post">
+<%
+ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+
+if(themeDisplay.isSignedIn()){
+	
+	Map fiveYears = new HashMap<String,String>();
+	Map tenYears = new HashMap<String,String>();
+	Map fifteenYears = new HashMap<String,String>();
+	Map twentyYears = new HashMap<String,String>();
+	Map twentyFiveYears = new HashMap<String,String>();
+	Map thirtyYears = new HashMap<String,String>();
+	
+	int j =0;
+	JSONArray data = (JSONArray)PeoplePowerAPI.GetEmpJoiningAnnivList();
+	for(int i = 0; i < data.length(); i++)
+	{
+		j++;
+		JSONObject objects = data.getJSONObject(i);
+		String Anniversary = objects.get("Anniversary").toString();
+		
+		int years = Integer.parseInt(Anniversary.replaceAll("\\D+",""));
+		
+		System.out.println("No of Years : "+years + " Emp Name : "+objects.get("Name"));
+		
+		if(years==5)
+		{
+			System.out.println("Name : " + objects.get("Name"));
+			fiveYears.put(objects.get("EmpId"), objects.get("Name"));
+		}
+		if(years==10)
+		{
+			System.out.println("Name : " + objects.get("Name"));
+			fiveYears.put(objects.get("EmpId"), objects.get("Name"));
+		}
+		if(years==15)
+		{
+			System.out.println("Name : " + objects.get("Name"));
+			fiveYears.put(objects.get("EmpId"), objects.get("Name"));
+		}
+		if(years==20)
+		{
+			System.out.println("Name : " + objects.get("Name"));
+			fiveYears.put(objects.get("EmpId"), objects.get("Name"));
+		}
+		if(years==25) 
+		{
+			System.out.println("Name : " + objects.get("Name"));
+			fiveYears.put(objects.get("EmpId"), objects.get("Name"));
+		}
+		if(years==30)
+		{
+			System.out.println("Name : " + objects.get("Name"));
+			fiveYears.put(objects.get("EmpId"), objects.get("Name"));
+		}
+		
+		%>
+		<%-- <input type="checkbox" name="userName" value=<%=result[2]%>>  <%=result[3] %> --%>
+		<%
+	}
+
+	if(j==0)
+	{
+		System.out.println("No Milestone's Today");
+		out.println("No Milestone's Today");
+	}
+	else
+	{
+	%>
+	<table border="2">
+	<tr>
+	<th>Five Years Completed</th>
+	<th>Ten Years Completed</th>
+	<th>Fifteen Years Completed</th>
+	<th>Twenty Years Completed</th>
+	<th>Twenty - Five Years Completed</th>
+	 <th>Thirty Years Completed</th>
+	</tr>
+	<tr>
+	<td>
+	<%
+	 Iterator it = fiveYears.entrySet().iterator();
+    while (it.hasNext()) {
+        Map.Entry pair = (Map.Entry)it.next();
+        
+        Object image = PeoplePowerAPI.GetEmpImage(String.valueOf(pair.getKey()));
+		
+	%>
+	 <input type="checkbox" name="userName" value=<%=pair.getKey()%>>
+				<%
+				if(image.equals("ERROR"))
+				{
+				%>
+				<img id="profileImage" src="theme/images/custom/noimage.png" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;">
+				<%
+				}else
+				{
+				%>
+				<img id="profileImage" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;" src="data:image/jpg;base64,<%=image.toString()%>">
+				<%
+				}
+				%>
+			<%=pair.getValue() %>	 
+	<%
+	it.remove();
+	}
+    %>
+    </td>
+	<td>
+	<%
+	 Iterator it1 = tenYears.entrySet().iterator();
+    while (it1.hasNext()) {
+        Map.Entry pair = (Map.Entry)it1.next();
+        Object image = PeoplePowerAPI.GetEmpImage(String.valueOf(pair.getKey()));
+	%>
+	
+	<input type="checkbox" name="userName" value=<%=pair.getValue()%>>
+				<%
+				if(image.equals("ERROR"))
+				{
+				%>
+				<img id="profileImage" src="theme/images/custom/noimage.png" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;">
+				<%
+				}else
+				{
+				%>
+				<img id="profileImage" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;" src="data:image/jpg;base64,<%=image.toString()%>">
+				<%
+				}
+				%>
+				 <%=pair.getKey() %>
+				
+	<%
+	it1.remove();
+	}
+    %>
+    </td>
+    <td>
+	<%
+	 Iterator it2 = fifteenYears.entrySet().iterator();
+    while (it2.hasNext()) {
+        Map.Entry pair = (Map.Entry)it2.next();
+        Object image = PeoplePowerAPI.GetEmpImage(String.valueOf(pair.getKey()));
+	%>
+	<input type="checkbox" name="userName" value=<%=pair.getValue()%>>
+				<%
+				if(image.equals("ERROR"))
+				{
+				%>
+				<img id="profileImage" src="theme/images/custom/noimage.png" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;">
+				<%
+				}else
+				{
+				%>
+				<img id="profileImage" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;" src="data:image/jpg;base64,<%=image.toString()%>">
+				<%
+				}
+				%>
+				
+				<%=pair.getKey() %>
+	<%
+	it2.remove();
+	}
+    %>
+    </td>
+    <td>
+	<%
+	 Iterator it3 = fiveYears.entrySet().iterator();
+    while (it3.hasNext()) {
+        Map.Entry pair = (Map.Entry)it3.next();
+        Object image = PeoplePowerAPI.GetEmpImage(String.valueOf(pair.getKey()));
+	%>
+	<input type="checkbox" name="userName" value=<%=pair.getValue()%>>
+				<%
+				if(image.equals("ERROR"))
+				{
+				%>
+				<img id="profileImage" src="theme/images/custom/noimage.png" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;">
+				<%
+				}else
+				{
+				%>
+				<img id="profileImage" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;" src="data:image/jpg;base64,<%=image.toString()%>">
+				<%
+				}
+				%>
+			
+				<%=pair.getKey() %>
+	<%
+	it3.remove();
+	}
+    %>
+    
+	</td>
+	<td>
+	<%
+	 Iterator it4 = fiveYears.entrySet().iterator();
+    while (it4.hasNext()) {
+        Map.Entry pair = (Map.Entry)it4.next();
+        Object image = PeoplePowerAPI.GetEmpImage(String.valueOf(pair.getKey()));
+	%>
+	<input type="checkbox" name="userName" value=<%=pair.getValue()%>>
+				<%
+				if(image.equals("ERROR"))
+				{
+				%>
+				<img id="profileImage" src="theme/images/custom/noimage.png" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;">
+				<%
+				}else
+				{
+				%>
+				<img id="profileImage" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;" src="data:image/jpg;base64,<%=image.toString()%>">
+				<%
+				}
+				%>
+				  <%=pair.getKey() %>
+	<%
+	it4.remove();
+	}
+    %>
+   </td>
+   <td>
+	<%
+	 Iterator it5 = fiveYears.entrySet().iterator();
+    while (it5.hasNext()) {
+        Map.Entry pair = (Map.Entry)it5.next();
+        Object image = PeoplePowerAPI.GetEmpImage(String.valueOf(pair.getKey()));
+	%>
+	<input type="checkbox" name="userName" value=<%=pair.getValue()%>>
+				<%
+				if(image.equals("ERROR"))
+				{
+				%>
+				<img id="profileImage" src="theme/images/custom/noimage.png" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;">
+				<%
+				}else
+				{
+				%>
+				<img id="profileImage" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;" src="data:image/jpg;base64,<%=image.toString()%>">
+				<%
+				}
+				%>
+				  <%=pair.getKey() %>
+	<%
+	it5.remove();
+	}
+    %>
+    </td>
+    </tr>
+    </table><br><br>
+    <textarea id="personalMessage" name="personalMessage" rows="4" cols="70" placeholder="Write Your Wish here !!!"></textarea><br>
+	<aui:button type="submit" id="submit" value="Send Wish"></aui:button>
+	</form>
+    <%
+	}
+}else
+{
+	%>
+	Please Sign In to Post on Milestone
+	<%
+}
+%>
+</div>
+  

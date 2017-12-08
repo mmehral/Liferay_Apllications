@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.halloffame.model.users" />
+	<class name="com.chola.halloffame.model.impl.usersImpl" table="halloffame_users">
+		<id name="Id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="empId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="empName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="empImagePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="writeUp" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="awardedDate" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>

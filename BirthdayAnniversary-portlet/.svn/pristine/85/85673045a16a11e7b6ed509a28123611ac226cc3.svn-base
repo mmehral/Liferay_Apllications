@@ -1,0 +1,1 @@
+create index IX_CB612322 on Add_birthdaywish (userId[$COLUMN_LENGTH:75$]);

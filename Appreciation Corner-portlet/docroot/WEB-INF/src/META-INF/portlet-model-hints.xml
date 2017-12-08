@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.app.model.post">
+		<field name="id" type="long" />
+		<field name="appTo" type="String" />
+		<field name="appBy" type="String" />
+		<field name="appMessage" type="String" />
+		<field name="appDate" type="Date" />
+	</model>
+	<model name="com.chola.app.model.replied">
+		<field name="id" type="long" />
+		<field name="repliedOnPost" type="long" />
+		<field name="repliedTo" type="String" />
+		<field name="repliedBy" type="String" />
+		<field name="repliedMessage" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="repliedDate" type="Date" />
+	</model>
+</model-hints>

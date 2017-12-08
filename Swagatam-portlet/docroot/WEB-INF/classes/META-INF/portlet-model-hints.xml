@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.swagatam.model.swagatam">
+		<field name="id" type="long" />
+		<field name="inductionid" type="String" />
+		<field name="title" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="desc" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="createdDate" type="Date" />
+		<field name="createdBy" type="String" />
+		<field name="flag" type="String" />
+	</model>
+	<model name="com.chola.swagatam.model.swagatamdata">
+		<field name="id" type="long" />
+		<field name="empId" type="String" />
+		<field name="watched" type="String" />
+		<field name="acknowledged" type="String" />
+	</model>
+	<model name="com.chola.swagatam.model.swagatampath">
+		<field name="id" type="long" />
+		<field name="inductionid" type="String" />
+		<field name="videoPath" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="videoTitle" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="videoDesc" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="createdDate" type="Date" />
+		<field name="createdBy" type="String" />
+		<field name="updatedDate" type="Date" />
+		<field name="updatedBy" type="String" />
+		<field name="flag" type="String" />
+	</model>
+</model-hints>

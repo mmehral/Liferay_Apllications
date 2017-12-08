@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.branchdetails.model.branchdetails" />
+	<import class="com.branchdetails.model.city" />
+	<import class="com.branchdetails.model.mapping" />
+	<import class="com.branchdetails.model.product" />
+	<import class="com.branchdetails.model.state" />
+	<class name="com.branchdetails.model.impl.branchdetailsImpl" table="branch_branchdetails">
+		<id name="branch_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="branch_code" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="branch_address" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="city_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.branchdetails.model.impl.cityImpl" table="branch_city">
+		<id name="city_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="city_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="state_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.branchdetails.model.impl.mappingImpl" table="branch_mapping">
+		<id name="mapping_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="product_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="state_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="city_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="branch_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.branchdetails.model.impl.productImpl" table="branch_product">
+		<id name="product_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="product_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.branchdetails.model.impl.stateImpl" table="branch_state">
+		<id name="state_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="state_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,184 @@
+<%@page import="org.json.JSONObject"%>
+<%@page import="org.json.JSONArray"%>
+<%@page import="peoplepowerapi.PeoplePowerAPI"%>
+<%@page import="com.chola.birthday.BirthdayWish"%>
+<%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.chola.birthday.service.birthdaywishLocalServiceUtil"%>
+<%@page import="com.chola.birthday.model.birthdaywish"%>
+<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%@page import="com.liferay.portal.kernel.theme.ThemeDisplay"%>
+<%@page import="com.chola.birthday.service.predefinedmessagesLocalServiceUtil"%>
+<%@page import="com.chola.birthday.model.predefinedmessages"%>
+<%@page import="com.liferay.counter.kernel.service.CounterLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.service.ContactLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.Contact"%>
+<%@page import="java.util.List"%><%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@taglib uri="http://liferay.com/tld/aui" prefix="aui"%>
+
+
+<portlet:defineObjects />
+<%--  <portlet:actionURL var="sendWishes"  name="sendWishes"></portlet:actionURL> --%>
+
+<portlet:renderURL var="simpleDialogExample"
+windowState="<%=LiferayWindowState.EXCLUSIVE.toString()%>">
+<portlet:param name="mvcPath"
+value="/jsp/detail.jsp"/>
+</portlet:renderURL>
+
+<aui:script>
+	function sendEmpId(id)
+	{
+		console.log("EmpID : "+id);
+		
+		AUI().use('aui-base',
+		'aui-io-plugin-deprecated',
+		'liferay-util-window',
+		function(A) {
+		var popUpWindow=Liferay.Util.Window.getWindow(
+		{
+		dialog: {
+		centered: true,
+		constrain2view: true,
+		//cssClass: 'yourCSSclassName',
+		modal: true,
+		resizable: false,
+		width: 475
+		}
+		}
+		).plug(
+		A.Plugin.IO,
+		{
+		autoLoad: false
+		}).render();
+		popUpWindow.show();
+		popUpWindow.titleNode.html("Birthday Wish");
+		popUpWindow.io.set('uri','<%=simpleDialogExample%>&id='+id);
+		popUpWindow.io.start();
+
+});
+	}
+</aui:script>
+<script type="text/javascript">
+/* $(document).ready(function(){
+
+$("#submit").click(function(){
+    if($('#wish').find('input[type=checkbox]:checked').length == 0)
+    {
+        alert('Please select atleast one checkbox');
+        return false;
+    }
+    else if(($('input[name=preMessages]:checked').length <= 0) && ($('#personalMessage').val()==null || $('#personalMessage').val()==""))
+    {
+        alert('Please select atleast one predefind message or write your personal message in below textarea');
+        return false;
+    }
+    else
+    	{
+    	return true;
+    	}
+});
+}); */
+</script>
+
+<%
+ ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+String url=themeDisplay.getURLCurrent();
+//out.println(url); 
+if(url.contains("/birthday-wishes"))
+{
+%>
+<div class="col-md-12 bd_gradient" style="height: 620px;overflow: auto;">
+<%-- <form id="wish" action="<%=sendWishes%>" method="post">  --%>
+<%
+}
+else
+{ 
+	%>
+	<div class="col-md-12 bd_gradient" style="height: 290px;overflow: auto;">
+	<%	
+}
+if(themeDisplay.isSignedIn()){
+	
+	int j =0;
+	JSONArray data = (JSONArray)PeoplePowerAPI.GetEmpBirthDayList();
+	for(int i = 0; i < data.length(); i++)
+	{
+		j++;
+		JSONObject objects = data.getJSONObject(i);
+		Object image = PeoplePowerAPI.GetEmpImage(String.valueOf(objects.get("EmpId")));
+		
+		%>
+		<div class="row">
+				<div class="col-md-2" style="padding: 0px; text-align: center;">
+				 <%
+				if(image.equals("ERROR"))
+				{
+				%> 
+				<img id="profileImage" src="/theme/images/custom/noimage.png" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;">
+				<%
+				}else
+				{
+				%>
+				<img id="profileImage" class="img-responsive" style="height: 44px;width: 44px;border-radius: 50%;" src="data:image/jpg;base64,<%=image.toString()%>">
+				<%
+				}
+				%>
+				<%-- <input type="checkbox" name="users" value="<%=objects.get("EmpId") %>"/> --%>
+				</div>
+				<div class="col-md-7" style="padding: 0px; font-size: 10px; text-align: left; font-weight: bold;">
+                <span style="font-weight:bold;"> <%=objects.get("Name") %> </span><br>
+                <span style="font-style:italic; color:#8d8d8d;"><%=objects.get("Designation") %></span></div>
+                <div class="col-md-3" style="padding: 3px;">
+				<center><button style="border:none; background:none;" onclick="sendEmpId('<%=objects.get("EmpId") %>')">
+				<div class="col-md-12" style="padding: 0px;"><center>
+				<img src="/theme/images/custom/bd.jpg"></center></div>
+				<div class="col-md-12" style="padding: 0px; text-align: center;">
+				<span style="background: rgb(30, 89, 119) none repeat scroll 0% 0%; color: rgb(255, 255, 255); padding: 2px; font-size: 8px;">
+				    Send Wish</span></div></button></center>
+				</div>
+				</div>              
+		<%
+	}
+
+if(j==0)
+{
+	System.out.println("No Birthday's Today");
+	out.println("No Birthday's Today");
+}
+else
+{
+	%>
+	
+	<%-- <br><b>Select one of the Messages below :</b><br><br>
+	<%
+	List<predefinedmessages> predefindList = predefinedmessagesLocalServiceUtil.getpredefinedmessageses(0, CounterLocalServiceUtil.getCountersCount());
+	for(predefinedmessages preMes : predefindList)
+	{
+		System.out.println("predefinedmessages :"+preMes.getMessage());
+	%>
+	<input type="radio" name="preMessages" value="<%=preMes.getId()%>"> <%=preMes.getMessage() %><br>
+		<%
+	}
+	%>
+	<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OR</b><br><br> --%>
+	<!-- <textarea id="personalMessage" name="personalMessage" rows="4" cols="50" placeholder="Write Your Wish here !!!"></textarea><br>
+	<input type="submit" id="submit" value="Send a Wish Now"> -->
+
+	<%
+}
+}else
+{
+	%>
+	Please Sign In to Post Birthday Wish
+	<%
+}
+%>
+</div>
+<!-- <div class="col-md-12">
+     <div class="row text_style" style="text-align:right;"><input type="submit" id="submit" value="Wish All"></div>
+     </div>
+  </form> -->
+  

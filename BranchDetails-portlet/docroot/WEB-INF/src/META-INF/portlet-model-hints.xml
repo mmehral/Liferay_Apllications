@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.branchdetails.model.branchdetails">
+		<field name="branch_id" type="long" />
+		<field name="branch_code" type="String" />
+		<field name="branch_address" type="String" ><hint name="max-length">5000</hint></field>
+		<field name="city_id" type="long" />
+	</model>
+	<model name="com.branchdetails.model.city">
+		<field name="city_id" type="long" />
+		<field name="city_name" type="String" />
+		<field name="state_id" type="long" />
+	</model>
+	<model name="com.branchdetails.model.mapping">
+		<field name="mapping_id" type="long" />
+		<field name="product_id" type="long" />
+		<field name="state_id" type="long" />
+		<field name="city_id" type="long" />
+		<field name="branch_id" type="long" />
+	</model>
+	<model name="com.branchdetails.model.product">
+		<field name="product_id" type="long" />
+		<field name="product_name" type="String" />
+	</model>
+	<model name="com.branchdetails.model.state">
+		<field name="state_id" type="long" />
+		<field name="state_name" type="String" />
+	</model>
+</model-hints>

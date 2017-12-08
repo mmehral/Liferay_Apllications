@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.knowledgebites.service.impl.kbdetailsLocalServiceImpl" id="com.chola.knowledgebites.service.kbdetailsLocalService" />
+	<bean class="com.chola.knowledgebites.service.impl.kbdetailsServiceImpl" id="com.chola.knowledgebites.service.kbdetailsService" />
+	<bean class="com.chola.knowledgebites.service.persistence.impl.kbdetailsPersistenceImpl" id="com.chola.knowledgebites.service.persistence.kbdetailsPersistence" parent="basePersistence" />
+	<bean class="com.chola.knowledgebites.service.persistence.impl.kbdetailsFinderImpl" id="com.chola.knowledgebites.service.persistence.kbdetailsFinder" parent="basePersistence" />
+	<bean class="com.chola.knowledgebites.service.impl.kbpathLocalServiceImpl" id="com.chola.knowledgebites.service.kbpathLocalService" />
+	<bean class="com.chola.knowledgebites.service.impl.kbpathServiceImpl" id="com.chola.knowledgebites.service.kbpathService" />
+	<bean class="com.chola.knowledgebites.service.persistence.impl.kbpathPersistenceImpl" id="com.chola.knowledgebites.service.persistence.kbpathPersistence" parent="basePersistence" />
+</beans>

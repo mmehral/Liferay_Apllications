@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.appcorner.service.impl.postLocalServiceImpl" id="com.chola.appcorner.service.postLocalService" />
+	<bean class="com.chola.appcorner.service.impl.postServiceImpl" id="com.chola.appcorner.service.postService" />
+	<bean class="com.chola.appcorner.service.persistence.impl.postPersistenceImpl" id="com.chola.appcorner.service.persistence.postPersistence" parent="basePersistence" />
+	<bean class="com.chola.appcorner.service.persistence.impl.postFinderImpl" id="com.chola.appcorner.service.persistence.postFinder" parent="basePersistence" />
+	<bean class="com.chola.appcorner.service.impl.repliedLocalServiceImpl" id="com.chola.appcorner.service.repliedLocalService" />
+	<bean class="com.chola.appcorner.service.impl.repliedServiceImpl" id="com.chola.appcorner.service.repliedService" />
+	<bean class="com.chola.appcorner.service.persistence.impl.repliedPersistenceImpl" id="com.chola.appcorner.service.persistence.repliedPersistence" parent="basePersistence" />
+</beans>

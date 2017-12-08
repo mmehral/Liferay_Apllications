@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.quarterly.model.quarterlyreports">
+		<field name="id" type="long" />
+		<field name="details" type="String">
+			<hint name="max-length">20000</hint>
+		</field>
+		<field name="updatedon" type="Date" />
+		<field name="updatedby" type="long" />
+		<field name="uniquecontentid" type="long" />
+	</model>
+</model-hints>

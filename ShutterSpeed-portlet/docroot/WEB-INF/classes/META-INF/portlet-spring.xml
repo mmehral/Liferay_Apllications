@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.shutterspeed.service.impl.shutterspeedgalleryLocalServiceImpl" id="com.chola.shutterspeed.service.shutterspeedgalleryLocalService" />
+	<bean class="com.chola.shutterspeed.service.impl.shutterspeedgalleryServiceImpl" id="com.chola.shutterspeed.service.shutterspeedgalleryService" />
+	<bean class="com.chola.shutterspeed.service.persistence.impl.shutterspeedgalleryPersistenceImpl" id="com.chola.shutterspeed.service.persistence.shutterspeedgalleryPersistence" parent="basePersistence" />
+	<bean class="com.chola.shutterspeed.service.persistence.impl.shutterspeedgalleryFinderImpl" id="com.chola.shutterspeed.service.persistence.shutterspeedgalleryFinder" parent="basePersistence" />
+	<bean class="com.chola.shutterspeed.service.impl.shutterspeedgallerypathLocalServiceImpl" id="com.chola.shutterspeed.service.shutterspeedgallerypathLocalService" />
+	<bean class="com.chola.shutterspeed.service.impl.shutterspeedgallerypathServiceImpl" id="com.chola.shutterspeed.service.shutterspeedgallerypathService" />
+	<bean class="com.chola.shutterspeed.service.persistence.impl.shutterspeedgallerypathPersistenceImpl" id="com.chola.shutterspeed.service.persistence.shutterspeedgallerypathPersistence" parent="basePersistence" />
+</beans>

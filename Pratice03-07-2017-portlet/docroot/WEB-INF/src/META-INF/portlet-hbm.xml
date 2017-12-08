@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.pratice.model.emp" />
+	<class name="com.pratice.model.impl.empImpl" table="pratice_emp">
+		<id name="empId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="empName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="dept" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="salary" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

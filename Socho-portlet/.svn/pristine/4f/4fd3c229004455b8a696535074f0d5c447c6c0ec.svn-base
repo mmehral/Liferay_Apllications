@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.socho.model.idea" />
+	<import class="com.chola.socho.model.topics" />
+	<class name="com.chola.socho.model.impl.ideaImpl" table="socho_idea">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="topic" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sharedIdea" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sharedFile" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sharedDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.chola.socho.model.impl.topicsImpl" table="socho_topics">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="topicName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdOn" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedOn" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>

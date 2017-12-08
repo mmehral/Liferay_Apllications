@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+
+	<sql id="syscode">
+    <![CDATA[
+		SELECT val,description FROM ms0028
+		where syscode =?
+ ]]>
+	</sql>
+
+
+
+	
+	<sql id="complist">
+    <![CDATA[
+   SELECT * FROM business b;
+        ]]>
+	</sql>
+	
+	<sql id="userlist">
+    <![CDATA[
+   SELECT CONCAT(firstname,' ',lastname,' (',screenname,')') as name FROM user_ where screenname  is not null and firstname is not null and lastname is not null;
+        ]]>
+	</sql>
+	
+	<sql id="unitlist">
+    <![CDATA[
+   SELECT unit FROM unit where business_id = ? and active=1 order by unit;
+        ]]>
+	</sql>
+	
+	<sql id="departlist">
+    <![CDATA[
+   SELECT department FROM department where business_id = ? and active=1 order by department;
+        ]]>
+	</sql>
+	
+	<sql id="functionlist">
+    <![CDATA[
+   SELECT function FROM function_table where business_id = ? and active=1 order by function;
+        ]]>
+	</sql>
+	
+	<sql id="designationlist">
+    <![CDATA[
+   SELECT designation FROM designation where business_id = ? and active=1 order by designation;
+        ]]>
+	</sql>
+	
+	<sql id="zonelist">
+    <![CDATA[
+   SELECT zone FROM zone where business_id = ? and active=1 order by zone;
+        ]]>
+	</sql>
+	
+	<sql id="gradelist">
+    <![CDATA[
+   SELECT grade FROM grade where business_id = ? and active=1 order by grade;
+        ]]>
+	</sql>
+	
+	<sql id="regionlist">
+    <![CDATA[
+   SELECT region FROM region_table where business_id = ? and active=1 order by region;
+        ]]>
+	</sql>
+	
+	<sql id="locationlist">
+    <![CDATA[
+   SELECT location FROM location_table where business_id = ? and active=1 order by location;
+        ]]>
+	</sql>
+	
+	<sql id="productlist">
+    <![CDATA[
+  SELECT product FROM product where business_id=? and active=1 order by product;
+        ]]>
+	</sql>
+	
+	<sql id="branchlist">
+    <![CDATA[
+   SELECT branch from branch where business_id=? and active=1 order by branch;
+        ]]>
+	</sql>
+	
+	
+	<sql id="alluserlist_greaterthan">
+    <![CDATA[
+    select empid from activeemployeeinfo where business=? and (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) > ?);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_greaterthan_unit">
+    <![CDATA[
+    select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) > ?) and unit in ([$unitdata$]);
+        ]]>
+	</sql>
+	
+	
+	<sql id="intendeduserlist_greaterthan_department">
+    <![CDATA[
+    select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) > ?) and department in ([$departmentdata$]);
+        ]]>
+	</sql>
+	
+	
+	<sql id="intendeduserlist_greaterthan_function">
+    <![CDATA[
+    select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) > ?) and functionname in ([$functiondata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_greaterthan_designation">
+    <![CDATA[
+    select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) > ?) and designation in ([$designationdata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_greaterthan_product">
+    <![CDATA[
+    select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) > ?) and product in ([$productdata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_greaterthan_zone">
+    <![CDATA[
+    select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) > ?) and zone in ([$zonedata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_greaterthan_grade">
+    <![CDATA[
+    select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) > ?) and grade in ([$gradedata$]);
+        ]]>
+	</sql>
+	
+		<sql id="intendeduserlist_greaterthan_branch">
+    <![CDATA[
+    select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) > ?) and branch in ([$branchdata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_greaterthan_region">
+    <![CDATA[
+    select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) > ?) and region in ([$regiondata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_greaterthan_location">
+    <![CDATA[
+    select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) > ?) and location in ([$locationdata$]);
+        ]]>
+	</sql>
+	
+	
+	
+	
+		<sql id="alluserlist_lessthan">
+    <![CDATA[
+select empid from activeemployeeinfo where business=? and (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) < ?);
+        ]]>
+	</sql>
+	
+	
+	<sql id="intendeduserlist_lessthan_unit">
+    <![CDATA[
+select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) < ?) and unit in ([$unitdata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_lessthan_department">
+    <![CDATA[
+select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) < ?) and department in ([$departmentdata$]);
+        ]]>
+	</sql>
+	
+	
+	<sql id="intendeduserlist_lessthan_function">
+    <![CDATA[
+select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) < ?) and functionname in ([$functiondata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_lessthan_designation">
+    <![CDATA[
+select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) < ?) and designation in ([$designationdata$]);
+        ]]>
+	</sql>
+	
+		<sql id="intendeduserlist_lessthan_product">
+    <![CDATA[
+select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) < ?) and product in ([$productdata$]);
+        ]]>
+	</sql>
+	
+			<sql id="intendeduserlist_lessthan_zone">
+    <![CDATA[
+select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) < ?) and zone in ([$zonedata$]);
+        ]]>
+	</sql>
+	
+				<sql id="intendeduserlist_lessthan_branch">
+    <![CDATA[
+select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) < ?) and branch in ([$branchdata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_lessthan_grade">
+    <![CDATA[
+select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) < ?) and grade in ([$gradedata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_lessthan_region">
+    <![CDATA[
+select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) < ?) and region in ([$regiondata$]);
+        ]]>
+	</sql>
+	
+		<sql id="intendeduserlist_lessthan_location">
+    <![CDATA[
+select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) < ?) and location in ([$locationdata$]);
+        ]]>
+	</sql>
+	
+	
+	
+		<sql id="alluserlist_between">
+    <![CDATA[
+   select empid from activeemployeeinfo where business=? and (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) BETWEEN ? and ?);
+      ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_between_unit">
+    <![CDATA[
+   select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) BETWEEN ? and ?) and unit in ([$unitdata$]);
+      ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_between_department">
+    <![CDATA[
+   select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) BETWEEN ? and ?) and department in ([$departmentdata$]);
+      ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_between_function">
+    <![CDATA[
+   select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) BETWEEN ? and ?) and functionname in ([$functiondata$]);
+      ]]>
+	</sql>
+	
+		<sql id="intendeduserlist_between_designation">
+    <![CDATA[
+   select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) BETWEEN ? and ?) and designation in ([$designationdata$]);
+      ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_between_product">
+    <![CDATA[
+   select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) BETWEEN ? and ?) and product in ([$productdata$]);
+      ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_between_zone">
+    <![CDATA[
+   select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) BETWEEN ? and ?) and zone in ([$zonedata$]);
+      ]]>
+	</sql>
+	
+		<sql id="intendeduserlist_between_branch">
+    <![CDATA[
+   select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) BETWEEN ? and ?) and branch in ([$branchdata$]);
+      ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_between_grade">
+    <![CDATA[
+   select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) BETWEEN ? and ?) and grade in ([$gradedata$]);
+      ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_between_region">
+    <![CDATA[
+   select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) BETWEEN ? and ?) and region in ([$regiondata$]);
+      ]]>
+	</sql>
+	
+		<sql id="intendeduserlist_between_location">
+    <![CDATA[
+   select empid from activeemployeeinfo where (gender = ifnull(?,gender))
+and (year(current_date)-year(STR_TO_DATE(birthday,'%d-%b-%Y')) BETWEEN ? and ?) and location in ([$locationdata$]);
+      ]]>
+	</sql>
+	
+	
+	<sql id="alluserlist_all">
+    <![CDATA[
+    SELECT empid FROM activeemployeeinfo where business=? and  (gender = ifnull(?,gender));
+        ]]>
+	</sql>
+	
+	
+	<sql id="intendeduserlist_all_unit">
+    <![CDATA[
+    SELECT empid FROM activeemployeeinfo where (gender = ifnull(?,gender)) and
+    unit in ([$unitdata$]);
+        ]]>
+	</sql> 
+	
+	
+	
+	<sql id="intendeduserlist_all_department">
+    <![CDATA[
+    SELECT empid FROM activeemployeeinfo where (gender = ifnull(?,gender)) and
+    department in ([$departmentdata$]);
+        ]]>
+	</sql> 
+	
+	
+		<sql id="intendeduserlist_all_function">
+    <![CDATA[
+    SELECT empid FROM activeemployeeinfo where (gender = ifnull(?,gender)) and
+    functionname in ([$functiondata$]);
+        ]]>
+	</sql> 
+	
+	<sql id="intendeduserlist_all_designation">
+    <![CDATA[
+    SELECT empid FROM activeemployeeinfo where (gender = ifnull(?,gender)) and
+    designation in ([$designationdata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_all_product">
+    <![CDATA[
+    SELECT empid FROM activeemployeeinfo where (gender = ifnull(?,gender)) and
+    product in ([$productdata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_all_zone">
+    <![CDATA[
+    SELECT empid FROM activeemployeeinfo where (gender = ifnull(?,gender)) and
+    zone in ([$zonedata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_all_branch">
+    <![CDATA[
+    SELECT empid FROM activeemployeeinfo where (gender = ifnull(?,gender)) and
+    branch in ([$branchdata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_all_grade">
+    <![CDATA[
+    SELECT empid FROM activeemployeeinfo where (gender = ifnull(?,gender)) and
+    grade in ([$gradedata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_all_region">
+    <![CDATA[
+    SELECT empid FROM activeemployeeinfo where (gender = ifnull(?,gender)) and
+    region in ([$regiondata$]);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_all_location">
+    <![CDATA[
+    SELECT empid FROM activeemployeeinfo where (gender = ifnull(?,gender)) and
+    location in ([$locationdata$]);
+        ]]>
+	</sql>
+	
+	
+	 <sql id="notifycat">
+    <![CDATA[
+      update usernotificationevent
+        set
+        notify_syscd=?,
+        notify_val=?,
+        notify_desc=?,
+        status=?,
+        flag=?
+        where userNotificationEventId=?;
+        ]]>
+    </sql>
+    
+    
+     <sql id="insertpersonalisedparameters">
+    <![CDATA[
+      insert into personalisedparametersintendedcontent(content_id,business,unit,function,department,designation,product,zone,branch,grade,region,location,user_id,notify_syscd,notify_val,notify_desc,status,flag,status_update_date,gender,age_type,age_value,notification_type,content_type,notify_notificationtext)
+        values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+        ]]>
+    </sql>
+    
+    
+    
+    <sql id="getbusinessname">
+    <![CDATA[
+     select business from business where business_id=?;
+        ]]>
+    </sql>
+</custom-sql>

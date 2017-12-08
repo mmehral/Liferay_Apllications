@@ -1,0 +1,287 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.Enumeration"%>
+<%@page import="javax.portlet.PortletSession"%>
+<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%@page import="com.liferay.portal.kernel.theme.ThemeDisplay"%>
+<%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %> 
+
+<portlet:defineObjects />
+
+<portlet:renderURL var="simpleDialogExample"
+windowState="<%=LiferayWindowState.EXCLUSIVE.toString()%>">
+<portlet:param name="mvcPath" value="/jsp/detail.jsp"/>
+</portlet:renderURL>
+<style>
+table {
+    font-size: 12px;
+    font-family: Calibri !important;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    text-align: left;
+    border: 1px solid black;
+    background-color: #ebedec;
+}
+
+/* tr:nth-child(even) {
+    background-color: #dddddd;
+} */
+
+</style>  
+<aui:script>
+	function sendId(empid)
+	{
+		//alert(empid);
+		AUI().use('aui-base',
+		'aui-io-plugin-deprecated',
+		'liferay-util-window',
+		function(A) {
+		var popUpWindow=Liferay.Util.Window.getWindow(
+		{
+		dialog: {
+		centered: true,
+		constrain2view: true,
+		//cssClass: 'yourCSSclassName',
+		modal: true,
+		resizable: false,
+		width: 475
+		}
+		}
+		).plug(
+		A.Plugin.IO,
+		{
+		autoLoad: false
+		}).render();
+		popUpWindow.show();
+		popUpWindow.titleNode.html("Employee Details");
+		popUpWindow.io.set('uri','<%=simpleDialogExample%>&id='+empid);
+		popUpWindow.io.start();
+
+});   
+	}
+</aui:script>
+
+<script>
+$(document).ready(function(){
+	$.ajax({
+		url : "<portlet:resourceURL id='businessCall'/>",
+		type : 'POST',
+		dataType : 'json',
+		async: false,
+		contentType : 'application/json',
+		success : function(data) {
+			//alert(JSON.stringify(data));
+			$("#business").append("<option value='*'>-Select-</option>");
+			$("#function").empty();
+			$("#function").append("<option value='*'>-Select-</option>");
+			$("#location").empty();
+			$("#location").append("<option value='*'>-Select-</option>");
+			$("#branch").empty();
+			$("#branch").append("<option value='*'>-Select-</option>");
+			$("#department").empty();
+			$("#department").append("<option value='*'>-Select-</option>");
+			
+			 for(var i in data)
+			{
+			$("#business").append("<option value=" + data[i].business_id + ">" + data[i].business_name + "</option>");
+			} 
+		},
+		error : function() {
+		//	alert("There was an error. Try again please!");
+		}
+	});
+	
+	
+	$("#business").change(function() {
+		var businessId = $("#business option:selected").val();
+		//alert("businessId : "+businessId);
+	$.ajax({
+		url : "<portlet:resourceURL id='locationCall'/>",
+		type : 'POST',
+		data : {business : businessId},
+		dataType : 'json',
+		async: false,
+		success : function(data) {
+			//alert(JSON.stringify(data));
+		
+			 for(var i in data.unit)
+			{
+			$("#location").append("<option value='"+data.unit[i]+"'>" + data.unit[i] + "</option>");
+			} 
+		},
+		error : function() {
+			//alert("There was an error. Try again please!");
+		}
+	});
+	});
+	
+ $("#business").change(function() {
+		var businessId = $("#business option:selected").val();
+		//alert("businessId : "+businessId);
+	$.ajax({
+		url : "<portlet:resourceURL id='branchCall'/>",
+		type : 'POST',
+		data : {business : businessId},
+		dataType : 'json',
+		async: false,
+		success : function(data) {
+			//alert(JSON.stringify(data));
+		
+			 for(var i in data.unit)
+			{
+			$("#branch").append("<option value='"+data.unit[i]+"'>" + data.unit[i] + "</option>");
+			} 
+		},
+		error : function() {
+			//alert("There was an error. Try again please!");
+		}
+	});
+	});
+	
+	$("#business").change(function() {
+		var businessId = $("#business option:selected").val();
+		//alert("businessId : "+businessId);
+	$.ajax({
+		url : "<portlet:resourceURL id='departmentCall'/>",
+		type : 'POST',
+		data : {business : businessId},
+		dataType : 'json',
+		async: false,
+		success : function(data) {
+			//alert(JSON.stringify(data));
+		
+			for(var i in data.unit)
+			{
+			$("#department").append("<option value='"+data.unit[i]+"'>" + data.unit[i] + "</option>");
+			} 
+		},
+		error : function() {
+		//	alert("There was an error. Try again please!");
+		}
+	});
+	});
+	
+	$("#business").change(function() {
+		var businessId = $("#business option:selected").val();
+		//alert("businessId : "+businessId);
+	$.ajax({
+		url : "<portlet:resourceURL id='functionCall'/>",
+		type : 'POST',
+		data : {business : businessId},
+		dataType : 'json',
+		async: false,
+		success : function(data) {
+			//alert(JSON.stringify(data));
+			
+			 for(var i in data.unit)
+			{
+			$("#function").append("<option value='"+data.unit[i]+"'>" + data.unit[i] + "</option>");
+			} 
+		},
+		error : function() {
+			//alert("There was an error. Try again please!");
+		}
+	});
+	}); 
+});
+
+
+function searchMethod()
+{
+	var business = $('#business option:selected').text();
+	if(business=="-Select-")
+		{
+		business="*";
+		}
+	if(business!="*")
+	{
+		business = '\"'+business+'\"';
+	}
+	
+	var name = $('#name').val();
+	
+	var location = $('#location option:selected').val();
+	if(location!="*")
+	{
+	location = '\"'+location+'\"';
+	}
+	
+	var branch = $('#branch option:selected').val();
+	if(branch!="*")
+	{
+		branch = '\"'+branch+'\"';
+	}
+	
+	var functions = $('#function option:selected').val();
+	if(functions!="*")
+	{
+		functions = '\"'+functions+'\"';
+	}
+	
+	var department = $('#department option:selected').val();
+	if(department!="*")
+	{
+		department = '\"'+department+'\"';
+	}
+	
+	var URL_PREFIX = 'http://10.9.50.123:8983/solr/user/select?indent=on&q=name:'+name;
+	var URL_SUFFIX = '&fq=location:'+location+'&fq=branch:'+branch+'&fq=business:'+encodeURIComponent(business)+'&fq=functionname:'+functions+'&fq=department:'+department+'&wt=json&rows=500';
+	
+	//alert(keywrd);
+	
+        	var URL = URL_PREFIX +  URL_SUFFIX;
+        	//alert("URL : "+URL);
+			var id = [];
+			$.ajax({
+				url : URL,
+				dataType : 'jsonp',
+				jsonp : 'json.wrf',
+				success : function(dataresponse) {
+					console.log(JSON.stringify(dataresponse));
+					$('#results').find("tr:gt(0)").remove();
+					
+					for(var i=0;i<dataresponse.response.docs.length;i++)
+						{
+						  $("<tr><td>"+dataresponse.response.docs[i].empid+"</td>"
+								  +"<td>"+dataresponse.response.docs[i].name+"</td>"
+								  +"<td>"+dataresponse.response.docs[i].designation+"</td>"
+								  +"<td>"+dataresponse.response.docs[i].emailid+"</td>"
+								  +"<td>"+dataresponse.response.docs[i].department+"</td>"
+								  +"<td>"+dataresponse.response.docs[i].functionname+"</td>"
+								  +"<td>"+dataresponse.response.docs[i].location+"</td>"
+								  +"<td>"+dataresponse.response.docs[i].doj+"</td>"
+								  +"<td>"+dataresponse.response.docs[i].business+"</td></tr>"
+								  ).insertAfter($('#results tr:last'));
+						}
+				}
+			 });
+}
+	
+</script>
+
+Name : <input type="text" id="name" name="name"><br>
+Business : <select name="business" id="business"></select><br>
+Location : <select name="location" id="location"></select>&nbsp;&nbsp;&nbsp;&nbsp;
+Branch : <select name="branch" id="branch"></select><br>
+Department : <select name="department" id="department"></select>&nbsp;&nbsp;&nbsp;&nbsp;
+Function : <select name="function" id="function"></select><br>
+<input type="button" onclick="searchMethod()" value="Search" id="search"/><hr>
+<body>
+<table id="results">
+   <tr>
+   <th>Emp Id</th>
+   <th>Name</th>
+   <th>Designation</th>
+   <th>Email Id</th>
+   <th>Department</th>
+   <th>Function</th>
+   <th>Location</th>
+   <th>Date of Joining</th>
+   <th>Business</th>
+   </tr>
+</table>
+</body>

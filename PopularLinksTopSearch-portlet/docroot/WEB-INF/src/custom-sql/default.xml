@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="urlcheck">
+    <![CDATA[
+      SELECT id_ FROM chola_popularlinks
+      where url=?
+      and userid=?
+      and flag=1;
+        ]]>
+	</sql>
+	
+	<sql id="presearch">
+    <![CDATA[
+      SELECT tag FROM chola_externallinks; 
+        ]]>
+	</sql>
+
+	<sql id="countval">
+    <![CDATA[
+       SELECT id_,count FROM chola_popularlinks 
+       where url=?
+        and userid=?
+        and flag=1; 
+      ]]>
+	</sql>
+	<sql id="externalurlcheck">
+    <![CDATA[
+       SELECT id_ FROM chola_popularlinks 
+       where url=?
+       and userid=?
+       and flag=2; 
+      ]]>
+	</sql>
+
+
+
+	<sql id="internalurlfetch">
+    <![CDATA[
+SELECT url , tag ,count
+     FROM chola_popularlinks
+     where userid=?
+     and flag=1
+     order by count desc
+     limit 5;
+        ]]>
+	</sql>
+	<sql id="externalurlfetch">
+    <![CDATA[
+    SELECT url , tag ,count,id_
+     FROM chola_popularlinks
+     where userid=?
+     and flag=2
+     order by count desc
+     limit 5;
+        ]]>
+	</sql>
+
+<sql id="exturlft">
+ <![CDATA[
+SELECT url FROM chola_externallinks
+where tag = ?;
+ ]]>
+</sql>
+
+</custom-sql>

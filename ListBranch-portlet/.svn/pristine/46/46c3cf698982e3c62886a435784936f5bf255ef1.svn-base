@@ -1,0 +1,60 @@
+<custom-sql>
+<sql id="citylist1">
+<![CDATA[
+select * from branch_city;
+]]>
+</sql>
+<sql id="citylist">
+<![CDATA[
+select * from branch_city where state_id=?;
+]]>
+</sql>
+
+<sql id="productlist">
+<![CDATA[
+select * from branch_product;
+]]>
+</sql>
+
+<sql id="statelist">
+<![CDATA[
+select * from branch_state;
+]]>
+</sql>
+
+<sql id="branchnamedetailslist">
+<![CDATA[
+select * from branch_branchdetails where city_id=?;
+]]>
+</sql>
+
+<sql id="branchnamelist">
+<![CDATA[
+select * from branch_state where state_id=?;
+]]>
+</sql>
+
+<sql id="editcityname">
+<![CDATA[
+select city_name from branch_city where city_id=?;
+]]>
+</sql>
+
+<sql id="editproductname">
+<![CDATA[
+select product_name from branch_product where product_id=?;
+]]>
+</sql>
+
+<sql id="editbranchname">
+<![CDATA[
+select branch_code from branch_branchdetails where branch_id=?;
+]]>
+</sql>
+
+<sql id="editstatelist">
+<![CDATA[
+select state_name from branch_state where state_id=?;
+]]>
+</sql>
+</custom-sql>

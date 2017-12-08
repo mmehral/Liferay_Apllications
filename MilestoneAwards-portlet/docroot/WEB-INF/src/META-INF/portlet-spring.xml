@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.milestone.service.impl.milestoneLocalServiceImpl" id="com.chola.milestone.service.milestoneLocalService" />
+	<bean class="com.chola.milestone.service.impl.milestoneServiceImpl" id="com.chola.milestone.service.milestoneService" />
+	<bean class="com.chola.milestone.service.persistence.impl.milestonePersistenceImpl" id="com.chola.milestone.service.persistence.milestonePersistence" parent="basePersistence" />
+	<bean class="com.chola.milestone.service.persistence.impl.milestoneFinderImpl" id="com.chola.milestone.service.persistence.milestoneFinder" parent="basePersistence" />
+</beans>

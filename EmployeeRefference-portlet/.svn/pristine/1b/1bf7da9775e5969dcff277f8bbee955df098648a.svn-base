@@ -1,0 +1,9 @@
+create table emp_EmployeeRefrence (
+	refId LONG not null primary key,
+	title VARCHAR(200) null,
+	from_ VARCHAR(200) null,
+	to_ VARCHAR(200) null,
+	body VARCHAR(1000) null,
+	flag LONG,
+	createDate DATE null
+);

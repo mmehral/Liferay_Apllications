@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.usertheme.model.themecolor">
+		<field name="id" type="long" />
+		<field name="user_id" type="String" />
+		<field name="color" type="String" />
+		<field name="updatedDate" type="Date" />
+	</model>
+</model-hints>

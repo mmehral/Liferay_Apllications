@@ -1,0 +1,104 @@
+package com.chola.InternalJobRef.Action;
+
+import java.util.Date;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import com.chola.InternalJobRef.model.InternalReference;
+import com.chola.InternalJobRef.service.InternalReferenceLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+
+public class InternalReferenceMainAction extends MVCPortlet {
+	private static Log logger = LogFactoryUtil.getLog(InternalReferenceMainAction.class);
+	
+	public void submitRefferal(ActionRequest request, ActionResponse response) {
+		String Title = request.getParameter("Title");
+		logger.info("Title :" + Title);
+		String From = request.getParameter("From");
+		logger.info("Title :" + From);
+		String To = request.getParameter("To");
+		logger.info("To :" + To);
+		String Body = request.getParameter("Body");
+		logger.info("Body :" + Body);
+		long referenceId = ParamUtil.getInteger(request, "referenceId");
+		logger.info("referenceId==========" + referenceId);
+		if (referenceId >= 01) {
+			modifiedinternalref(request, response, referenceId, Title, From, To, Body);
+			response.setRenderParameter("jspPage", "/html/edit.jsp");
+		} else {
+
+			InternalReference ref = InternalReferenceLocalServiceUtil
+					.createInternalReference(CounterLocalServiceUtil.increment());
+			ref.setBody(Body);
+			ref.setFrom(From);
+			ref.setFlag(1);
+			ref.setTitle(Title);
+			ref.setTo(To);
+			ref.setCreateDate(new Date());
+			InternalReferenceLocalServiceUtil.addInternalReference(ref);
+		}
+
+	}
+
+	private void modifiedinternalref(ActionRequest request, ActionResponse response, long referenceId, String title,
+			String from, String to, String body) {
+
+		logger.info("referenceId====" + referenceId);
+		InternalReference ref = null;
+		
+			ref = InternalReferenceLocalServiceUtil.fetchInternalReference(referenceId);
+			logger.info("!!!!!!" + ref);
+		
+		if (Validator.isNotNull(ref)) {
+			ref.setBody(body);
+			ref.setFrom(from);
+			ref.setFlag(1);
+			ref.setTitle(title);
+			ref.setTo(to);
+			try {
+
+				InternalReferenceLocalServiceUtil.updateInternalReference(ref);
+				logger.info("Your Updated Successfully");
+			} catch (Exception e) {
+				logger.error("Error",e);
+			}
+		}
+	}
+
+	public void deletereference(ActionRequest actionRequest, ActionResponse actionResponse)
+			throws Exception {
+		logger.info("Delete Vendor======");
+		long referenceId = ParamUtil.getInteger(actionRequest, "referenceId");
+		logger.info("referenceId===" + referenceId);
+		if (referenceId >= 01) {
+
+			try {
+				InternalReferenceLocalServiceUtil.deleteInternalReference(referenceId);
+				logger.info("your deleted successfully");
+				actionResponse.setRenderParameter("jspPage", "/html/edit.jsp");
+
+			} catch (Exception e) {
+				logger.error("Error",e);
+			}
+
+		}
+
+	}
+	public void addComment(ActionRequest actionRequest, ActionResponse actionResponse) {
+		logger.info("Comment=======");
+
+		try {
+			invokeTaglibDiscussion(actionRequest, actionResponse);
+			logger.info("Comment added Successfully..............");
+		} catch (Exception e) {
+			logger.error("Error",e);
+		}
+	}
+	
+	
+}

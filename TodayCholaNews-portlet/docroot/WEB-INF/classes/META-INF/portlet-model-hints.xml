@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.TodaycholaNews.model.TodayCholaNews">
+		<field name="id" type="long" />
+		<field name="title" type="String" />
+		<field name="content" type="String" />
+		<field name="createdate" type="String" />
+	</model>
+</model-hints>

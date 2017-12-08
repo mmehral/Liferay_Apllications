@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.chola.app">
+	<author>CloverLiferay02</author>
+	<namespace>appreciation</namespace>
+	<entity name="post" local-service="true" remote-service="true">
+		<column name="id" type="long" primary="true" />
+		<column name="appTo" type="String" />
+		<column name="appBy" type="String" />
+		<column name="appMessage" type="String" />
+		<column name="appDate" type="Date" />
+	</entity>
+	<entity name="replied" local-service="true" remote-service="true">
+		<column name="id" type="long" primary="true" />
+		<column name="repliedOnPost" type="long" />
+		<column name="repliedTo" type="String" />
+		<column name="repliedBy" type="String" />
+		<column name="repliedMessage" type="String" />
+		<column name="repliedDate" type="Date" />
+	</entity>
+</service-builder>

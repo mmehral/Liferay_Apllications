@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.business.model.businesssopDetails">
+		<field name="id" type="long" />
+		<field name="businesstitle" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="businessDesc" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="createdDate" type="Date" />
+		<field name="createdBy" type="String" />
+		<field name="modifiedDate" type="Date" />
+		<field name="modifiedBy" type="long" />
+		<field name="flag" type="String" />
+	</model>
+	<model name="com.chola.business.model.businesssoppath">
+		<field name="id" type="long" />
+		<field name="businessdoc" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="businessPath" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="createdDate" type="Date" />
+		<field name="createdBy" type="String" />
+		<field name="flag" type="String" />
+		<field name="businessdetails_id" type="long" />
+	</model>
+	<model name="com.chola.business.model.businesssopusers">
+		<field name="id" type="long" />
+		<field name="user_id" type="long" />
+		<field name="businessdetails_id" type="long" />
+	</model>
+</model-hints>

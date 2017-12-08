@@ -1,0 +1,125 @@
+<custom-sql>
+
+<sql id="complist">
+    <![CDATA[
+   SELECT * FROM business b;
+        ]]>
+	</sql>
+	
+	<sql id="unitlist">
+    <![CDATA[
+   SELECT unit FROM unit where business_id = ? and active=1 order by unit;
+        ]]>
+	</sql>
+	
+	<sql id="departlist">
+    <![CDATA[
+   SELECT department FROM department where business_id = ? and active=1 order by department;
+        ]]>
+	</sql>
+	
+	<sql id="functionlist">
+    <![CDATA[
+   SELECT function FROM function_table where business_id = ? and active=1 order by function;
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_greaterthan_unit">
+    <![CDATA[
+    SELECT userid FROM events_empinfoentity where (gender = ifnull(?,gender)
+   and round(DATEDIFF(CURRENT_DATE, STR_TO_DATE(birthday, '%Y-%m-%d'))/365) > ?) and unit in (?);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_lessthan_unit">
+    <![CDATA[
+    SELECT userid FROM events_empinfoentity where (gender = ifnull(?,gender)
+   and round(DATEDIFF(CURRENT_DATE, STR_TO_DATE(birthday, '%Y-%m-%d'))/365) < ?) and unit in (?);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_between_unit">
+    <![CDATA[
+    SELECT userid FROM events_empinfoentity where (gender = ifnull(?,gender))
+   and( round(DATEDIFF(CURRENT_DATE, STR_TO_DATE(birthday, '%Y-%m-%d'))/365)  BETWEEN ? and ?) and unit in (?);
+        ]]>
+	</sql>
+	
+	<sql id="intendeduserlist_all_unit">
+    <![CDATA[
+    SELECT userid FROM events_empinfoentity where (gender = ifnull(?,gender))
+    and unit in (?);
+        ]]>
+	</sql>
+	
+	<sql id="twoParamsGreater">
+    <![CDATA[
+   SELECT userid FROM events_empinfoentity where (gender = ?
+   and round(DATEDIFF(CURRENT_DATE, STR_TO_DATE(birthday, '%Y-%m-%d'))/365) > ?);
+        ]]>
+	</sql>
+	
+	<sql id="threeParams">
+    <![CDATA[
+  SELECT userid FROM events_empinfoentity
+where CASE WHEN location is not null and department is not null and subdepartment is not null then userid  in
+(select userid from events_empinfoentity where location=? and department=? and subdepartment=?) END;
+        ]]>
+	</sql>
+	
+	<sql id="callist">
+    <![CDATA[
+    SELECT * FROM events_eventcalendar where userid = ?;
+        ]]>
+	</sql>
+	
+	<sql id="loclist">
+    <![CDATA[
+    SELECT DISTINCT(location) FROM events_empinfoentity;
+        ]]>
+	</sql>
+	
+	<sql id="deptlist">
+    <![CDATA[
+    SELECT DISTINCT(department) FROM events_empinfoentity ;
+        ]]>
+	</sql>
+	
+	<sql id="deptlistall">
+    <![CDATA[
+    SELECT DISTINCT(department) FROM events_empinfoentity;
+        ]]>
+	</sql>
+	
+	<sql id="subdeptlist">
+    <![CDATA[
+    SELECT DISTINCT(subdepartment) FROM events_empinfoentity;
+        ]]>
+	</sql>
+	
+	<sql id="userlist">
+    <![CDATA[
+    SELECT name FROM events_empinfoentity;
+        ]]>
+	</sql>
+	<!--  For Notification Added by Ashish  -->
+	    <sql id="notifycat">
+    <![CDATA[
+      update usernotificationevent
+        set
+        notify_syscd=?,
+        notify_val=?,
+        notify_desc=?,
+        status=?,
+        flag=?
+        where userNotificationEventId=?;
+        ]]>
+    </sql>
+
+<sql id="syscode">
+    <![CDATA[
+        SELECT * FROM ms0028
+        where syscode =?
+ ]]>
+    </sql>
+</custom-sql>

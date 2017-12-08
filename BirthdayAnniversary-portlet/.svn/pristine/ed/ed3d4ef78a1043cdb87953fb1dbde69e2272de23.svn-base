@@ -1,0 +1,89 @@
+<%@page import="com.liferay.portal.kernel.workflow.WorkflowConstants"%>
+<%@page import="com.liferay.portal.kernel.util.PortalUtil"%>
+<%@page import="com.liferay.message.boards.kernel.service.MBMessageLocalServiceUtil"%>
+<%@page import="com.chola.birthday.BirthdayWish"%>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui"%>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="org.json.simple.JSONArray"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
+<%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.User"%>
+<%@page import="com.liferay.portal.kernel.service.ContactLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.Contact"%>
+<%@page import="com.chola.birthday.service.birthdaywishLocalServiceUtil"%>
+<%@page import="com.chola.birthday.model.birthdaywish"%>
+<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%@page import="com.liferay.portal.kernel.theme.ThemeDisplay"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.List"%>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<portlet:defineObjects />
+
+<portlet:actionURL var="discussURL" name="addComment"></portlet:actionURL>
+ <%
+
+ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+
+if(themeDisplay.isSignedIn()){
+	
+	Long userId = themeDisplay.getUserId();
+	System.out.println("Logged In UserID : "+userId);
+
+	List wish = birthdaywishLocalServiceUtil.customFinder(String.valueOf(userId));
+	System.out.println(wish);
+	
+	Iterator it = wish.iterator();
+	
+	if(wish!=null || !(wish.isEmpty())){
+		while (it.hasNext()) 
+		 {
+		 Object[] object = (Object[]) it.next();
+		 JSONObject obj1 = new JSONObject();
+		 long wishedBy = Long.parseLong(object[1].toString());	
+		 User user =UserLocalServiceUtil.getUser(wishedBy); 
+		 long id = Long.parseLong(object[0].toString());
+		 %>
+		 	<div class="code"><%=object[4].toString()%></div>
+			<div class="message"><%=object[3].toString()%></div>
+			<div class="postedby" style="text-align: right;">-<%=user.getFirstName()+" "+ user.getLastName() %>(<%=object[5].toString()%>)</div>
+			<div class="comment">
+		<liferay-ui:ratings className="<%=birthdaywish.class.getName()%>"
+		classPK="<%=id %>" type="thumbs" />
+		
+		<liferay-ui:ratings className="<%=birthdaywish.class.getName()%>"
+		classPK="<%=id %>" numberOfStars="5" />
+
+
+		<liferay-ui:discussion 
+		classPK="<%=id%>" 
+		userId="<%=themeDisplay.getUserId()%>"
+		className="<%=com.chola.birthday.model.birthdaywish.class.getName() %>" 
+		formAction="<%=discussURL %>"
+		ratingsEnabled="<%= true %>"
+		redirect="<%=themeDisplay.getURLCurrent() %>"
+		/>
+		</div>
+		<%
+		}
+	}
+	if(wish.isEmpty())
+	{
+		System.out.println("No walls Post");
+		%>
+		No Wall Post's
+		<%
+		
+	}
+	
+}
+else
+{ 
+%>
+Please Login to see your wall [post]....
+<%
+}
+%>
+
+

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.listbranch.model.branchdetails">
+		<field name="branch_id" type="long" />
+		<field name="branch_code" type="String" />
+		<field name="branch_address" type="String" />
+		<field name="city_id" type="long" />
+	</model>
+	<model name="com.chola.listbranch.model.city">
+		<field name="city_id" type="long" />
+		<field name="city_name" type="String" />
+		<field name="state_id" type="long" />
+	</model>
+	<model name="com.chola.listbranch.model.mapping">
+		<field name="mapping_id" type="long" />
+		<field name="product_id" type="long" />
+		<field name="state_id" type="long" />
+		<field name="city_id" type="long" />
+		<field name="branch_id" type="long" />
+	</model>
+	<model name="com.chola.listbranch.model.product">
+		<field name="product_id" type="long" />
+		<field name="product_name" type="String" />
+	</model>
+	<model name="com.chola.listbranch.model.state">
+		<field name="state_id" type="long" />
+		<field name="state_name" type="String" />
+	</model>
+</model-hints>

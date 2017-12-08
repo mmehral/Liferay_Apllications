@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.service.compliance.model.compliance" />
+	<class name="com.service.compliance.model.impl.complianceImpl" table="cholacompliance_compliance">
+		<id name="compliance_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="compliance_tite" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="compliance_shortdescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="compliance_description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="compliance_document_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="compliance_document_extension" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="compliance_document_path" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.quarterly.model.quarterlyreports" />
+	<class name="com.chola.quarterly.model.impl.quarterlyreportsImpl" table="chola_quarterlyreports">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="details" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedon" type="org.hibernate.type.TimestampType" />
+		<property name="updatedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="uniquecontentid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

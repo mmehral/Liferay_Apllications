@@ -1,0 +1,35 @@
+<%@page import="com.chola.anniversary.Anniversary"%>
+<%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.model.User"%>
+<%@page import="com.liferay.portal.kernel.workflow.WorkflowConstants"%>
+<%@page import="com.liferay.portal.kernel.util.PortalUtil"%>
+<%@page import="com.liferay.message.boards.kernel.service.MBMessageLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%@page import="com.liferay.portal.kernel.theme.ThemeDisplay"%>
+<%@taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
+<%@taglib uri="http://liferay.com/tld/ui"  prefix="liferay-ui"%>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
+<portlet:defineObjects/>
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+<%
+String id = request.getParameter("id");
+System.out.println("SRNO or Id : "+id);
+ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+%>
+<portlet:actionURL name="sendWish" var="sendWish" />
+<form action="<%=sendWish %>" method="post" name="fm" >
+<input type="hidden" name="userName" value=<%=id%>>
+<textarea id="personalMessage" name="personalMessage" rows="4" cols="60" maxlength="2000" placeholder="Write Your Wish here !!!"></textarea><br>
+	<aui:button type="submit" id="submit" value="Send Wish"></aui:button>
+</form>
+<div>
+
+</div>
+</body>
+</html>

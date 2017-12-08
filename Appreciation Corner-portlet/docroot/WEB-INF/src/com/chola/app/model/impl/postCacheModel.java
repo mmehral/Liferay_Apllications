@@ -1,0 +1,167 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.chola.app.model.impl;
+
+import aQute.bnd.annotation.ProviderType;
+
+import com.chola.app.model.post;
+
+import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.util.HashUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+
+import java.util.Date;
+
+/**
+ * The cache model class for representing post in entity cache.
+ *
+ * @author CloverLiferay02
+ * @see post
+ * @generated
+ */
+@ProviderType
+public class postCacheModel implements CacheModel<post>, Externalizable {
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof postCacheModel)) {
+			return false;
+		}
+
+		postCacheModel postCacheModel = (postCacheModel)obj;
+
+		if (id == postCacheModel.id) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashUtil.hash(0, id);
+	}
+
+	@Override
+	public String toString() {
+		StringBundler sb = new StringBundler(11);
+
+		sb.append("{id=");
+		sb.append(id);
+		sb.append(", appTo=");
+		sb.append(appTo);
+		sb.append(", appBy=");
+		sb.append(appBy);
+		sb.append(", appMessage=");
+		sb.append(appMessage);
+		sb.append(", appDate=");
+		sb.append(appDate);
+		sb.append("}");
+
+		return sb.toString();
+	}
+
+	@Override
+	public post toEntityModel() {
+		postImpl postImpl = new postImpl();
+
+		postImpl.setId(id);
+
+		if (appTo == null) {
+			postImpl.setAppTo(StringPool.BLANK);
+		}
+		else {
+			postImpl.setAppTo(appTo);
+		}
+
+		if (appBy == null) {
+			postImpl.setAppBy(StringPool.BLANK);
+		}
+		else {
+			postImpl.setAppBy(appBy);
+		}
+
+		if (appMessage == null) {
+			postImpl.setAppMessage(StringPool.BLANK);
+		}
+		else {
+			postImpl.setAppMessage(appMessage);
+		}
+
+		if (appDate == Long.MIN_VALUE) {
+			postImpl.setAppDate(null);
+		}
+		else {
+			postImpl.setAppDate(new Date(appDate));
+		}
+
+		postImpl.resetOriginalValues();
+
+		return postImpl;
+	}
+
+	@Override
+	public void readExternal(ObjectInput objectInput) throws IOException {
+		id = objectInput.readLong();
+		appTo = objectInput.readUTF();
+		appBy = objectInput.readUTF();
+		appMessage = objectInput.readUTF();
+		appDate = objectInput.readLong();
+	}
+
+	@Override
+	public void writeExternal(ObjectOutput objectOutput)
+		throws IOException {
+		objectOutput.writeLong(id);
+
+		if (appTo == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(appTo);
+		}
+
+		if (appBy == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(appBy);
+		}
+
+		if (appMessage == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(appMessage);
+		}
+
+		objectOutput.writeLong(appDate);
+	}
+
+	public long id;
+	public String appTo;
+	public String appBy;
+	public String appMessage;
+	public long appDate;
+}

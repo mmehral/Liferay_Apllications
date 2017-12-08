@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.chola.knowledgebites">
+	<author>cloverliferay01</author>
+	<namespace>chola</namespace>
+
+	<entity name="kbdetails" local-service="true"
+		remote-service="true">
+		<column name="id" type="long" primary="true" id-type="increment" />
+		<column name="content_id" type="long"/>
+		<column name="kbtitle" type="String" />
+		<column name="kbdesc" type="String" />
+		<column name="createdDate" type="Date" />
+		<column name="createdBy" type="long" />
+		<column name="modifiedDate" type="Date" />
+		<column name="modifiedBy" type="long" />
+		<column name="flag" type="String" />
+		<finder return-type="Collection" name="CONTENT_ID">
+		<finder-column name="content_id"></finder-column>
+		</finder>
+	</entity>
+	<entity name="kbpath" local-service="true"
+		remote-service="true">
+		<column name="id" type="long" primary="true" id-type="increment" />
+		<column name="kbfiledoc" type="String" />
+		<column name="kbfilepath" type="String" />
+		<column name="createdDate" type="Date" />
+		<column name="createdBy" type="long" />
+		<column name="flag" type="String" />
+		<column name="kbdetails_id" type="long"/>
+		<column name="content_id" type="long"/>
+		<column name="kbfilename" type="String"></column>
+		<finder return-type="Collection" name="CONTENT_ID">
+		<finder-column name="content_id"></finder-column>
+		</finder>
+	</entity>
+	
+</service-builder>

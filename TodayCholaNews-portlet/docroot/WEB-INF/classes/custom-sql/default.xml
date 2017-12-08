@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="contentlist">
+    <![CDATA[
+    SELECT * FROM chola_TodayCholaNews where 
+    createdate=?;
+   	]]>
+	</sql>
+	
+	<sql id="contentnewslist">
+    <![CDATA[
+    select * from chola_TodayCholaNews order by id_ desc limit 1;
+        ]]>
+	</sql>
+</custom-sql>

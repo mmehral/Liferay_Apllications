@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.conferenceroombooking.service.impl.cityLocalServiceImpl" id="com.chola.conferenceroombooking.service.cityLocalService" />
+	<bean class="com.chola.conferenceroombooking.service.impl.cityServiceImpl" id="com.chola.conferenceroombooking.service.cityService" />
+	<bean class="com.chola.conferenceroombooking.service.persistence.impl.cityPersistenceImpl" id="com.chola.conferenceroombooking.service.persistence.cityPersistence" parent="basePersistence" />
+	<bean class="com.chola.conferenceroombooking.service.impl.conferenceroombookingdetailsLocalServiceImpl" id="com.chola.conferenceroombooking.service.conferenceroombookingdetailsLocalService" />
+	<bean class="com.chola.conferenceroombooking.service.impl.conferenceroombookingdetailsServiceImpl" id="com.chola.conferenceroombooking.service.conferenceroombookingdetailsService" />
+	<bean class="com.chola.conferenceroombooking.service.persistence.impl.conferenceroombookingdetailsPersistenceImpl" id="com.chola.conferenceroombooking.service.persistence.conferenceroombookingdetailsPersistence" parent="basePersistence" />
+	<bean class="com.chola.conferenceroombooking.service.persistence.impl.conferenceroombookingdetailsFinderImpl" id="com.chola.conferenceroombooking.service.persistence.conferenceroombookingdetailsFinder" parent="basePersistence" />
+	<bean class="com.chola.conferenceroombooking.service.impl.facilitymasterLocalServiceImpl" id="com.chola.conferenceroombooking.service.facilitymasterLocalService" />
+	<bean class="com.chola.conferenceroombooking.service.impl.facilitymasterServiceImpl" id="com.chola.conferenceroombooking.service.facilitymasterService" />
+	<bean class="com.chola.conferenceroombooking.service.persistence.impl.facilitymasterPersistenceImpl" id="com.chola.conferenceroombooking.service.persistence.facilitymasterPersistence" parent="basePersistence" />
+	<bean class="com.chola.conferenceroombooking.service.impl.floorwingLocalServiceImpl" id="com.chola.conferenceroombooking.service.floorwingLocalService" />
+	<bean class="com.chola.conferenceroombooking.service.impl.floorwingServiceImpl" id="com.chola.conferenceroombooking.service.floorwingService" />
+	<bean class="com.chola.conferenceroombooking.service.persistence.impl.floorwingPersistenceImpl" id="com.chola.conferenceroombooking.service.persistence.floorwingPersistence" parent="basePersistence" />
+	<bean class="com.chola.conferenceroombooking.service.impl.locationLocalServiceImpl" id="com.chola.conferenceroombooking.service.locationLocalService" />
+	<bean class="com.chola.conferenceroombooking.service.impl.locationServiceImpl" id="com.chola.conferenceroombooking.service.locationService" />
+	<bean class="com.chola.conferenceroombooking.service.persistence.impl.locationPersistenceImpl" id="com.chola.conferenceroombooking.service.persistence.locationPersistence" parent="basePersistence" />
+	<bean class="com.chola.conferenceroombooking.service.persistence.impl.locationFinderImpl" id="com.chola.conferenceroombooking.service.persistence.locationFinder" parent="basePersistence" />
+	<bean class="com.chola.conferenceroombooking.service.impl.roomLocalServiceImpl" id="com.chola.conferenceroombooking.service.roomLocalService" />
+	<bean class="com.chola.conferenceroombooking.service.impl.roomServiceImpl" id="com.chola.conferenceroombooking.service.roomService" />
+	<bean class="com.chola.conferenceroombooking.service.persistence.impl.roomPersistenceImpl" id="com.chola.conferenceroombooking.service.persistence.roomPersistence" parent="basePersistence" />
+	<bean class="com.chola.conferenceroombooking.service.impl.stateLocalServiceImpl" id="com.chola.conferenceroombooking.service.stateLocalService" />
+	<bean class="com.chola.conferenceroombooking.service.impl.stateServiceImpl" id="com.chola.conferenceroombooking.service.stateService" />
+	<bean class="com.chola.conferenceroombooking.service.persistence.impl.statePersistenceImpl" id="com.chola.conferenceroombooking.service.persistence.statePersistence" parent="basePersistence" />
+</beans>

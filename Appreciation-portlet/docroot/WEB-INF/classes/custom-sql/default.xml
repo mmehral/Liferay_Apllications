@@ -1,0 +1,22 @@
+ <custom-sql>
+ 
+  <sql id="notifycat">
+    <![CDATA[
+      update usernotificationevent
+        set
+        notify_syscd=?,
+        notify_val=?,
+        notify_desc=?,
+        status=?,
+        flag=?
+        where userNotificationEventId=?;
+        ]]>
+    </sql>
+
+<sql id="syscode">
+    <![CDATA[
+        SELECT * FROM ms0028
+        where syscode =?
+ ]]>
+    </sql>
+    </custom-sql>

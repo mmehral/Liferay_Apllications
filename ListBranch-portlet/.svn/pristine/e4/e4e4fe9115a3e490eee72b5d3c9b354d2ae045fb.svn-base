@@ -1,0 +1,473 @@
+package com.branchlist;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletException;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import com.chola.listbranch.model.branchdetails;
+import com.chola.listbranch.model.city;
+import com.chola.listbranch.model.mapping;
+import com.chola.listbranch.model.product;
+import com.chola.listbranch.model.state;
+import com.chola.listbranch.service.branchdetailsLocalServiceUtil;
+import com.chola.listbranch.service.cityLocalServiceUtil;
+import com.chola.listbranch.service.mappingLocalServiceUtil;
+import com.chola.listbranch.service.productLocalServiceUtil;
+import com.chola.listbranch.service.stateLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+
+public class ListBranchAction extends MVCPortlet
+{
+	private static Log logger = LogFactoryUtil.getLog(ListBranchAction.class);
+	@Override
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)throws IOException, PortletException 
+	{
+
+	logger.info("In ListBranchAction class.....");
+
+	logger.info("ID : " + resourceRequest.getResourceID());
+	
+	try 
+	{
+	
+	if ("CityCall1".equalsIgnoreCase(resourceRequest.getResourceID()))
+	{
+	List<String> lt = cityLocalServiceUtil.getCity();
+	Iterator it = lt.iterator();
+	JSONArray jArray = new JSONArray();
+	PrintWriter writer = resourceResponse.getWriter();
+
+	while (it.hasNext()) 
+	{
+	Object[] object = (Object[]) it.next();
+	JSONObject obj = new JSONObject();
+	obj.put("city_id", object[0].toString());
+	obj.put("city_name", object[1].toString());
+	jArray.add(obj);
+	}
+
+	logger.info(jArray);
+	writer.print(jArray);
+	}
+
+		} catch (Exception e) {
+	logger.error("Error",e);
+	}
+	
+	try 
+	{
+	
+	if ("CityCall".equalsIgnoreCase(resourceRequest.getResourceID()))
+	{
+		logger.info("In city call action class.....");
+		String stateId=resourceRequest.getParameter("stateId");
+		logger.info("State id: "+stateId);
+		
+		List<String> lt = cityLocalServiceUtil.getCities(Long.parseLong(stateId));
+	Iterator it = lt.iterator();
+	JSONArray jArray = new JSONArray();
+	PrintWriter writer = resourceResponse.getWriter();
+
+	while (it.hasNext()) {
+	Object[] object = (Object[]) it.next();
+	JSONObject obj = new JSONObject();
+	obj.put("city_id", object[0].toString());
+	obj.put("city_name", object[1].toString());
+	jArray.add(obj);
+	}
+
+	logger.info(jArray);
+	writer.print(jArray);
+	}
+
+		} catch (Exception e) {
+	logger.error("Error",e);
+	}
+	
+	try 
+	{
+	
+	if ("ProductCall".equalsIgnoreCase(resourceRequest.getResourceID()))
+	{
+		logger.info("In product call action class.....");
+	List<String> lt = cityLocalServiceUtil.getProduct();
+	Iterator it = lt.iterator();
+	JSONArray jArray = new JSONArray();
+	PrintWriter writer = resourceResponse.getWriter();
+
+	while (it.hasNext()) {
+	Object[] object = (Object[]) it.next();
+	JSONObject obj = new JSONObject();
+	obj.put("product_id", object[0].toString());
+	obj.put("product_name", object[1].toString());
+	jArray.add(obj);
+	}
+
+	logger.info(jArray);
+	writer.print(jArray);
+	}
+
+		} catch (Exception e) {
+	logger.error("Error",e);
+	}
+	
+	try 
+	{
+	
+	if ("StateCall".equalsIgnoreCase(resourceRequest.getResourceID()))
+	{
+		logger.info("In state call action class.....");
+	List<String> lt = cityLocalServiceUtil.getState();
+	Iterator it = lt.iterator();
+	JSONArray jArray = new JSONArray();
+	PrintWriter writer = resourceResponse.getWriter();
+
+	while (it.hasNext()) {
+	Object[] object = (Object[]) it.next();
+	JSONObject obj = new JSONObject();
+	obj.put("state_id", object[0].toString());
+	obj.put("state_name", object[1].toString());
+	jArray.add(obj);
+	}
+
+	logger.info(jArray);
+	writer.print(jArray);
+	}
+
+		} 
+	catch (Exception e)
+	{
+	logger.error("Error",e);
+	}
+	try 
+	{
+	
+	if ("BranchCall".equalsIgnoreCase(resourceRequest.getResourceID()))
+	{
+	String cityId=resourceRequest.getParameter("cityId");
+	logger.info("City id in branch call..."+cityId);
+	List  list = cityLocalServiceUtil.getBranchNamedetails(Long.parseLong(cityId));
+	JSONArray jArray = new JSONArray();
+	PrintWriter writer = resourceResponse.getWriter();
+
+for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+	Object[] object = (Object[]) iterator.next();
+	JSONObject jsonobj= new JSONObject();
+	jsonobj.put("branch_id", object[0].toString());
+	jsonobj.put("branch_code", object[1].toString());
+	
+	jArray.add(jsonobj);
+	}
+	writer.print(jArray);
+	}
+		} catch (Exception e) {
+	logger.error("Error",e);
+	} 
+	
+	}
+		
+	
+	
+public void  submitState(ActionRequest request,ActionResponse response)
+{
+	logger.info("In submit state....");
+	String statename=request.getParameter("BranchState");
+	logger.info("Branch State :"+statename);
+	long stateId=ParamUtil.getLong(request, "stateId");
+	logger.info("state id in submit state.."+stateId);
+	if(stateId>=01){
+		modifiedstate(request,response,stateId,statename);
+		response.setRenderParameter("jspPage","/html/editState.jsp");
+	}else{
+	state st=stateLocalServiceUtil.createstate(CounterLocalServiceUtil.increment());
+	st.setState_name(statename);
+	stateLocalServiceUtil.addstate(st);
+	}
+	}
+
+public void  submitCity(ActionRequest request,ActionResponse response) throws NumberFormatException, PortalException
+{
+	String stateId=request.getParameter("Selectstate");
+	logger.info("State Id.."+stateId);
+	String cityname=request.getParameter("BranchCity");
+	logger.info("City name :"+cityname);
+	
+state st=stateLocalServiceUtil.getstate(Long.parseLong(stateId));
+logger.info("State Name::::"+st.getState_name());
+	long cityId=ParamUtil.getLong(request, "cityId");
+	if(cityId>=01){
+		modifiedcity(request,response,cityId,cityname,stateId);
+		response.setRenderParameter("jspPage","/html/editCity.jsp");
+	}
+	else
+	{
+	city ct=cityLocalServiceUtil.createcity(CounterLocalServiceUtil.increment());
+	ct.setCity_name(cityname);
+	ct.setState_id(Long.parseLong(stateId));
+	
+	cityLocalServiceUtil.addcity(ct);
+	}
+}
+
+public void submitBranchDetails(ActionRequest request,ActionResponse response) throws NumberFormatException, PortalException
+{
+	logger.info("Enter Product details");
+	String SelectCity=request.getParameter("SelectCity");
+	logger.info("SelectCity :"+SelectCity);
+	
+	String branchcd=ParamUtil.getString(request, "branchCode");
+	logger.info(" : "+branchcd);
+	
+	String BranchCode=request.getParameter("BranchCode");
+	logger.info("BranchCode :"+BranchCode);
+	
+	
+	String BranchAddress=request.getParameter("BranchAddress");
+	logger.info("BranchAddress :"+BranchAddress);
+	
+	long branchId=ParamUtil.getLong(request, "branchId");
+	logger.info("Branch Id..................."+branchId);
+	
+	city ct=cityLocalServiceUtil.getcity(Long.parseLong(SelectCity));
+	logger.info("City name.."+ct.getCity_name());
+	if(branchId>=01)
+	{
+		modifiedbranchdetails(request, response,branchId,SelectCity,BranchCode,BranchAddress);
+		response.setRenderParameter("jspPage","/html/editbranchdetails.jsp");
+	}
+	else
+	{
+	branchdetails bdetails=branchdetailsLocalServiceUtil.createbranchdetails(CounterLocalServiceUtil.increment());
+	bdetails.setBranch_address(BranchAddress);
+	bdetails.setBranch_code(BranchCode);
+	bdetails.setCity_id(Long.parseLong(SelectCity));
+	
+	branchdetailsLocalServiceUtil.addbranchdetails(bdetails);	
+	}
+}
+
+public void submitBranchProductMapping(ActionRequest request,ActionResponse response) throws NumberFormatException, PortalException
+{
+	logger.info("submit branch product mapping");
+	 String product_id=request.getParameter("Selectproduct");
+	 logger.info("Product Id "+product_id);
+	 
+	 String state_id=request.getParameter("Selectstate");
+	 logger.info("State Id "+state_id);
+	 
+	 String city_id=request.getParameter("SelectCity");
+	 logger.info("City Id "+city_id);
+	 
+	 String branch_id=request.getParameter("Selectbranchname");
+	 logger.info("Branch Name "+branch_id);
+	 
+	 state st=stateLocalServiceUtil.getstate(Long.parseLong(state_id));
+	 logger.info(st.getState_name());
+	 
+	 city ct=cityLocalServiceUtil.getcity(Long.parseLong(city_id));
+	 logger.info(ct.getCity_name());
+	 
+	 product pr=productLocalServiceUtil.getproduct(Long.parseLong(product_id));
+	 logger.info(pr.getProduct_name());
+	 
+	 long mappingId=ParamUtil.getLong(request, "mappingId");
+		logger.info("Branch Id..................."+mappingId);
+		
+		if(mappingId>=01)
+		{
+			modifiedbranchmapping(request, response,mappingId,city_id,branch_id,state_id,product_id);
+			response.setRenderParameter("jspPage","/html/editbranchmapping.jsp");
+		}
+		else
+		{
+	 mapping map=mappingLocalServiceUtil.createmapping(CounterLocalServiceUtil.increment());
+	 map.setProduct_id(Long.parseLong(product_id));
+	 map.setState_id(Long.parseLong(state_id));
+	 map.setCity_id(Long.parseLong(city_id));
+	 map.setBranch_id(Long.parseLong(branch_id));
+	 
+	 mappingLocalServiceUtil.addmapping(map);    
+		}
+}
+
+public void deletestatereference(ActionRequest actionRequest,
+		ActionResponse actionResponse) throws Exception
+{
+ 	try {
+	long stateId = ParamUtil.getInteger(actionRequest, "stateId");
+	logger.info("referenceId : " + stateId);
+	if (stateId >= 01) {
+	
+ 		stateLocalServiceUtil.deletestate(stateId);
+			logger.info("record deleted successfully");
+			actionResponse.setRenderParameter("jspPage","/html/editState.jsp");
+	}
+ 	} catch (Exception e) {
+		logger.error("Error",e);
+	} 
+	
+}
+
+public void deletecityreference(ActionRequest actionRequest,
+		ActionResponse actionResponse) throws Exception
+{
+	try {
+	long cityId = ParamUtil.getInteger(actionRequest, "cityId");
+	logger.info("referenceId City " + cityId);
+	if (cityId >= 01) {
+ 		cityLocalServiceUtil.deletecity(cityId);
+			logger.info("city  deleted successfully");
+			actionResponse.setRenderParameter("jspPage","/html/editCity.jsp");
+		} 
+	}
+	catch (Exception e) {
+		logger.error("Error",e);
+	} 
+	
+}
+
+public void deletebranchdetailsreference(ActionRequest actionRequest,
+		ActionResponse actionResponse) throws Exception
+{
+	try {
+	long branchId = ParamUtil.getInteger(actionRequest, "branchId");
+	logger.info("referenceId " + branchId);
+	if (branchId >= 01) {
+ 
+ 		branchdetailsLocalServiceUtil.deletebranchdetails(branchId);
+			logger.info("branch deleted successfully");
+			actionResponse.setRenderParameter("jspPage","/html/editbranchdetails.jsp");
+		} 
+			
+	}catch (Exception e) {
+		logger.error("Error",e);
+	}
+	
+}
+public void deletebranchmappingreference(ActionRequest actionRequest,
+		ActionResponse actionResponse) throws Exception
+{
+	long mappingId = ParamUtil.getInteger(actionRequest, "mappingId");
+	logger.info("mapping Id ===" + mappingId);
+	if (mappingId >= 01) {
+	
+ 	try {
+ 		mappingLocalServiceUtil.deletemapping(mappingId);
+			logger.info("mapping deleted successfully");
+			actionResponse.setRenderParameter("jspPage","/html/editbranchmapping.jsp");
+		
+		} catch (Exception e) {
+			logger.error("Error",e);
+		} 
+			
+	}
+	
+}
+
+
+private void modifiedstate(ActionRequest request, ActionResponse response, long stateID, String state_name)
+{
+	
+	logger.info("myyyyy CompanyId====" + stateID);
+	state st = null;
+	try {
+		st = stateLocalServiceUtil.fetchstate(stateID);
+		logger.info("!!!!!!" + st);
+	
+	if (Validator.isNotNull(st)) {
+		st.setState_name(state_name);
+		stateLocalServiceUtil.updatestate(st);
+			logger.info("state Updated Successfully");
+		} 
+	}
+	catch (Exception e) {
+			logger.error("Error",e);
+		}
+}
+
+private void modifiedcity(ActionRequest request, ActionResponse response, long cityId, String cityname,String stateId)
+{
+	try
+	{
+	logger.info(" cityId====" + cityId);
+	city ct = null;
+		ct = cityLocalServiceUtil.fetchcity(cityId);
+		logger.info(ct);
+	
+	if (Validator.isNotNull(ct)) {
+		ct.setCity_name(cityname);
+		ct.setState_id(Long.parseLong(stateId));
+			cityLocalServiceUtil.updatecity(ct);
+			logger.info("State Updated Successfully");
+		}
+	}catch (SystemException e) {
+			logger.error("Error",e);
+		}
+}	
+
+private void modifiedbranchdetails(ActionRequest request, ActionResponse response, long branchId,String SelectCity, String BranchCode,String BranchAddress)
+{
+	logger.info(" cityId====" + SelectCity);
+	branchdetails bd = null;
+	try {
+		bd = branchdetailsLocalServiceUtil.fetchbranchdetails(branchId);
+		logger.info(bd);
+	
+	if (Validator.isNotNull(bd)) 
+	{
+		bd.setBranch_address(BranchAddress);
+		bd.setBranch_code(BranchCode);
+		bd.setCity_id(Long.parseLong(SelectCity));
+			branchdetailsLocalServiceUtil.updatebranchdetails(bd);
+			logger.info("branch Updated Successfully");
+		}
+	}catch (Exception e) {
+			logger.error("Error",e);
+		}
+	
+}	
+
+private void modifiedbranchmapping(ActionRequest request, ActionResponse response,long mappingId,String city_id, String branch_id,String state_id,String product_id)
+{
+     logger.info("edit the forms======");
+	
+	mapping map = null;
+	try {
+		map = mappingLocalServiceUtil.fetchmapping(mappingId);
+		logger.info(map);
+	
+	if (Validator.isNotNull(map)) 
+	{
+		map.setBranch_id(Long.parseLong(branch_id));
+		map.setCity_id(Long.parseLong(city_id));
+		map.setProduct_id(Long.parseLong(product_id));
+		map.setState_id(Long.parseLong(state_id));
+			mappingLocalServiceUtil.updatemapping(map);
+			logger.info("mapping Updated Successfully");
+		} 
+	}
+	catch (Exception e) {
+			logger.error("Error",e);
+		}
+	}
+
+
+}

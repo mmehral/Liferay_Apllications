@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.listbranch.service.impl.branchdetailsLocalServiceImpl" id="com.chola.listbranch.service.branchdetailsLocalService" />
+	<bean class="com.chola.listbranch.service.impl.branchdetailsServiceImpl" id="com.chola.listbranch.service.branchdetailsService" />
+	<bean class="com.chola.listbranch.service.persistence.impl.branchdetailsPersistenceImpl" id="com.chola.listbranch.service.persistence.branchdetailsPersistence" parent="basePersistence" />
+	<bean class="com.chola.listbranch.service.impl.cityLocalServiceImpl" id="com.chola.listbranch.service.cityLocalService" />
+	<bean class="com.chola.listbranch.service.impl.cityServiceImpl" id="com.chola.listbranch.service.cityService" />
+	<bean class="com.chola.listbranch.service.persistence.impl.cityPersistenceImpl" id="com.chola.listbranch.service.persistence.cityPersistence" parent="basePersistence" />
+	<bean class="com.chola.listbranch.service.persistence.impl.cityFinderImpl" id="com.chola.listbranch.service.persistence.cityFinder" parent="basePersistence" />
+	<bean class="com.chola.listbranch.service.impl.mappingLocalServiceImpl" id="com.chola.listbranch.service.mappingLocalService" />
+	<bean class="com.chola.listbranch.service.impl.mappingServiceImpl" id="com.chola.listbranch.service.mappingService" />
+	<bean class="com.chola.listbranch.service.persistence.impl.mappingPersistenceImpl" id="com.chola.listbranch.service.persistence.mappingPersistence" parent="basePersistence" />
+	<bean class="com.chola.listbranch.service.impl.productLocalServiceImpl" id="com.chola.listbranch.service.productLocalService" />
+	<bean class="com.chola.listbranch.service.impl.productServiceImpl" id="com.chola.listbranch.service.productService" />
+	<bean class="com.chola.listbranch.service.persistence.impl.productPersistenceImpl" id="com.chola.listbranch.service.persistence.productPersistence" parent="basePersistence" />
+	<bean class="com.chola.listbranch.service.impl.stateLocalServiceImpl" id="com.chola.listbranch.service.stateLocalService" />
+	<bean class="com.chola.listbranch.service.impl.stateServiceImpl" id="com.chola.listbranch.service.stateService" />
+	<bean class="com.chola.listbranch.service.persistence.impl.statePersistenceImpl" id="com.chola.listbranch.service.persistence.statePersistence" parent="basePersistence" />
+</beans>

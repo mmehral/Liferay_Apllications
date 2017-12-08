@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.feedforward.model.feedforwardgallery" />
+	<import class="com.chola.feedforward.model.feedforwardgallerypath" />
+	<class name="com.chola.feedforward.model.impl.feedforwardgalleryImpl" table="chola_feedforwardgallery">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="albumName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="albumDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="albumId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+		<property name="updatedBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.chola.feedforward.model.impl.feedforwardgallerypathImpl" table="chola_feedforwardgallerypath">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="albumId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="albumImagePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imageTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+		<property name="updatedBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+
+	<sql id="syscode">
+    <![CDATA[
+		SELECT val,description FROM ms0028
+		where syscode =?
+     ]]>
+	</sql>
+	<sql id="state">
+    <![CDATA[
+		SELECT state_id, state_name FROM branch_state ;
+     ]]>
+	</sql>
+	<sql id="location">
+    <![CDATA[
+		SELECT id,location
+        FROM location
+        where stateid=?;
+     ]]>
+	</sql>
+	<sql id="roomlist">
+    <![CDATA[
+	SELECT id,roomname,floordesc, capacity, extension, facility
+    FROM room_master
+    where stateid=?
+    and locationid=?;
+	 ]]>
+	</sql>
+
+	<sql id="approveroom">
+    <![CDATA[
+    SELECT id,startdate,starttime,endtime
+	FROM test
+	where starttime > ?
+    and endtime < ?
+	union
+	select id,startdate,starttime,endtime
+	from test
+	where ? between starttime and endtime
+	and ? between  starttime and endtime
+	 ]]>
+	</sql>
+
+	<sql id="roomid">
+    <![CDATA[
+       select id 
+       from room_master
+       where stateid=? and locationid=?
+     ]]>
+	</sql>
+
+
+	<sql id="bookingdetails">
+    <![CDATA[
+     select * from chola_bookingdetails
+		where roomid=?
+		and startime > ?
+		and endtime < ?
+		and startdate=date_format(?,"%Y-%m-%d")
+		and status=1
+		union
+		select * from chola_bookingdetails
+		where roomid=?		  
+		and startdate=date_format(?,"%Y-%m-%d")
+		and ? between startime and endtime
+		or ? between startime and endtime
+		and roomid=?
+        and startdate=date_format(?,"%Y-%m-%d")
+		and status=1
+		order by  startime,endtime,bookid
+     ]]>
+	</sql>
+	<sql id="roommasterlist">
+    <![CDATA[
+   select statename,locationname,roomname,floordesc,facility,capacity,extension
+    from room_master
+    where stateid=?
+    and locationid=?
+    and id=?
+         ]]>
+	</sql>
+	<sql id="mybookingdetails">
+    <![CDATA[
+    select startdate,startime,endtime,roomid,meeting_emailid,meeting_title,meeting_agenda,statename,locationname,floordesc,roomname,capacity,extension,facility,bookid
+	from chola_bookingdetails,room_master
+	where roomid=id
+	and userid =?
+	and status=?
+	order by startime ,endtime   
+    ]]>
+	</sql>
+
+	<sql id="updatestatus">
+    <![CDATA[
+       update chola_bookingdetails
+       set status =?
+       where userid =?
+       and bookid=?   
+    ]]>
+	</sql>
+	<sql id="allbookinglist">
+    <![CDATA[
+ select startdate,startime,endtime,statename,locationname,floordesc,roomname,capacity,extension,facility,bookid 
+     from chola_bookingdetails,room_master
+	where roomid=id
+	and startdate between ? and ?
+	and roomid in (select id from room_master
+	where stateid =? and locationid =?)
+	order by startdate,startime
+    ]]>
+	</sql>
+	<sql id="defaultallbookinglist">
+    <![CDATA[
+    select startdate,startime,endtime,statename,locationname,floordesc,roomname,capacity,extension,facility,bookid 
+    from chola_bookingdetails,room_master
+	where roomid=id
+	and startdate between ? and ?
+	order by startdate,startime
+    ]]>
+	</sql>
+	
+</custom-sql>

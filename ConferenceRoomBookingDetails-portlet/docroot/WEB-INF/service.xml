@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.chola.conferenceroombooking">
+	<author>adms.java1</author>
+	<namespace>branch</namespace>
+
+	<entity name="conferenceroombookingdetails"  local-service="true" remote-service="true">
+		<column name="bookid" type="long" primary="true" id-type="increment"></column>
+		<column name="startdate" type="Date"></column>
+		<column name="startime" type="String"></column>
+		<column name="endtime" type="String"></column>
+		<column name="roomid" type="int"></column>
+		<column name="meeting_emailid" type="String"></column>
+		<column name="meeting_title" type="String"></column>
+		<column name="meeting_agenda" type="String"></column>
+		<column name="status" type="int"></column>
+		<column name="userid" type="long"></column>
+		<column name="username" type="String"></column>
+		<column name="createdate" type="Date"></column>
+		<finder return-type="Collection" name="MY_BOOKING">
+		<finder-column name="userid"></finder-column>
+		<finder-column name="status"></finder-column>
+		</finder>
+	</entity>
+	
+<entity name="state" local-service="true" remote-service="true">
+<column name="state_id" type="long" primary="true" id-type="increment"></column>
+<column name="state_name" type="String"></column>
+</entity>
+
+
+ <entity name="location" local-service="true" remote-service="true">
+<column name="location_id" type="long" primary="true" id-type="increment"></column>
+<column name="location_name" type="String"></column>
+<column name="state_id" type="long"></column>
+</entity>  
+
+<entity name="city" local-service="true" remote-service="true">
+<column name="city_id" type="long" primary="true" id-type="increment"></column>
+<column name="city_name" type="String"></column>
+<column name="state_id" type="long"></column>
+</entity> 
+
+<entity name="floorwing" local-service="true" remote-service="true">
+<column name="floorwing_id" type="long" primary="true" id-type="increment"></column>
+<column name="state_id" type="long"></column>
+<column name="location_id" type="long"></column>
+<column name="floor_name" type="String"></column>
+</entity> 
+   
+<entity name="facilitymaster" local-service="true" remote-service="true">
+<column name="facility_id" type="long" primary="true" id-type="increment"></column>
+<column name="facility_name" type="String"></column>
+<column name="facility_description" type="String"></column>
+</entity>	
+
+<entity name="room" local-service="true" remote-service="true">
+<column name="room_id" type="long" primary="true" id-type="increment"></column>
+<column name="state_id" type="long"></column>
+<column name="location_id" type="long"></column>
+<column name="floor_id" type="long"></column>
+<column name="room_name" type="String"></column>
+<column name="room_capacity" type="long"></column>
+<column name="room_extension" type="long"></column>
+<column name="room_values" type="String"></column>
+
+
+</entity>	
+</service-builder>

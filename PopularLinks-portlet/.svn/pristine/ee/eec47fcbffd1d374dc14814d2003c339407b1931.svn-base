@@ -1,0 +1,127 @@
+package com.chola.popularlinks.filter;
+
+import java.io.IOException;
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.List;
+
+import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import javax.portlet.filter.FilterChain;
+import javax.portlet.filter.FilterConfig;
+import javax.portlet.filter.RenderFilter;
+
+import com.chola.popularlinks.model.popularlinks;
+import com.chola.popularlinks.service.popularlinksLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
+
+public class PopularLinksHitCountFilter implements RenderFilter {
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		System.out.println("##################DESTROY########################");
+	}
+
+	@Override
+	public void init(FilterConfig arg0) throws PortletException {
+		// TODO Auto-generated method stub
+		System.out.println("##################initalization########################");
+	}
+
+	@Override
+	public void doFilter(RenderRequest renderRequest, RenderResponse renderResponse, FilterChain filterChain)
+			throws IOException, PortletException {
+		// TODO Auto-generated method stub
+		System.out.println("################DO Filter####################");
+		boolean flag = false;
+		boolean urlflag = false;
+		String url = null;
+		List<Object[]> internallist = null;
+		List<Object[]> externallist = null;
+		ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		if (themeDisplay.isSignedIn()) {
+			try {
+
+				System.out.println(themeDisplay.getURLCurrent());
+				// Step 1 :- Check for URL Pattern..............
+
+				if (themeDisplay.getURLCurrent().indexOf("?") != -1) {
+					int count = themeDisplay.getURLCurrent().indexOf("?");
+					url = themeDisplay.getURLCurrent().substring(0, count);
+					
+				} else {
+					url = themeDisplay.getURLCurrent();
+				}
+				System.out.println("URL : "+url);
+				flag = popularlinksLocalServiceUtil.findurl(url, themeDisplay.getUserId());
+				int urlength = url.length();
+				int urlcount = url.lastIndexOf("/");
+				String tag = url.substring(urlcount + 1, urlength);
+				System.out.println("Tag.............." + tag);
+				if(!url.equals("/") && !url.equals("/web/guest") && !url.equals("/web/guest/home")){
+
+					if (flag) {
+
+						Object[] value = popularlinksLocalServiceUtil.getcount(url, themeDisplay.getUserId());
+						System.out.println(value[0]);
+						System.out.println(value[1]);
+						BigInteger id = (BigInteger) value[0];
+						BigInteger count = (BigInteger) value[1];
+						long id1 = id.longValue();
+						long count1 = count.longValue();
+
+						popularlinks urllink = popularlinksLocalServiceUtil.fetchpopularlinks(id1);
+						urllink.setCount(count1 + 1);
+						urllink.setCreateDate(new Date());
+						urllink = popularlinksLocalServiceUtil.updatepopularlinks(urllink);
+					} else {
+						System.out.println("New Records Entry.............");
+						popularlinks link = popularlinksLocalServiceUtil
+								.createpopularlinks(CounterLocalServiceUtil.increment());
+						link.setUrl(url);
+						link.setUserid(themeDisplay.getUserId());
+						link.setTag(tag);
+						link.setCreateDate(new Date());
+						link.setFlag(1);
+						link.setCount(1);
+						link = popularlinksLocalServiceUtil.addpopularlinks(link);
+					}
+
+				}
+
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			// Step 2:- Fetching the List from URL Link Table......
+
+			internallist = popularlinksLocalServiceUtil.getinternallinks(themeDisplay.getUserId());
+			externallist = popularlinksLocalServiceUtil.getExternallinks(themeDisplay.getUserId());
+			for (Object[] obj : internallist) {
+				System.out.println("Internal List");
+				System.out.println(obj[0].toString());
+			}
+
+			for (Object[] obj : externallist) {
+				System.out.println("External List");
+				System.out.println(obj[0].toString());
+			}
+
+		}
+		else
+		{
+		System.out.println("User Not Logged Inn !!!");
+		}
+		renderRequest.setAttribute("internallist", internallist);
+		renderRequest.setAttribute("externallist", externallist);
+
+		filterChain.doFilter(renderRequest, renderResponse);
+	}
+
+}

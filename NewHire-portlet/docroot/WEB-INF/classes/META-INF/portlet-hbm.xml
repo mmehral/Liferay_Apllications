@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.service.model.newhire" />
+	<class name="com.service.model.impl.newhireImpl" table="cholawelcome_newhire">
+		<id name="newhire_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="newhire_name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="newhire_designation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="newhire_profileimage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="newhire_profileimage_path" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="newhire_detailedimage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="newhire_detailedimage_path" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="newhire_createdate" type="org.hibernate.type.TimestampType" />
+		<property name="newhire_modifieddate" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>

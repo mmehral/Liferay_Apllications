@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.usertheme.model.themecolor" />
+	<class name="com.usertheme.model.impl.themecolorImpl" table="usertheme_themecolor">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="user_id" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="color" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>

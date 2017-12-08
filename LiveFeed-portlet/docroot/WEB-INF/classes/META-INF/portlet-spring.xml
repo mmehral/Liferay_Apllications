@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.livefeed.service.impl.LiveFeedLocalServiceImpl" id="com.chola.livefeed.service.LiveFeedLocalService" />
+	<bean class="com.chola.livefeed.service.impl.LiveFeedServiceImpl" id="com.chola.livefeed.service.LiveFeedService" />
+	<bean class="com.chola.livefeed.service.persistence.impl.LiveFeedPersistenceImpl" id="com.chola.livefeed.service.persistence.LiveFeedPersistence" parent="basePersistence" />
+	<bean class="com.chola.livefeed.service.persistence.impl.LiveFeedFinderImpl" id="com.chola.livefeed.service.persistence.LiveFeedFinder" parent="basePersistence" />
+</beans>

@@ -1,0 +1,1 @@
+create index IX_31AD4F59 on add_anniversarywish (userId[$COLUMN_LENGTH:75$]);

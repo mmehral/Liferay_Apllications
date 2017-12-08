@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.content.service.impl.contentupdateLocalServiceImpl" id="com.content.service.contentupdateLocalService" />
+	<bean class="com.content.service.impl.contentupdateServiceImpl" id="com.content.service.contentupdateService" />
+	<bean class="com.content.service.persistence.impl.contentupdatePersistenceImpl" id="com.content.service.persistence.contentupdatePersistence" parent="basePersistence" />
+	<bean class="com.content.service.persistence.impl.contentupdateFinderImpl" id="com.content.service.persistence.contentupdateFinder" parent="basePersistence" />
+</beans>

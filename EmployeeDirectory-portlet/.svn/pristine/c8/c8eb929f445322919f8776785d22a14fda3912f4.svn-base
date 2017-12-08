@@ -1,0 +1,97 @@
+package com.employeedirect;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.portlet.PortletException;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import com.chola.ppcontent.service.contentupdateLocalServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+
+public class EmployeeInfo extends MVCPortlet{
+	  
+	private static final Log _log = LogFactoryUtil.getLog(EmployeeInfo.class);
+	
+	@Override
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+			throws IOException, PortletException {
+
+		try {
+			_log.info("Ajax ID " + resourceRequest.getResourceID());
+
+			if (resourceRequest.getResourceID().equalsIgnoreCase("businessCall")) {
+				_log.info("Inside businessCall");
+				List<String> lt = contentupdateLocalServiceUtil.getCompany();
+				Iterator it = lt.iterator();
+				JSONArray jArray = new JSONArray();
+				PrintWriter writer = resourceResponse.getWriter();
+				while (it.hasNext()) {
+					Object[] object = (Object[]) it.next();
+					JSONObject obj = new JSONObject();
+					obj.put("business_id", object[0].toString());
+					obj.put("business_name", object[1].toString());
+					jArray.add(obj);
+				}
+				_log.info("Business : "+jArray);
+				writer.print(jArray);
+			} 
+			
+			 if (resourceRequest.getResourceID().equalsIgnoreCase("locationCall")) 
+			{
+				_log.info("Inside locationCall");
+				String businessId = resourceRequest.getParameter("business");
+				_log.info("businessId : "+businessId);
+				List<String> lt = contentupdateLocalServiceUtil.getLocation(businessId);
+				JSONObject obj = new JSONObject();
+				PrintWriter writer = resourceResponse.getWriter();
+				obj.put("unit", lt);
+				_log.info("Location : "+obj);
+				writer.print(obj);
+			} 
+			 if (resourceRequest.getResourceID().equalsIgnoreCase("branchCall")) 
+			{
+				_log.info("Inside branchCall");
+				String businessId = resourceRequest.getParameter("business");
+				List<String> lt = contentupdateLocalServiceUtil.getBranch(businessId);
+				JSONObject obj = new JSONObject();
+				PrintWriter writer = resourceResponse.getWriter();
+				obj.put("unit", lt);
+				_log.info("Branch : "+obj);
+				writer.print(obj);
+			} 
+			 if (resourceRequest.getResourceID().equalsIgnoreCase("departmentCall")) 
+			{
+				_log.info("Inside departmentCall");
+				String businessId = resourceRequest.getParameter("business");
+				List<String> lt = contentupdateLocalServiceUtil.getDepart(businessId);
+				JSONObject obj = new JSONObject();
+				PrintWriter writer = resourceResponse.getWriter();
+				obj.put("unit", lt);
+				_log.info("Department : "+obj);
+				writer.print(obj);
+			} 
+			 if (resourceRequest.getResourceID().equalsIgnoreCase("functionCall")) 
+			{
+				_log.info("Inside functionCall");
+				String businessId = resourceRequest.getParameter("business");
+				List<String> lt = contentupdateLocalServiceUtil.getFunction(businessId);
+				JSONObject obj = new JSONObject();
+				PrintWriter writer = resourceResponse.getWriter();
+				obj.put("unit", lt);
+				_log.info("Function : "+obj);
+				writer.print(obj);
+			} 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			_log.error(e.getMessage());
+		}
+	}
+}

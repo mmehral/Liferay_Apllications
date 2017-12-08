@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.InternalJobRef.service.impl.InternalReferenceLocalServiceImpl" id="com.chola.InternalJobRef.service.InternalReferenceLocalService" />
+	<bean class="com.chola.InternalJobRef.service.impl.InternalReferenceServiceImpl" id="com.chola.InternalJobRef.service.InternalReferenceService" />
+	<bean class="com.chola.InternalJobRef.service.persistence.impl.InternalReferencePersistenceImpl" id="com.chola.InternalJobRef.service.persistence.InternalReferencePersistence" parent="basePersistence" />
+</beans>

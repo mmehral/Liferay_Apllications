@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.pratice.model.emp">
+		<field name="empId" type="long" />
+		<field name="empName" type="String" />
+		<field name="dept" type="String" />
+		<field name="salary" type="String" />
+	</model>
+</model-hints>

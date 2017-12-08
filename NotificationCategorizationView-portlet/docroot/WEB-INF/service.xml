@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.chola.notificationcategorization">
+	<author>cloverliferay03</author>
+	<namespace>notify</namespace>
+
+	<entity name="NoticationCategoryCount" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="eventId" type="long" primary="true" id-type="increment"/>
+		<column name="username" type="String"></column>
+	</entity>
+</service-builder>

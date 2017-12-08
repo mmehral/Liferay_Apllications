@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.calendar.service.impl.dataLocalServiceImpl" id="com.chola.calendar.service.dataLocalService" />
+	<bean class="com.chola.calendar.service.impl.dataServiceImpl" id="com.chola.calendar.service.dataService" />
+	<bean class="com.chola.calendar.service.persistence.impl.dataPersistenceImpl" id="com.chola.calendar.service.persistence.dataPersistence" parent="basePersistence" />
+	<bean class="com.chola.calendar.service.impl.EmpInfoEntityLocalServiceImpl" id="com.chola.calendar.service.EmpInfoEntityLocalService" />
+	<bean class="com.chola.calendar.service.impl.EmpInfoEntityServiceImpl" id="com.chola.calendar.service.EmpInfoEntityService" />
+	<bean class="com.chola.calendar.service.persistence.impl.EmpInfoEntityPersistenceImpl" id="com.chola.calendar.service.persistence.EmpInfoEntityPersistence" parent="basePersistence" />
+	<bean class="com.chola.calendar.service.impl.eventcalendarLocalServiceImpl" id="com.chola.calendar.service.eventcalendarLocalService" />
+	<bean class="com.chola.calendar.service.impl.eventcalendarServiceImpl" id="com.chola.calendar.service.eventcalendarService" />
+	<bean class="com.chola.calendar.service.persistence.impl.eventcalendarPersistenceImpl" id="com.chola.calendar.service.persistence.eventcalendarPersistence" parent="basePersistence" />
+	<bean class="com.chola.calendar.service.persistence.impl.eventcalendarFinderImpl" id="com.chola.calendar.service.persistence.eventcalendarFinder" parent="basePersistence" />
+</beans>

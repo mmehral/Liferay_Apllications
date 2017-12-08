@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.service.impl.cholatalkiesLocalServiceImpl" id="com.service.cholatalkiesLocalService" />
+	<bean class="com.service.impl.cholatalkiesServiceImpl" id="com.service.cholatalkiesService" />
+	<bean class="com.service.persistence.impl.cholatalkiesPersistenceImpl" id="com.service.persistence.cholatalkiesPersistence" parent="basePersistence" />
+	<bean class="com.service.persistence.impl.cholatalkiesFinderImpl" id="com.service.persistence.cholatalkiesFinder" parent="basePersistence" />
+	<bean class="com.service.impl.cholatalkiespathLocalServiceImpl" id="com.service.cholatalkiespathLocalService" />
+	<bean class="com.service.impl.cholatalkiespathServiceImpl" id="com.service.cholatalkiespathService" />
+	<bean class="com.service.persistence.impl.cholatalkiespathPersistenceImpl" id="com.service.persistence.cholatalkiespathPersistence" parent="basePersistence" />
+</beans>

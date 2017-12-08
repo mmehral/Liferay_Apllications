@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.birthday.model.birthdaywish">
+		<field name="id" type="long" />
+		<field name="userId" type="String" />
+		<field name="wishedBy" type="String" />
+		<field name="message" type="String" />
+		<field name="createdDate" type="Date" />
+	</model>
+	<model name="com.chola.birthday.model.predefinedmessages">
+		<field name="id" type="long" />
+		<field name="message" type="String" />
+	</model>
+</model-hints>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.milestone.model.milestone">
+		<field name="id" type="long" />
+		<field name="userId" type="String" />
+		<field name="wishedBy" type="String" />
+		<field name="message" type="String" />
+		<field name="createdDate" type="Date" />
+	</model>
+</model-hints>

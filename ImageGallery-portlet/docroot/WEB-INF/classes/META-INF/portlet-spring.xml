@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.chola.imagegallery.service.impl.imagegalleryLocalServiceImpl" id="com.chola.imagegallery.service.imagegalleryLocalService" />
+	<bean class="com.chola.imagegallery.service.impl.imagegalleryServiceImpl" id="com.chola.imagegallery.service.imagegalleryService" />
+	<bean class="com.chola.imagegallery.service.persistence.impl.imagegalleryPersistenceImpl" id="com.chola.imagegallery.service.persistence.imagegalleryPersistence" parent="basePersistence" />
+	<bean class="com.chola.imagegallery.service.impl.imagegallerypathLocalServiceImpl" id="com.chola.imagegallery.service.imagegallerypathLocalService" />
+	<bean class="com.chola.imagegallery.service.impl.imagegallerypathServiceImpl" id="com.chola.imagegallery.service.imagegallerypathService" />
+	<bean class="com.chola.imagegallery.service.persistence.impl.imagegallerypathPersistenceImpl" id="com.chola.imagegallery.service.persistence.imagegallerypathPersistence" parent="basePersistence" />
+</beans>

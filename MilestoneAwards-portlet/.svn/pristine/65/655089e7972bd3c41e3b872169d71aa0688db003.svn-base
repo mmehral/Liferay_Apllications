@@ -1,0 +1,52 @@
+package com.chola.milestone;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+
+import com.chola.milestone.service.milestoneLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
+
+public class Milestone extends MVCPortlet{
+	public void sendWish(ActionRequest actionRequest,ActionResponse actionResponse) throws NumberFormatException, PortalException
+	{
+		System.out.println("Inside Wish method");
+		String[] userIds = actionRequest.getParameterValues("userName");
+		System.out.println("userIds Length : "+ userIds.length);
+		
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		Long wishedBy = themeDisplay.getUserId();
+		
+		System.out.println("wishedBy User ID : "+wishedBy);
+		
+		String message = "";
+		if(null==(actionRequest.getParameter("preMessages")) || actionRequest.getParameter("preMessages").equalsIgnoreCase(""))
+		{
+			System.out.println("No Predefined Message Selected");
+			
+			if(null!=(actionRequest.getParameter("personalMessage")) || (!actionRequest.getParameter("personalMessage").equalsIgnoreCase("")))
+			{
+				message = actionRequest.getParameter("personalMessage");
+				System.out.println("Personal Message is  : "+message);
+			}
+		}
+		
+		for(int i=0;i<userIds.length;i++)
+		{
+			boolean flag = milestoneLocalServiceUtil.insertData(message,String.valueOf(themeDisplay.getUserId()),userIds[i]);
+			System.out.println("User Id : "+userIds[i]);
+			if(flag)
+			{
+				System.out.println("Success");
+			}
+			else
+			{
+				System.out.println("Failed");
+			}
+		}
+		
+		
+	}
+}

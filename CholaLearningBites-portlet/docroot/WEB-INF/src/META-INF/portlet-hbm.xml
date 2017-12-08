@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.learningbites.model.lbdetails" />
+	<class name="com.chola.learningbites.model.impl.lbdetailsImpl" table="chola_lbdetails">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="content_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="lbtitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lbdescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lbfilename" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lbfilepath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createddate" type="org.hibernate.type.TimestampType" />
+		<property name="createdby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifieddate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedby" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

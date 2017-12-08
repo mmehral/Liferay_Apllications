@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<service-builder package-path="com.chola.appcorner">
+	<author>CloverLiferay02</author>
+	<namespace>appcorner</namespace>
+<entity name="post" local-service="true" remote-service="true">
+		<column name="id" type="long" id-type="increment" primary="true" />
+		<column name="appTo" type="long" />
+		<column name="appBy" type="long" />
+		<column name="appMessage" type="String" />
+		<column name="appDate" type="String" />
+		<finder return-type="Collection" name="APP_TO">
+		<finder-column name="appTo"></finder-column>
+		</finder>
+	</entity>
+	<entity name="replied" local-service="true" remote-service="true">
+		<column name="id" type="long" id-type="increment"  primary="true" />
+		<column name="repliedOnPost" type="long" />
+		<column name="repliedTo" type="long" />
+		<column name="repliedBy" type="long" />
+		<column name="repliedMessage" type="String" />
+		<column name="repliedDate" type="String" />
+		<finder return-type="Collection" name="REPLIED_POST">
+		<finder-column name="repliedOnPost"></finder-column>
+		</finder>
+	</entity>
+</service-builder>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.chola.livefeed.model.LiveFeed">
+		<field name="id" type="long" />
+		<field name="title" type="String" />
+		<field name="content" type="String">
+			<hint name="max-length">5000</hint>
+		</field>
+		<field name="createdate" type="String" />
+	</model>
+</model-hints>

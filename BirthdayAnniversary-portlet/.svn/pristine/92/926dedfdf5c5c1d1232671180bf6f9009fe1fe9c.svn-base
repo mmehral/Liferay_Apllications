@@ -1,0 +1,28 @@
+package com.chola.messagewall;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+
+import com.chola.birthday.BirthdayWish;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.util.bridges.mvc.MVCPortlet;
+
+/**
+ * Portlet implementation class MessageWall
+ */
+public class MessageWall extends MVCPortlet {
+ 
+private static Log _log = LogFactoryUtil.getLog(MessageWall.class);
+	
+	public void addComment(ActionRequest actionRequest, ActionResponse actionResponse) {
+		_log.info("Comment=======");
+
+		try {
+			invokeTaglibDiscussion(actionRequest, actionResponse);
+			_log.info("Comment added Successfully..............");
+		} catch (Exception e) {
+			_log.error(e.getMessage());
+		}
+	}
+}

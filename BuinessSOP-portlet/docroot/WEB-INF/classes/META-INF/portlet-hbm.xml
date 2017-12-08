@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.chola.business.model.businesssopDetails" />
+	<import class="com.chola.business.model.businesssoppath" />
+	<import class="com.chola.business.model.businesssopusers" />
+	<class name="com.chola.business.model.impl.businesssopDetailsImpl" table="chola_businesssopDetails">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="businesstitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="businessDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.chola.business.model.impl.businesssoppathImpl" table="chola_businesssoppath">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="businessdoc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="businessPath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="createdBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="businessdetails_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.chola.business.model.impl.businesssopusersImpl" table="chola_businesssopusers">
+		<id column="id_" name="id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="user_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="businessdetails_id" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>
